@@ -497,7 +497,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ComponentVersion: 1
-  m_AssetsPPU: 100
+  m_AssetsPPU: 20
   m_RefResolutionX: 1280
   m_RefResolutionY: 720
   m_CropFrame: 4
@@ -543,7 +543,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 0
-  orthographic size: 3.6
+  orthographic size: 18
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
