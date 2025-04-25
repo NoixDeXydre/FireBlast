@@ -14,4 +14,10 @@ public class PhysiqueJoueur
     {
         this.joueur = joueur;
     }
+
+    public void Propulser(Vector2 forcePropulsion)
+    {
+        joueur.AddForceX(-forcePropulsion.x, ForceMode2D.Impulse);
+        joueur.AddForceY(-forcePropulsion.y, ForceMode2D.Impulse);
+    }
 }
