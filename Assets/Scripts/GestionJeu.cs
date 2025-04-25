@@ -1,3 +1,4 @@
+using System.Runtime.CompilerServices;
 using TMPro;
 using UnityEngine;
 
@@ -25,7 +26,10 @@ public class GestionJeu : MonoBehaviour
     private ControlesSouris controlesSouris;
     private PhysiqueJoueur physiqueJoueur;
 
-    // TODO
+    /// <summary>
+    /// Initialise la logique métier 
+    /// et l'affichage du jeu.
+    /// </summary>
     void Start()
     {
         Debug.Log("Lancement de la partie...");   
@@ -35,9 +39,24 @@ public class GestionJeu : MonoBehaviour
         physiqueJoueur = new PhysiqueJoueur(joueur);
     }
 
-    // TODO
-    void Update()
+    // Capture de la souris à l'aide
+    // du BoxCollider2D du GO ComportementJeu.
+
+    /// <summary>
+    /// Comportement lorsque le joueur
+    /// enfonce et glisse la souris.
+    /// </summary>
+    private void OnMouseDrag()
     {
-           
+        controlesSouris.UpdateOnEnfoncement();
+    }
+
+    /// <summary>
+    /// Comportement lorsque le joueur
+    /// relache le clic de la souris.
+    /// </summary>
+    private void OnMouseUp()
+    {
+        controlesSouris.UpdateOnRelachement();
     }
 }
