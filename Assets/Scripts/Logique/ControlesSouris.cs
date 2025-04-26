@@ -62,8 +62,9 @@ public class ControlesSouris
 
         if (!estEnfonce)
         {
-
-            positionDebutEnfoncement = Mouse.current.position.ReadValue();
+        
+            positionDebutEnfoncement.x = Input.mousePosition.x;
+            positionDebutEnfoncement.y = Input.mousePosition.y;
 
             // On évite ainsi des erreurs côté développement.
             positionFinEnfoncement.x = positionDebutEnfoncement.x;
@@ -82,7 +83,8 @@ public class ControlesSouris
 
         if (estEnfonce)
         {
-            positionFinEnfoncement = Mouse.current.position.ReadValue();
+            positionFinEnfoncement.x = Input.mousePosition.x;
+            positionFinEnfoncement.y = Input.mousePosition.y;
             estEnfonce = false;
         }
     }

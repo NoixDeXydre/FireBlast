@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem.EnhancedTouch;
 
 /// <summary>
 /// Contrôleur de la logique et 
@@ -47,7 +48,6 @@ public class GestionJeu : MonoBehaviour
     /// </summary>
     private void OnMouseDrag()
     {
-
         controlesSouris.UpdateOnEnfoncement();
 
         if (controlesSouris.EstEnfoncementSansGlissement())
