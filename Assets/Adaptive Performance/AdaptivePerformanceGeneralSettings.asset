@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: iPhone Settings
   m_EditorClassIdentifier: 
   m_LoaderManagerInstance: {fileID: 6813984763292258794}
-  m_InitManagerOnStart: 1
+  m_InitManagerOnStart: 0
 --- !u!114 &-5810158100421372193
 MonoBehaviour:
   m_ObjectHideFlags: 2
@@ -27,7 +27,7 @@ MonoBehaviour:
   m_Name: Standalone Settings
   m_EditorClassIdentifier: 
   m_LoaderManagerInstance: {fileID: 3533100768694555189}
-  m_InitManagerOnStart: 1
+  m_InitManagerOnStart: 0
 --- !u!114 &-449180125835120305
 MonoBehaviour:
   m_ObjectHideFlags: 2
@@ -41,7 +41,7 @@ MonoBehaviour:
   m_Name: WebGL Settings
   m_EditorClassIdentifier: 
   m_LoaderManagerInstance: {fileID: 4708793062702180140}
-  m_InitManagerOnStart: 1
+  m_InitManagerOnStart: 0
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 2
@@ -119,9 +119,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_AutomaticLoading: 0
   m_AutomaticRunning: 0
-  m_Loaders:
-  - {fileID: 11400000, guid: c3deab7b7e3e6114185fb295094e6b9f, type: 2}
-  - {fileID: 11400000, guid: c84c064a52d414a4aa6cbf86ed5b408d, type: 2}
+  m_Loaders: []
 --- !u!114 &8952070929574996870
 MonoBehaviour:
   m_ObjectHideFlags: 2
@@ -135,4 +133,4 @@ MonoBehaviour:
   m_Name: Android Settings
   m_EditorClassIdentifier: 
   m_LoaderManagerInstance: {fileID: 7228547052164495953}
-  m_InitManagerOnStart: 1
+  m_InitManagerOnStart: 0
