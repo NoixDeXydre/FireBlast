@@ -47,7 +47,16 @@ public class GestionJeu : MonoBehaviour
     /// </summary>
     private void OnMouseDrag()
     {
+
         controlesSouris.UpdateOnEnfoncement();
+
+        if (controlesSouris.EstEnfoncementSansGlissement())
+        {
+            physiqueJoueur.Freiner();
+        } else
+        {
+            physiqueJoueur.AnnulerFreinage();
+        }
     }
 
     /// <summary>

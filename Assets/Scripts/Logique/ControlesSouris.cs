@@ -34,6 +34,12 @@ public class ControlesSouris
         estEnfonce = false;
     }
 
+    public bool EstEnfoncementSansGlissement()
+    {
+        Vector2 directionGlissement = GetVecteurEnfoncement();
+        return directionGlissement.x == 0 && directionGlissement.y == 0;
+    }
+
     /// <returns>
     /// Un vecteur pointant dans la direction 
     /// où le joueur a glissé la souris.
