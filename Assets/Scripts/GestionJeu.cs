@@ -25,7 +25,12 @@ public class GestionJeu : MonoBehaviour
     /// <summary>
     /// Score total de la partie affiché dans l'UI.
     /// </summary>
-    public TextMeshProUGUI score;
+    public TextMeshProUGUI scoreTexte;
+
+    /// <summary>
+    /// Temps écoulé de la partie affiché dans l'UI.
+    /// </summary>
+    public TextMeshProUGUI timerTexte;
 
     // ===== Variables destinées aux calculs =====
 
@@ -36,6 +41,7 @@ public class GestionJeu : MonoBehaviour
 
     private ControlesSouris controlesSouris;
     private PhysiqueJoueur physiqueJoueur;
+    private Timer timer;
 
     /// <summary>
     /// Initialise la logique métier 
@@ -48,6 +54,7 @@ public class GestionJeu : MonoBehaviour
         Debug.Log("Initialisation de la logique du jeu...");
         controlesSouris = new ControlesSouris();
         physiqueJoueur = new PhysiqueJoueur(joueur);
+        timer = new Timer();
 
         Debug.Log("Analyse de la carte...");
         BoundsInt coinsMap = map.cellBounds;
@@ -58,6 +65,16 @@ public class GestionJeu : MonoBehaviour
 
         Debug.Log("Map : " + coordonneesCoinSuperieurDroitMap.ToString() 
             + " - " + coordonneesCoinInferieurGaucheMap.ToString());
+    }
+
+    /// <summary>
+    /// Met à jour les composants 
+    /// ayant besoin d'un timer réel.
+    /// </summary>
+    private void FixedUpdate()
+    {
+        timer.Update();
+        timerTexte.SetText(timer.ToString()); // TODO mettre à un contrôleur intermédiaire
     }
 
     // Capture de la souris à l'aide

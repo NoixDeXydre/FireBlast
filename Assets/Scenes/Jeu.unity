@@ -3713,7 +3713,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   joueur: {fileID: 1564545269}
   map: {fileID: 131868816}
-  score: {fileID: 1712388593}
+  scoreTexte: {fileID: 1712388593}
+  timerTexte: {fileID: 1239875637}
 --- !u!61 &1298134836
 BoxCollider2D:
   m_ObjectHideFlags: 0
