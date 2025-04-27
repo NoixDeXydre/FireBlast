@@ -1190,9 +1190,9 @@ Camera:
   m_LensShift: {x: 0, y: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0.09583333
+    x: 0
     y: 0
-    width: 0.80808073
+    width: 1
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
@@ -2669,6 +2669,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca629a9f43c2f1046b1a0cf90949dd88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fluiditeCamera: 0.125
   objetSuivi: {fileID: 1564545272}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
