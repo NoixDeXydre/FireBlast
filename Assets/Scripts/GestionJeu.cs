@@ -1,6 +1,7 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem.EnhancedTouch;
+using UnityEngine.Tilemaps;
 
 /// <summary>
 /// Contrôleur de la logique et 
@@ -17,9 +18,19 @@ public class GestionJeu : MonoBehaviour
     public Rigidbody2D joueur;
 
     /// <summary>
+    /// Map du jeu
+    /// </summary>
+    public Tilemap map;
+
+    /// <summary>
     /// Score total de la partie affiché dans l'UI.
     /// </summary>
     public TextMeshProUGUI score;
+
+    // ===== Variables destinées aux calculs =====
+
+    private Vector3 coordonneesCoinSuperieurDroitMap;
+    private Vector3 coordonneesCoinInferieurGaucheMap;
 
     // ============= Logique métier ==============
 
@@ -34,9 +45,19 @@ public class GestionJeu : MonoBehaviour
     {
         Debug.Log("Lancement de la partie...");   
 
-        Debug.Log("Initialisation de la logique du jeu");
+        Debug.Log("Initialisation de la logique du jeu...");
         controlesSouris = new ControlesSouris();
         physiqueJoueur = new PhysiqueJoueur(joueur);
+
+        Debug.Log("Analyse de la carte...");
+        BoundsInt coinsMap = map.cellBounds;
+        coordonneesCoinSuperieurDroitMap = map.CellToWorld(coinsMap.max);
+        coordonneesCoinInferieurGaucheMap = map.CellToWorld(coinsMap.min);
+
+        coordonneesCoinSuperieurDroitMap.y--; // Est exclusif
+
+        Debug.Log("Map : " + coordonneesCoinSuperieurDroitMap.ToString() 
+            + " - " + coordonneesCoinInferieurGaucheMap.ToString());
     }
 
     // Capture de la souris à l'aide
