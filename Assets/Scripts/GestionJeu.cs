@@ -1,6 +1,5 @@
 using TMPro;
 using UnityEngine;
-using UnityEngine.InputSystem.EnhancedTouch;
 using UnityEngine.Tilemaps;
 
 /// <summary>
@@ -47,7 +46,7 @@ public class GestionJeu : MonoBehaviour
     /// Initialise la logique métier 
     /// et l'affichage du jeu.
     /// </summary>
-    void Start()
+    private void Start()
     {
         Debug.Log("Lancement de la partie...");   
 
@@ -65,6 +64,19 @@ public class GestionJeu : MonoBehaviour
 
         Debug.Log("Map : " + coordonneesCoinSuperieurDroitMap.ToString() 
             + " - " + coordonneesCoinInferieurGaucheMap.ToString());
+    }
+
+    /// <summary>
+    /// Met à jour les composants
+    /// nécessitant le delta.
+    /// </summary>
+    private void Update()
+    {
+
+        // Le taux de raffraichissement n'est jamais bon sur Android.
+        #if UNITY_ANDROID
+            Application.targetFrameRate = 60;
+        #endif
     }
 
     /// <summary>
