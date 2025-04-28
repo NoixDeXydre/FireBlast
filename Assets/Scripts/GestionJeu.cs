@@ -38,9 +38,22 @@ public class GestionJeu : MonoBehaviour
 
     // ============= Logique métier ==============
 
+    // Composants accessibles
+    public PhysiqueJoueur physiqueJoueur;
+    public Timer timer;
+
+    // Composants inaccessibles
     private ControlesSouris controlesSouris;
-    private PhysiqueJoueur physiqueJoueur;
-    private Timer timer;
+
+    /// <summary>
+    /// Initialise les composants étant
+    /// nécessaires dans des scripts externes.
+    /// </summary>
+    private void Awake()
+    {
+        physiqueJoueur = new PhysiqueJoueur(joueur);
+        timer = new Timer();
+    }
 
     /// <summary>
     /// Initialise la logique métier 
@@ -48,14 +61,9 @@ public class GestionJeu : MonoBehaviour
     /// </summary>
     private void Start()
     {
-        Debug.Log("Lancement de la partie...");   
 
-        Debug.Log("Initialisation de la logique du jeu...");
         controlesSouris = new ControlesSouris();
-        physiqueJoueur = new PhysiqueJoueur(joueur);
-        timer = new Timer();
 
-        Debug.Log("Analyse de la carte...");
         BoundsInt coinsMap = map.cellBounds;
         coordonneesCoinSuperieurDroitMap = map.CellToWorld(coinsMap.max);
         coordonneesCoinInferieurGaucheMap = map.CellToWorld(coinsMap.min);
