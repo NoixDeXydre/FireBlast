@@ -1,7 +1,5 @@
-using NUnit.Framework.Internal;
 using TMPro;
 using UnityEngine;
-using UnityEngine.SocialPlatforms.Impl;
 using UnityEngine.Tilemaps;
 
 /// <summary>
@@ -42,29 +40,29 @@ public class GestionJeu : MonoBehaviour
 
     // Composants accessibles
     public PhysiqueJoueur physiqueJoueur;
+    public Timer timer;
 
     // Composants inaccessibles
     private ControlesSouris controlesSouris;
-    private Score score;
-    private Timer timer;
-
-    // ============== Controleurs ================
-
-    public ScoreControleur scoreControleur;
 
     /// <summary>
-    /// Initialise la logique métier, les controleurs
-    /// et l'affichage du jeu.
+    /// Initialise les composants étant
+    /// nécessaires dans des scripts externes.
     /// </summary>
     private void Awake()
     {
-
-        controlesSouris = new ControlesSouris();
         physiqueJoueur = new PhysiqueJoueur(joueur);
         timer = new Timer();
-        score = new Score();
+    }
 
-        scoreControleur = new ScoreControleur(score, scoreTexte, timer);
+    /// <summary>
+    /// Initialise la logique métier 
+    /// et l'affichage du jeu.
+    /// </summary>
+    private void Start()
+    {
+
+        controlesSouris = new ControlesSouris();
 
         BoundsInt coinsMap = map.cellBounds;
         coordonneesCoinSuperieurDroitMap = map.CellToWorld(coinsMap.max);
@@ -72,7 +70,7 @@ public class GestionJeu : MonoBehaviour
 
         coordonneesCoinSuperieurDroitMap.y--; // Est exclusif
 
-        Debug.Log("Map : " + coordonneesCoinSuperieurDroitMap.ToString()
+        Debug.Log("Map : " + coordonneesCoinSuperieurDroitMap.ToString() 
             + " - " + coordonneesCoinInferieurGaucheMap.ToString());
     }
 
@@ -95,11 +93,8 @@ public class GestionJeu : MonoBehaviour
     /// </summary>
     private void FixedUpdate()
     {
-
         timer.Update();
         timerTexte.SetText(timer.ToString()); // TODO mettre à un contrôleur intermédiaire
-
-        scoreControleur.Update();
     }
 
     // Capture de la souris à l'aide
