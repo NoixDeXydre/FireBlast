@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 /// <summary>
 /// Donne des informations en retour
@@ -7,6 +6,12 @@ using UnityEngine.InputSystem;
 /// </summary>
 public class ControlesSouris
 {
+
+    /// <summary>
+    /// Référence par rapport à la position
+    /// de la souris sur l'écran.
+    /// </summary>
+    private Camera cameraReferenceMonde;
 
     /// <summary>
     /// Position de la souris lorsque le joueur
@@ -25,8 +30,14 @@ public class ControlesSouris
     /// </summary>
     private bool estEnfonce;
 
-    public ControlesSouris()
+    /// <summary>
+    /// Initialise une interface pour la souris.
+    /// </summary>
+    /// <param name="cameraReferenceMonde">Caméra du monde en référence</param>
+    public ControlesSouris(Camera cameraReferenceMonde)
     {
+
+        this.cameraReferenceMonde = cameraReferenceMonde;
 
         positionDebutEnfoncement = new Vector2(.0f, .0f);
         positionFinEnfoncement = new Vector2(.0f, .0f);
@@ -34,6 +45,10 @@ public class ControlesSouris
         estEnfonce = false;
     }
 
+    /// <returns>
+    /// True si le joueur n'a pas glissé la souris après enfoncement,
+    /// sinon false
+    /// </returns>
     public bool EstEnfoncementSansGlissement()
     {
         Vector2 directionGlissement = GetVecteurEnfoncement();
@@ -66,6 +81,8 @@ public class ControlesSouris
             positionDebutEnfoncement.x = Input.mousePosition.x;
             positionDebutEnfoncement.y = Input.mousePosition.y;
 
+            positionDebutEnfoncement = cameraReferenceMonde.ScreenToWorldPoint(positionDebutEnfoncement);
+
             // On évite ainsi des erreurs côté développement.
             positionFinEnfoncement.x = positionDebutEnfoncement.x;
             positionFinEnfoncement.y = positionDebutEnfoncement.y;
@@ -86,6 +103,8 @@ public class ControlesSouris
             positionFinEnfoncement.x = Input.mousePosition.x;
             positionFinEnfoncement.y = Input.mousePosition.y;
             estEnfonce = false;
+
+            positionFinEnfoncement = cameraReferenceMonde.ScreenToWorldPoint(positionFinEnfoncement);
         }
     }
 }

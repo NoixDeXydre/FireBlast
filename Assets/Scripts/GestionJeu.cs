@@ -1,7 +1,5 @@
-using NUnit.Framework.Internal;
 using TMPro;
 using UnityEngine;
-using UnityEngine.SocialPlatforms.Impl;
 using UnityEngine.Tilemaps;
 
 /// <summary>
@@ -12,6 +10,11 @@ public class GestionJeu : MonoBehaviour
 {
 
     // =========== Objets à référencer ===========
+
+    /// <summary>
+    /// Référence de la position dans le monde.
+    /// </summary>
+    public Camera cameraEcranReference;
 
     /// <summary>
     /// Entité contrôlée par le joueur.
@@ -59,7 +62,7 @@ public class GestionJeu : MonoBehaviour
     private void Awake()
     {
 
-        controlesSouris = new ControlesSouris();
+        controlesSouris = new ControlesSouris(cameraEcranReference);
         physiqueJoueur = new PhysiqueJoueur(joueur);
         timer = new Timer();
         score = new Score();
