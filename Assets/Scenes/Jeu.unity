@@ -2731,12 +2731,12 @@ Camera:
     x: 0
     y: 0
     width: 1
-    height: 1
+    height: 0.9995119
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 45
+  orthographic size: 48
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -2785,8 +2785,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_ComponentVersion: 1
   m_AssetsPPU: 8
-  m_RefResolutionX: 1280
-  m_RefResolutionY: 720
+  m_RefResolutionX: 1366
+  m_RefResolutionY: 768
   m_CropFrame: 4
   m_GridSnapping: 0
   m_FilterMode: 0
@@ -4219,7 +4219,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 5
+  m_Mass: 7
   m_LinearDamping: 0.5
   m_AngularDamping: 0
   m_GravityScale: 0
@@ -4522,10 +4522,10 @@ Camera:
   m_LensShift: {x: 0, y: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0.13636363
+    x: 0
     y: 0
-    width: 0.7272727
-    height: 1
+    width: 1
+    height: 100000
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 85
@@ -4670,10 +4670,10 @@ Camera:
   m_LensShift: {x: 0, y: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0.07894737
+    x: 0
     y: 0
-    width: 0.84210527
-    height: 1
+    width: 1
+    height: 100000
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 25
