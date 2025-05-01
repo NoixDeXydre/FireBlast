@@ -8,9 +8,19 @@ public class PhysiqueJoueur
 {
 
     /// <summary>
+    /// Le taux de friction en cas de freinage.
+    /// </summary>
+    private const float TauxFrictionFreinage = 2.0f;
+
+    /// <summary>
+    /// Vitesse maximale pouvant être atteinte.
+    /// </summary>
+    private const float VelociteMaximale = 40.0f;
+
+    /// <summary>
     /// Le taux de linear damping de base du personnage.
     /// </summary>
-    private readonly float tauxFreinageDefaut;
+    private readonly float tauxFrictionDefaut;
 
     /// <summary>
     /// Le personnage où l'on applique la physique.
@@ -20,7 +30,7 @@ public class PhysiqueJoueur
     public PhysiqueJoueur(Rigidbody2D joueur)
     {
         this.joueur = joueur;
-        tauxFreinageDefaut = joueur.linearDamping;
+        tauxFrictionDefaut = joueur.linearDamping;
     }
 
     /// <summary>
@@ -28,7 +38,7 @@ public class PhysiqueJoueur
     /// </summary>
     public void AnnulerFreinage()
     {
-        joueur.linearDamping = tauxFreinageDefaut;
+        joueur.linearDamping = tauxFrictionDefaut;
     }
 
     /// <summary>
@@ -37,7 +47,7 @@ public class PhysiqueJoueur
     /// </summary>
     public void Freiner()
     {
-        joueur.linearDamping = 2.0f;
+        joueur.linearDamping = TauxFrictionFreinage;
     }
 
     /// <summary>
@@ -50,7 +60,12 @@ public class PhysiqueJoueur
         // On remet la friction comme avant pour ne pas ralentir.
         AnnulerFreinage();
 
-        joueur.AddForceX(-forcePropulsion.x, ForceMode2D.Impulse);
-        joueur.AddForceY(-forcePropulsion.y, ForceMode2D.Impulse);
+        joueur.AddForce(-forcePropulsion, ForceMode2D.Impulse);
+
+        // La vitesse est bridée par défaut.
+        if (joueur.linearVelocity.magnitude > VelociteMaximale)
+        {
+            joueur.linearVelocity = joueur.linearVelocity.normalized * VelociteMaximale;
+        }
     }
 }
