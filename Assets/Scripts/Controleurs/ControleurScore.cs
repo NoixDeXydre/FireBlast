@@ -4,7 +4,7 @@ using DG.Tweening;
 /// <summary>
 /// Pilote entre les données et le score affiché.
 /// </summary>
-public class ScoreControleur
+public class ControleurScore
 {
 
     /// <summary>
@@ -56,7 +56,7 @@ public class ScoreControleur
     /// <param name="score">Le service score</param>
     /// <param name="compteurScore">Le compteur UI affichant le score</param>
     /// <param name="timer">Timer influançant le score</param>
-    public ScoreControleur(Score score, TextMeshProUGUI compteurScore, Timer timer)
+    public ControleurScore(Score score, TextMeshProUGUI compteurScore, Timer timer)
     {
 
         this.score = score;

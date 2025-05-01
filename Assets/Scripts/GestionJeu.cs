@@ -53,7 +53,7 @@ public class GestionJeu : MonoBehaviour
 
     // ============== Controleurs ================
 
-    public ScoreControleur scoreControleur;
+    public ControleurScore controleurScore;
 
     /// <summary>
     /// Initialise la logique métier, les controleurs
@@ -67,7 +67,7 @@ public class GestionJeu : MonoBehaviour
         timer = new Timer();
         score = new Score();
 
-        scoreControleur = new ScoreControleur(score, scoreTexte, timer);
+        controleurScore = new ControleurScore(score, scoreTexte, timer);
 
         BoundsInt coinsMap = map.cellBounds;
         coordonneesCoinSuperieurDroitMap = map.CellToWorld(coinsMap.max);
@@ -102,7 +102,7 @@ public class GestionJeu : MonoBehaviour
         timer.Update();
         timerTexte.SetText(timer.ToString()); // TODO mettre à un contrôleur intermédiaire
 
-        scoreControleur.Update();
+        controleurScore.Update();
     }
 
     // Capture de la souris à l'aide
