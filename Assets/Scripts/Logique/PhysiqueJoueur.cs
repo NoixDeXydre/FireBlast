@@ -42,6 +42,14 @@ public class PhysiqueJoueur
     }
 
     /// <summary>
+    /// Remet le joueur à une vitesse de 0.
+    /// </summary>
+    public void AnnulerVitesse()
+    {
+        joueur.linearVelocity = Vector2.zero;
+    }
+
+    /// <summary>
     /// Freine les mouvements du personnage 
     /// en multipliant la friction par 2.
     /// </summary>

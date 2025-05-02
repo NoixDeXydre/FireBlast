@@ -7,6 +7,7 @@ public static class TagLayers
     // Tags
     public const string TagJoueur = "Joueur";
     public const string TagCollectible = "Collectible";
+    public const string TagProjectile = "Projectile";
 
     // Layers
     // TODO (au moment où ils seront nécessaires.)
