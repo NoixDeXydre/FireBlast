@@ -1,6 +1,7 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using UnityEngine.UI;
 
 /// <summary>
 /// Contrôleur de la logique et 
@@ -15,6 +16,8 @@ public class GestionJeu : MonoBehaviour
     /// Référence de la position dans le monde.
     /// </summary>
     public Camera cameraEcranReference;
+
+    public Image panelVies;
 
     /// <summary>
     /// Entité contrôlée par le joueur.
@@ -50,10 +53,12 @@ public class GestionJeu : MonoBehaviour
     private ControlesSouris controlesSouris;
     private Score score;
     private Timer timer;
+    private Vie vie;
 
     // ============== Controleurs ================
 
     public ControleurScore controleurScore;
+    public ControleurVie controleurVie;
 
     /// <summary>
     /// Initialise la logique métier, les controleurs
@@ -66,8 +71,10 @@ public class GestionJeu : MonoBehaviour
         physiqueJoueur = new PhysiqueJoueur(joueur);
         timer = new Timer();
         score = new Score();
+        vie = new Vie();
 
         controleurScore = new ControleurScore(score, scoreTexte, timer);
+        controleurVie = new ControleurVie(vie, panelVies);
 
         BoundsInt coinsMap = map.cellBounds;
         coordonneesCoinSuperieurDroitMap = map.CellToWorld(coinsMap.max);

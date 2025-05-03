@@ -26,6 +26,21 @@ public class ComportementJoueur : MonoBehaviour
     private bool estInvincible;
 
     /// <summary>
+    /// Permet de modifier le score.
+    /// </summary>
+    private ControleurScore controleurScore;
+
+    /// <summary>
+    /// Permet de modifier la vie du personnage.
+    /// </summary>
+    private ControleurVie controleurVie;
+
+    /// <summary>
+    /// Script principal du jeu
+    /// </summary>
+    private GestionJeu scriptGestionJeu;
+
+    /// <summary>
     /// Module permetant de bouger le joueur.
     /// </summary>
     private PhysiqueJoueur physiqueJoueur;
@@ -39,7 +54,10 @@ public class ComportementJoueur : MonoBehaviour
         timerInvincibilite = .0f;
         estInvincible = false;
 
-        physiqueJoueur = GestionJeuUtils.GetScriptGestionJeu().physiqueJoueur;
+        scriptGestionJeu = GestionJeuUtils.GetScriptGestionJeu();
+        controleurVie = scriptGestionJeu.controleurVie;
+        controleurScore = scriptGestionJeu.controleurScore;
+        physiqueJoueur = scriptGestionJeu.physiqueJoueur;
     }
 
     /// <summary>
@@ -51,6 +69,9 @@ public class ComportementJoueur : MonoBehaviour
 
         if (!estInvincible && collision.collider.CompareTag(TagLayers.TagProjectile))
         {
+
+            controleurVie.Diminuer();
+            controleurScore.Ajouter(-1000);
 
             estInvincible = true;
 
