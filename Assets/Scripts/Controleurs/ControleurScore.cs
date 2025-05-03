@@ -94,7 +94,7 @@ public class ControleurScore
             ancienScore = nouvelleCible;
             scoreInstantPrecedent.SetScore(ancienScore);
             compteurScore.text = scoreInstantPrecedent.ToString();
-        }, score.GetScore(), .8f).SetEase(Ease.InOutSine); ;
+        }, score.GetScore(), .8f).SetEase(Ease.InOutSine);
     }
 
     /// <summary>

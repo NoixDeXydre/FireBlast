@@ -7,6 +7,7 @@ TagManager:
   - Collectible
   - Joueur
   - Projectile
+  - Mur
   layers:
   - Default
   - TransparentFX

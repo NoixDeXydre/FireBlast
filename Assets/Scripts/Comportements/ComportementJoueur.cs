@@ -1,4 +1,6 @@
+using DG.Tweening;
 using UnityEngine;
+using UnityEngine.SocialPlatforms.Impl;
 
 /// <summary>
 /// À part les contrôles de base,
@@ -56,6 +58,11 @@ public class ComportementJoueur : MonoBehaviour
             Vector2 vitesseProjectile = collision.rigidbody.linearVelocity;
             physiqueJoueur.Propulser(-vitesseProjectile * vitesseProjectile.magnitude 
                 * collision.otherRigidbody.mass);
+        }
+
+        else if (collision.collider.CompareTag(TagLayers.TagMur))
+        {
+            transform.DOScale((Vector2)transform.localScale - new Vector2(Mathf.Abs(collision.otherRigidbody.linearVelocity.x), Mathf.Abs(collision.otherRigidbody.linearVelocity.y)) / 100.0f, .1f).SetLoops(2, LoopType.Yoyo).SetEase(Ease.InOutSine);
         }
     }
 
