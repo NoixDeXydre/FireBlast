@@ -81,7 +81,7 @@ public class ControleurScore
 
         if (scoreAjout < 0)
         {
-            score.Diminuer(scoreAjout);
+            score.Diminuer(-scoreAjout);
         }
 
         else
@@ -89,7 +89,7 @@ public class ControleurScore
             score.Ajouter(scoreAjout);
         }
 
-        // Animation de gain de perte.
+        // Animation de gain ou de perte.
         DOTween.To(() => ancienScore, nouvelleCible => {
             ancienScore = nouvelleCible;
             scoreInstantPrecedent.SetScore(ancienScore);
