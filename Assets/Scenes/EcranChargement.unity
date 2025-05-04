@@ -277,10 +277,10 @@ Camera:
   m_LensShift: {x: 0, y: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0.17870578
+    x: 0
     y: 0
-    width: 0.64240026
-    height: 1
+    width: 1
+    height: 0.9995119
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
@@ -565,7 +565,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1311270229}
   - component: {fileID: 1311270228}
-  - component: {fileID: 1311270227}
   - component: {fileID: 1311270226}
   - component: {fileID: 1311270230}
   m_Layer: 5
@@ -592,29 +591,6 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &1311270227
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1311270225}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_UiScaleMode: 1
-  m_ReferencePixelsPerUnit: 8
-  m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 640, y: 480}
-  m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
-  m_PhysicalUnit: 3
-  m_FallbackScreenDPI: 96
-  m_DefaultSpriteDPI: 96
-  m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
 --- !u!223 &1311270228
 Canvas:
   m_ObjectHideFlags: 0
@@ -624,7 +600,7 @@ Canvas:
   m_GameObject: {fileID: 1311270225}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 1
+  m_RenderMode: 2
   m_Camera: {fileID: 452616863}
   m_PlaneDistance: 100
   m_PixelPerfect: 1
@@ -646,8 +622,8 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1311270225}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 90}
+  m_LocalScale: {x: 0.2667969, y: 0.2667969, z: 0.2667969}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 83486004}
@@ -656,8 +632,8 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0, y: 0}
+  m_SizeDelta: {x: 640, y: 359.8243}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!225 &1311270230
 CanvasGroup:
   m_ObjectHideFlags: 0
