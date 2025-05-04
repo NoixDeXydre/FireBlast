@@ -57,9 +57,6 @@ public class PermuteurScene : MonoBehaviour
         // Autorise la scène à être active.
         operationAsync.allowSceneActivation = true;
 
-        // On décharge la scène précédente.
-        SceneManager.UnloadSceneAsync(sceneActive);
-
         StartCoroutine(FinaliserChangementDeScene(nomScene));
     }
 
@@ -122,6 +119,9 @@ public class PermuteurScene : MonoBehaviour
         {
             yield return null;
         }
+
+        // On décharge la scène précédente.
+        SceneManager.UnloadSceneAsync(sceneActive);
 
         Scene sceneChargee = SceneManager.GetSceneByName(nomScene);
         sceneActive = sceneChargee;
