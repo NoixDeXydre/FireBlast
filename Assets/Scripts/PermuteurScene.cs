@@ -9,6 +9,11 @@ public class PermuteurScene : MonoBehaviour
 {
 
     /// <summary>
+    /// Informe si une scène est en train de charger.
+    /// </summary>
+    private bool estEnChargement;
+
+    /// <summary>
     /// Une opération async en cours.
     /// </summary>
     private AsyncOperation operationAsync;
@@ -23,16 +28,28 @@ public class PermuteurScene : MonoBehaviour
     /// </summary>
     private Scene sceneActive;
 
+    private void Start()
+    {
+        estEnChargement = false;
+    }
+
     /// <summary>
     /// Lance la scène correspondante.
     /// </summary>
     public void ChargerEtLancerScene(string nomScene)
     {
-        StartCoroutine(ChargerEtLancerSceneCoroutine(nomScene));
+
+        // On vérifie si une scène est en chargement avant.
+        if (!estEnChargement)
+        {
+            StartCoroutine(ChargerEtLancerSceneCoroutine(nomScene));
+        }
     }
 
     private IEnumerator ChargerEtLancerSceneCoroutine(string nomScene)
     {
+
+        estEnChargement = true;
 
         sceneActive = SceneManager.GetActiveScene();
         yield return StartCoroutine(AfficherEcranChargementEnAttente());
@@ -77,6 +94,7 @@ public class PermuteurScene : MonoBehaviour
         SceneManager.SetActiveScene(SceneManager.GetSceneByName(nomScene));
 
         scriptEcranChargement.SetEcranNonVisible();
+        estEnChargement = false;
     }
 
     private IEnumerator AfficherEcranChargementEnAttente()
