@@ -13,13 +13,13 @@ public class GestionEcranChargement : MonoBehaviour
     /// Se déclenche lorsque l'écran de chargement 
     /// est complètement visible.
     /// </summary>
-    public static event Action OnEcranTotalementVisible;
+    public event Action OnEcranTotalementVisible;
 
     /// <summary>
     /// Se déclenche lorsque l'écran de chargement 
     /// a complètement disparu.
     /// </summary>
-    public static event Action OnEcranTotalementInvisible;
+    public event Action OnEcranTotalementInvisible;
 
     /// <summary>
     /// L'écran de chargement
