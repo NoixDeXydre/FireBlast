@@ -1,3 +1,4 @@
+using System;
 using DG.Tweening;
 using UnityEngine;
 
@@ -9,6 +10,18 @@ public class GestionEcranChargement : MonoBehaviour
 {
 
     /// <summary>
+    /// Se déclenche lorsque l'écran de chargement 
+    /// est complètement visible.
+    /// </summary>
+    public static event Action OnEcranTotalementVisible;
+
+    /// <summary>
+    /// Se déclenche lorsque l'écran de chargement 
+    /// a complètement disparu.
+    /// </summary>
+    public static event Action OnEcranTotalementInvisible;
+
+    /// <summary>
     /// L'écran de chargement
     /// </summary>
     public CanvasGroup ecranChargement;
@@ -18,7 +31,7 @@ public class GestionEcranChargement : MonoBehaviour
     /// </summary>
     public void SetEcranVisible()
     {
-        ecranChargement.DOFade(1f, 2f);
+        ecranChargement.DOFade(1f, 2f).OnComplete(() => OnEcranTotalementVisible?.Invoke());
     }
 
     /// <summary>
@@ -26,7 +39,7 @@ public class GestionEcranChargement : MonoBehaviour
     /// </summary>
     public void SetEcranNonVisible()
     {
-        ecranChargement.DOFade(0f, 2f);
+        ecranChargement.DOFade(0f, 2f).OnComplete(() => OnEcranTotalementInvisible?.Invoke());
     }
 
 }

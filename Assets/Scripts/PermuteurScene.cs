@@ -9,8 +9,6 @@ using UnityEngine.SceneManagement;
 public class PermuteurScene : MonoBehaviour
 {
 
-    public GameObject a;
-
     /// <summary>
     /// Lance le jeu principal
     /// </summary>
