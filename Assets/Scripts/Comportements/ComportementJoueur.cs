@@ -1,6 +1,5 @@
 using DG.Tweening;
 using UnityEngine;
-using UnityEngine.SocialPlatforms.Impl;
 
 /// <summary>
 /// À part les contrôles de base,
@@ -46,6 +45,11 @@ public class ComportementJoueur : MonoBehaviour
     private PhysiqueJoueur physiqueJoueur;
 
     /// <summary>
+    /// Rendu du sprite.
+    /// </summary>
+    private SpriteRenderer spriteRenderer;
+
+    /// <summary>
     /// Prépare le joueur et sa physique.
     /// </summary>
     private void Start()
@@ -58,6 +62,8 @@ public class ComportementJoueur : MonoBehaviour
         controleurVie = scriptGestionJeu.controleurVie;
         controleurScore = scriptGestionJeu.controleurScore;
         physiqueJoueur = scriptGestionJeu.physiqueJoueur;
+
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     /// <summary>
@@ -79,6 +85,10 @@ public class ComportementJoueur : MonoBehaviour
             Vector2 vitesseProjectile = collision.rigidbody.linearVelocity;
             physiqueJoueur.Propulser(-vitesseProjectile * vitesseProjectile.magnitude 
                 * collision.otherRigidbody.mass);
+
+            // Animation lorsque touché
+            spriteRenderer.DOFade(0f, .2f).OnComplete(() => spriteRenderer.DOFade(1f, .5f))
+                .SetLoops((int)(tempsInvincibilite / .2f));
         }
 
         else if (collision.collider.CompareTag(TagLayers.TagMur))

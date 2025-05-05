@@ -2806,7 +2806,7 @@ Camera:
     x: 0
     y: 0
     width: 1
-    height: 0.9995119
+    height: 0.999512
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
@@ -4847,7 +4847,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e94086fa6f104d46a0762f77f714f1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tempsInvincibilite: 3
+  tempsInvincibilite: 2
 --- !u!1 &1712388591
 GameObject:
   m_ObjectHideFlags: 0
