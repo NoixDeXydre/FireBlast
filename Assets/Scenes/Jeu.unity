@@ -4847,6 +4847,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e94086fa6f104d46a0762f77f714f1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nombrePointsPerdusDommage: -1000
   tempsInvincibilite: 2
 --- !u!1 &1712388591
 GameObject:

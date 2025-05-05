@@ -9,6 +9,11 @@ public class ComportementJoueur : MonoBehaviour
 {
 
     /// <summary>
+    /// Nombre de points perdus lorsque le joueur est touché.
+    /// </summary>
+    public int nombrePointsPerdusDommage;
+
+    /// <summary>
     /// Temps d'invinsibilité du joueur 
     /// si touché par un projectile.
     /// </summary>
@@ -73,11 +78,12 @@ public class ComportementJoueur : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
 
+        // Lorsque le joueur est touché par un projectile.
         if (!estInvincible && collision.collider.CompareTag(TagLayers.TagProjectile))
         {
 
             controleurVie.Diminuer();
-            controleurScore.Ajouter(-1000);
+            controleurScore.Ajouter(nombrePointsPerdusDommage);
 
             estInvincible = true;
 
@@ -88,12 +94,17 @@ public class ComportementJoueur : MonoBehaviour
 
             // Animation lorsque touché
             spriteRenderer.DOFade(0f, .2f).OnComplete(() => spriteRenderer.DOFade(1f, .5f))
-                .SetLoops((int)(tempsInvincibilite / .2f));
+                .SetLoops((int)(tempsInvincibilite / .2f)); // Nombre de loop calculé avec les secondes.
         }
 
+        // Lorsque le joueur rebondit dans un mur.
         else if (collision.collider.CompareTag(TagLayers.TagMur))
         {
-            transform.DOScale((Vector2)transform.localScale - new Vector2(Mathf.Abs(collision.otherRigidbody.linearVelocity.x), Mathf.Abs(collision.otherRigidbody.linearVelocity.y)) / 100.0f, .1f).SetLoops(2, LoopType.Yoyo).SetEase(Ease.InOutSine);
+
+            // TODO réduire et optimiser l'expression. 
+            transform.DOScale((Vector2)transform.localScale - new Vector2(Mathf.Abs(collision.otherRigidbody.linearVelocity.x),
+                Mathf.Abs(collision.otherRigidbody.linearVelocity.y)) / 100.0f, .1f)
+                .SetLoops(2, LoopType.Yoyo).SetEase(Ease.InOutSine).OnComplete(() => transform.localScale = new Vector2(1, 1));
         }
     }
 
