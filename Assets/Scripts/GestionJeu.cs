@@ -12,11 +12,6 @@ public class GestionJeu : MonoBehaviour
 
     // =========== Objets à référencer ===========
 
-    /// <summary>
-    /// Référence de la position dans le monde.
-    /// </summary>
-    public Camera cameraEcranReference;
-
     public Image panelVies;
 
     /// <summary>
@@ -50,7 +45,6 @@ public class GestionJeu : MonoBehaviour
     public PhysiqueJoueur physiqueJoueur;
 
     // Composants inaccessibles
-    private ControlesSouris controlesSouris;
     private Score score;
     private Timer timer;
     private Vie vie;
@@ -67,7 +61,6 @@ public class GestionJeu : MonoBehaviour
     private void Awake()
     {
 
-        controlesSouris = new ControlesSouris(cameraEcranReference);
         physiqueJoueur = new PhysiqueJoueur(joueur);
         timer = new Timer();
         score = new Score();
@@ -110,35 +103,5 @@ public class GestionJeu : MonoBehaviour
         timerTexte.SetText(timer.ToString()); // TODO mettre à un contrôleur intermédiaire
 
         controleurScore.Update();
-    }
-
-    // Capture de la souris à l'aide
-    // du BoxCollider2D du GO ComportementJeu.
-
-    /// <summary>
-    /// Comportement lorsque le joueur
-    /// enfonce et glisse la souris.
-    /// </summary>
-    private void OnMouseDrag()
-    {
-        controlesSouris.UpdateOnEnfoncement();
-
-        if (controlesSouris.EstEnfoncementSansGlissement())
-        {
-            physiqueJoueur.Freiner();
-        } else
-        {
-            physiqueJoueur.AnnulerFreinage();
-        }
-    }
-
-    /// <summary>
-    /// Comportement lorsque le joueur
-    /// relache le clic de la souris.
-    /// </summary>
-    private void OnMouseUp()
-    {
-        controlesSouris.UpdateOnRelachement();
-        physiqueJoueur.Propulser(controlesSouris.GetVecteurEnfoncement());
     }
 }
