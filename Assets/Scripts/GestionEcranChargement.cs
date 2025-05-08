@@ -10,6 +10,16 @@ public class GestionEcranChargement : MonoBehaviour
 {
 
     /// <summary>
+    /// Défini le temps de transition lors de l'apparition.
+    /// </summary>
+    private const float TempsTransitionEcranVisible = .5f;
+
+    /// <summary>
+    /// Défini le temps de transition lors de la disparition.
+    /// </summary>
+    private const float TempsTransitionEcranInvisible = 1.5f;
+
+    /// <summary>
     /// Se déclenche lorsque l'écran de chargement 
     /// est complètement visible.
     /// </summary>
@@ -31,7 +41,8 @@ public class GestionEcranChargement : MonoBehaviour
     /// </summary>
     public void SetEcranVisible()
     {
-        ecranChargement.DOFade(1f, 2f).OnComplete(() => OnEcranTotalementVisible?.Invoke());
+        ecranChargement.DOFade(1f, TempsTransitionEcranVisible).SetEase(Ease.InFlash)
+            .OnComplete(() => OnEcranTotalementVisible?.Invoke());
     }
 
     /// <summary>
@@ -39,7 +50,8 @@ public class GestionEcranChargement : MonoBehaviour
     /// </summary>
     public void SetEcranNonVisible()
     {
-        ecranChargement.DOFade(0f, 2f).OnComplete(() => OnEcranTotalementInvisible?.Invoke());
+        ecranChargement.DOFade(0f, TempsTransitionEcranInvisible).SetEase(Ease.OutFlash)
+            .OnComplete(() => OnEcranTotalementInvisible?.Invoke());
     }
 
 }

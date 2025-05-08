@@ -9,6 +9,11 @@ public class PermuteurScene : MonoBehaviour
 {
 
     /// <summary>
+    /// Informe si une scène est en train de charger.
+    /// </summary>
+    private bool estEnChargement;
+
+    /// <summary>
     /// Une opération async en cours.
     /// </summary>
     private AsyncOperation operationAsync;
@@ -23,32 +28,24 @@ public class PermuteurScene : MonoBehaviour
     /// </summary>
     private Scene sceneActive;
 
+    private void Start()
+    {
+        estEnChargement = false;
+        sceneActive = SceneManager.GetActiveScene();
+    }
+
     /// <summary>
     /// Lance la scène correspondante.
     /// </summary>
+    /// <param name="nomScene">Nom de la scène à charger</param>
     public void ChargerEtLancerScene(string nomScene)
     {
-        StartCoroutine(ChargerEtLancerSceneCoroutine(nomScene));
-    }
 
-    private IEnumerator ChargerEtLancerSceneCoroutine(string nomScene)
-    {
-
-        sceneActive = SceneManager.GetActiveScene();
-        yield return StartCoroutine(AfficherEcranChargementEnAttente());
-
-        // Charge en arrière plan.
-        operationAsync = SceneManager.LoadSceneAsync(nomScene, LoadSceneMode.Additive);
-        operationAsync.allowSceneActivation = false;
-
-        while (operationAsync.progress < .9f)
+        // On vérifie si une scène est en chargement avant.
+        if (!estEnChargement)
         {
-            yield return null;
+            StartCoroutine(ChargerEtLancerSceneCoroutine(nomScene));
         }
-
-        // La scène peut être changée si l'écran de chargement a fini son animation.
-        scriptEcranChargement.SetEcranVisible();
-        scriptEcranChargement.OnEcranTotalementVisible += () => ActiverScene(nomScene);
     }
 
     private void ActiverScene(string nomScene)
@@ -60,32 +57,17 @@ public class PermuteurScene : MonoBehaviour
         // Autorise la scène à être active.
         operationAsync.allowSceneActivation = true;
 
-        // On décharge la scène précédente.
-        SceneManager.UnloadSceneAsync(sceneActive);
-
         StartCoroutine(FinaliserChangementDeScene(nomScene));
-    }
-
-    private IEnumerator FinaliserChangementDeScene(string nomScene)
-    {
-        // 7. Attendre la fin de l'activation
-        while (!operationAsync.isDone)
-        {
-            yield return null;
-        }
-
-        SceneManager.SetActiveScene(SceneManager.GetSceneByName(nomScene));
-
-        scriptEcranChargement.SetEcranNonVisible();
     }
 
     private IEnumerator AfficherEcranChargementEnAttente()
     {
-        Scene ecranChargement = SceneManager.GetSceneByName("EcranChargement");
 
-        // Charger la scène d'écran de chargement si pas déjà chargée
+        // Restera en cache si fait une deuxième fois.
+        Scene ecranChargement = SceneManager.GetSceneByName("EcranChargement");
         if (!ecranChargement.isLoaded)
         {
+
             AsyncOperation chargementEcran = SceneManager.LoadSceneAsync("EcranChargement", LoadSceneMode.Additive);
             while (!chargementEcran.isDone)
             {
@@ -105,5 +87,47 @@ public class PermuteurScene : MonoBehaviour
 
         // Mettre la scène écran de chargement active
         SceneManager.SetActiveScene(ecranChargement);
+    }
+
+    private IEnumerator ChargerEtLancerSceneCoroutine(string nomScene)
+    {
+
+        // Mise à jour des informations que l'on possède.
+        estEnChargement = true;
+
+        // On déclenche l'écran de chargement pour faire patienter l'utilisateur.
+        yield return StartCoroutine(AfficherEcranChargementEnAttente());
+
+        // Charge en arrière plan la scène demandée jusqu'à un certain seuil.
+        operationAsync = SceneManager.LoadSceneAsync(nomScene, LoadSceneMode.Additive);
+        operationAsync.allowSceneActivation = false;
+        while (operationAsync.progress < .9f)
+        {
+            yield return null;
+        }
+
+        // La scène peut être changée si l'écran de chargement a fini son animation.
+        scriptEcranChargement.SetEcranVisible();
+        scriptEcranChargement.OnEcranTotalementVisible += () => ActiverScene(nomScene);
+    }
+
+    private IEnumerator FinaliserChangementDeScene(string nomScene)
+    {
+
+        // On termine totalement le chargement de la scène.
+        while (!operationAsync.isDone)
+        {
+            yield return null;
+        }
+
+        // On décharge la scène précédente.
+        SceneManager.UnloadSceneAsync(sceneActive);
+
+        Scene sceneChargee = SceneManager.GetSceneByName(nomScene);
+        sceneActive = sceneChargee;
+        estEnChargement = false;
+
+        SceneManager.SetActiveScene(sceneChargee);
+        scriptEcranChargement.SetEcranNonVisible();
     }
 }
