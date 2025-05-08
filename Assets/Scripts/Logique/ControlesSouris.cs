@@ -11,7 +11,13 @@ public class ControlesSouris
     /// Référence par rapport à la position
     /// de la souris sur l'écran.
     /// </summary>
-    private Camera cameraReferenceMonde;
+    private readonly Camera cameraReferenceMonde;
+
+    /// <summary>
+    /// Marge dans laquelle il n'est pas encore considéré
+    /// que le joueur glisse sa souris.
+    /// </summary>
+    private readonly Vector2 margeGlissementNonNul = new(3, 3); 
 
     /// <summary>
     /// Position de la souris lorsque le joueur
@@ -46,13 +52,17 @@ public class ControlesSouris
     }
 
     /// <returns>
-    /// True si le joueur n'a pas glissé la souris après enfoncement,
-    /// sinon false
+    /// True si le joueur n'a pas glissé suffisamment la souris après enfoncement,
+    /// sinon false.
     /// </returns>
     public bool EstEnfoncementSansGlissement()
     {
-        Vector2 directionGlissement = GetVecteurEnfoncement();
-        return directionGlissement.x == 0 && directionGlissement.y == 0;
+
+        Vector2 differencePositionSourisGlissement 
+            = (Vector2) cameraReferenceMonde.ScreenToWorldPoint(Input.mousePosition) - positionDebutEnfoncement;
+
+        return Mathf.Abs(differencePositionSourisGlissement.x) < margeGlissementNonNul.x 
+            && Mathf.Abs(differencePositionSourisGlissement.y) < margeGlissementNonNul.y;
     }
 
     /// <returns>
@@ -61,6 +71,12 @@ public class ControlesSouris
     /// </returns>
     public Vector2 GetVecteurEnfoncement()
     {
+
+        // Si le joueur n'a pas glissé suffisamment...
+        if (EstEnfoncementSansGlissement())
+        {
+            return Vector2.zero;
+        }
 
         float positionX = positionFinEnfoncement.x - positionDebutEnfoncement.x;
         float positionY = positionFinEnfoncement.y - positionDebutEnfoncement.y;
