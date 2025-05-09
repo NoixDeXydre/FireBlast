@@ -10,8 +10,7 @@ public class ParametresFireball : ScriptableObject
     public int numeroBuild;
     public string nomBuild;
 
-    public int dateDebutCopyright;
-    public int dateFinCopyright;
+    public string dateCopyright;
 
 #if UNITY_EDITOR
     private const string k_SettingsPath = "Assets/Settings/ParametresFireball.asset";
