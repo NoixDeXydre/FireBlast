@@ -10,6 +10,11 @@ public class ControleurSouris : MonoBehaviour
 
     // TODO input buffer
 
+    /// <summary>
+    /// Distance de la souris par rapport à la caméra.
+    /// </summary>
+    private const float DistanceCameraTrailSouris = 100.0f;
+
     // TODO
     /// <summary>
     /// Se déclenche lorsque le joueur clique.
@@ -53,6 +58,11 @@ public class ControleurSouris : MonoBehaviour
     public Camera cameraReference;
 
     /// <summary>
+    /// Souris étant affichée dans le canvas.
+    /// </summary>
+    public GameObject sourisVirtuelle;
+
+    /// <summary>
     /// Surface pouvant être cliquée.
     /// </summary>
     private BoxCollider2D ecranHitbox;
@@ -62,10 +72,17 @@ public class ControleurSouris : MonoBehaviour
     /// </summary>
     private ControlesSouris controlesSouris;
 
+    /// <summary>
+    /// Initialisation et préparation des composants.
+    /// </summary>
     private void Start()
     {
+
         controlesSouris = new ControlesSouris(cameraReference);
         ecranHitbox = GetComponent<BoxCollider2D>();
+
+        // On désactive le rendu de la souris avant de commencer.
+        sourisVirtuelle.SetActive(false);
     }
 
     /// <summary>
@@ -73,7 +90,14 @@ public class ControleurSouris : MonoBehaviour
     /// </summary>
     private void Update()
     {
+
         ecranHitbox.offset = cameraJoueur.transform.position;
+
+        // Normalisation de la position de la souris.
+        Vector3 positionSouris = Input.mousePosition;
+        positionSouris.z = DistanceCameraTrailSouris;
+
+        sourisVirtuelle.transform.position = cameraJoueur.ScreenToWorldPoint(positionSouris);
     }
 
     /// <summary>
@@ -107,11 +131,19 @@ public class ControleurSouris : MonoBehaviour
 
     protected virtual void OnSourisClicEnfonce()
     {
-        SourisClicEnfonce?.Invoke(controlesSouris.EstEnfoncementSansGlissement());
+
+        bool estEnfoncementSansGlissement = controlesSouris.EstEnfoncementSansGlissement();
+        if (!estEnfoncementSansGlissement)
+        {
+            sourisVirtuelle.SetActive(true);
+        }
+
+        SourisClicEnfonce?.Invoke(estEnfoncementSansGlissement);
     }
 
     protected virtual void OnSourisClicRelache()
     {
+        sourisVirtuelle.SetActive(false);
         SourisClicRelache?.Invoke(controlesSouris.GetVecteurEnfoncement());
     }
 }
