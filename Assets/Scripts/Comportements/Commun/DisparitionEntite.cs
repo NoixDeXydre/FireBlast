@@ -29,6 +29,12 @@ public class DisparitionEntite
         this.entiteADisparaitre = entiteADisparaitre;
     }
 
+    /// <returns>La période de vie restante</returns>
+    public float GetPeriodeVie()
+    {
+        return periodeVie;
+    }
+
     /// <summary>
     /// Met à jour le timer pour effectuer la destruction de l'objet
     /// avec le temps demandé.
@@ -37,7 +43,7 @@ public class DisparitionEntite
     {
 
         periodeVie -= Time.deltaTime;
-        if (periodeVie <= 0.0f)
+        if (periodeVie <= .0f)
         {
             Object.Destroy(entiteADisparaitre);
         }

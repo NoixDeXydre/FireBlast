@@ -94,7 +94,7 @@ public class ComportementJoueur : MonoBehaviour
 
             // Animation lorsque touché
             spriteRenderer.DOFade(0f, .2f).OnComplete(() => spriteRenderer.DOFade(1f, .5f))
-                .SetLoops((int)(tempsInvincibilite / .2f)); // Nombre de loop calculé avec les secondes.
+                .SetLoops(DoTweenUtils.CalculerCyclesLoopYoyo(tempsInvincibilite, .2f));
         }
 
         // Lorsque le joueur rebondit dans un mur.
@@ -111,7 +111,7 @@ public class ComportementJoueur : MonoBehaviour
     /// <summary>
     /// Gère le temps d'invincibilité du joueur.
     /// </summary>
-    private void FixedUpdate()
+    private void Update()
     {
         if (estInvincible)
         {
