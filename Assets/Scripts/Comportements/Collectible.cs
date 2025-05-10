@@ -1,4 +1,5 @@
 using DG.Tweening;
+using DG.Tweening.Core;
 using UnityEngine;
 
 /// <summary>
@@ -44,6 +45,11 @@ public class Collectible : MonoBehaviour
     private SpriteRenderer spriteCollectible;
 
     /// <summary>
+    /// Animation (à assigner) lors de la disparition du collectible.
+    /// </summary>
+    private Tween animationDisparition;
+
+    /// <summary>
     /// Récupère le gestionnaire du score.
     /// </summary>
     private void Start()
@@ -55,6 +61,9 @@ public class Collectible : MonoBehaviour
         controleurDisparitionEntite = new DisparitionEntite(gameObject, dureeApparition);
 
         spriteCollectible = GetComponent<SpriteRenderer>();
+
+        animationDisparition = spriteCollectible.DOFade(0f, 0.2f)
+        .SetLoops(DoTweenUtils.CalculerCyclesLoopYoyo(TempsSurLePointDeDisparaitre, 0.2f), LoopType.Yoyo).Pause();
     }
 
     /// <summary>
@@ -67,6 +76,7 @@ public class Collectible : MonoBehaviour
         if (collision.collider.tag.Equals(TagLayers.TagJoueur)) 
         {
             controleurScore.Ajouter(nombrePointsCollection);
+            animationDisparition.Kill(); // On annule la possible animation avant de détruire l'objet.
             Object.Destroy(gameObject);
         }
     }
@@ -82,8 +92,7 @@ public class Collectible : MonoBehaviour
             < TempsSurLePointDeDisparaitre)
         {
             estEnDisparition = true;
-            spriteCollectible.DOFade(0f, .2f)
-                .SetLoops(DoTweenUtils.CalculerCyclesLoopYoyo(TempsSurLePointDeDisparaitre, .2f), LoopType.Yoyo);
+            animationDisparition.Play();
         }
     }
 }
