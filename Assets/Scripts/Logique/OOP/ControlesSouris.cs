@@ -17,7 +17,7 @@ public class ControlesSouris
     /// Marge dans laquelle il n'est pas encore considéré
     /// que le joueur glisse sa souris.
     /// </summary>
-    private readonly Vector2 margeGlissementNonNul = new(3, 3); 
+    private readonly Vector2 margeGlissementNonNul = new(2.0f, 1.0f);
 
     /// <summary>
     /// Position de la souris lorsque le joueur
@@ -45,8 +45,8 @@ public class ControlesSouris
 
         this.cameraReferenceMonde = cameraReferenceMonde;
 
-        positionDebutEnfoncement = new Vector2(.0f, .0f);
-        positionFinEnfoncement = new Vector2(.0f, .0f);
+        positionDebutEnfoncement = Vector2.zero;
+        positionFinEnfoncement = Vector2.zero;
 
         estEnfonce = false;
     }
@@ -58,10 +58,10 @@ public class ControlesSouris
     public bool EstEnfoncementSansGlissement()
     {
 
-        Vector2 differencePositionSourisGlissement 
-            = (Vector2) cameraReferenceMonde.ScreenToWorldPoint(Input.mousePosition) - positionDebutEnfoncement;
+        Vector2 differencePositionSourisGlissement
+           = (Vector2)cameraReferenceMonde.ScreenToWorldPoint(Input.mousePosition) - positionDebutEnfoncement;
 
-        return Mathf.Abs(differencePositionSourisGlissement.x) < margeGlissementNonNul.x 
+        return Mathf.Abs(differencePositionSourisGlissement.x) < margeGlissementNonNul.x
             && Mathf.Abs(differencePositionSourisGlissement.y) < margeGlissementNonNul.y;
     }
 
@@ -78,10 +78,7 @@ public class ControlesSouris
             return Vector2.zero;
         }
 
-        float positionX = positionFinEnfoncement.x - positionDebutEnfoncement.x;
-        float positionY = positionFinEnfoncement.y - positionDebutEnfoncement.y;
-
-        return new Vector2(positionX, positionY);
+        return positionFinEnfoncement;
     }
 
     /// <summary>
@@ -93,15 +90,9 @@ public class ControlesSouris
 
         if (!estEnfonce)
         {
-        
-            positionDebutEnfoncement.x = Input.mousePosition.x;
-            positionDebutEnfoncement.y = Input.mousePosition.y;
 
-            positionDebutEnfoncement = cameraReferenceMonde.ScreenToWorldPoint(positionDebutEnfoncement);
-
-            // On évite ainsi des erreurs côté développement.
-            positionFinEnfoncement.x = positionDebutEnfoncement.x;
-            positionFinEnfoncement.y = positionDebutEnfoncement.y;
+            positionDebutEnfoncement = cameraReferenceMonde.ScreenToWorldPoint(Input.mousePosition);
+            positionFinEnfoncement = Vector2.zero;
 
             estEnfonce = true;
         }
@@ -113,14 +104,7 @@ public class ControlesSouris
     /// </summary>
     public void UpdateOnRelachement()
     {
-
-        if (estEnfonce)
-        {
-            positionFinEnfoncement.x = Input.mousePosition.x;
-            positionFinEnfoncement.y = Input.mousePosition.y;
-            estEnfonce = false;
-
-            positionFinEnfoncement = cameraReferenceMonde.ScreenToWorldPoint(positionFinEnfoncement);
-        }
+        estEnfonce = false;
+        positionFinEnfoncement = cameraReferenceMonde.ScreenToWorldPoint(Input.mousePosition);
     }
 }

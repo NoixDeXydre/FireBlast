@@ -1,3 +1,4 @@
+using DG.Tweening;
 using UnityEngine;
 
 /// <summary>
@@ -11,9 +12,9 @@ public class ControleurSouris : MonoBehaviour
     // TODO input buffer
 
     /// <summary>
-    /// Distance de la souris par rapport à la caméra.
+    /// Distance des objets affichés dans la grid.
     /// </summary>
-    private const float DistanceCameraTrailSouris = 100.0f;
+    private const float DistanceElementsVisuels = 100.0f;
 
     // TODO
     /// <summary>
@@ -63,6 +64,11 @@ public class ControleurSouris : MonoBehaviour
     public GameObject sourisVirtuelle;
 
     /// <summary>
+    /// Affiche la direction où souhaite se diriger le joueur.
+    /// </summary>
+    public LineRenderer affichageDirectionJoueur;
+
+    /// <summary>
     /// Surface pouvant être cliquée.
     /// </summary>
     private BoxCollider2D ecranHitbox;
@@ -83,6 +89,7 @@ public class ControleurSouris : MonoBehaviour
 
         // On désactive le rendu de la souris avant de commencer.
         sourisVirtuelle.SetActive(false);
+        affichageDirectionJoueur.enabled = false;
     }
 
     /// <summary>
@@ -91,13 +98,19 @@ public class ControleurSouris : MonoBehaviour
     private void Update()
     {
 
-        ecranHitbox.offset = cameraJoueur.transform.position;
-
-        // Normalisation de la position de la souris.
+        Vector3 positionCameraJoueur = cameraJoueur.transform.position;
         Vector3 positionSouris = Input.mousePosition;
-        positionSouris.z = DistanceCameraTrailSouris;
+        ecranHitbox.offset = positionCameraJoueur;
+
+        // Normalisation de la position de la souris et de la caméra.
+        positionCameraJoueur.z = DistanceElementsVisuels;
+        positionSouris.z = DistanceElementsVisuels;
 
         sourisVirtuelle.transform.position = cameraJoueur.ScreenToWorldPoint(positionSouris);
+
+        affichageDirectionJoueur.SetPosition(0, sourisVirtuelle.transform.position);
+        affichageDirectionJoueur.SetPosition(1, (positionCameraJoueur - sourisVirtuelle.transform.position).normalized 
+            + positionCameraJoueur);
     }
 
     /// <summary>
@@ -136,6 +149,7 @@ public class ControleurSouris : MonoBehaviour
         if (!estEnfoncementSansGlissement)
         {
             sourisVirtuelle.SetActive(true);
+            affichageDirectionJoueur.enabled = true;
         }
 
         SourisClicEnfonce?.Invoke(estEnfoncementSansGlissement);
@@ -143,7 +157,10 @@ public class ControleurSouris : MonoBehaviour
 
     protected virtual void OnSourisClicRelache()
     {
+
         sourisVirtuelle.SetActive(false);
+        affichageDirectionJoueur.enabled = false;
+
         SourisClicRelache?.Invoke(controlesSouris.GetVecteurEnfoncement());
     }
 }
