@@ -1,4 +1,3 @@
-using DG.Tweening;
 using UnityEngine;
 
 /// <summary>
@@ -78,6 +77,8 @@ public class ControleurSouris : MonoBehaviour
     /// </summary>
     private ControlesSouris controlesSouris;
 
+    private EtatsJeu etatsJeu;
+
     /// <summary>
     /// Initialisation et préparation des composants.
     /// </summary>
@@ -90,6 +91,8 @@ public class ControleurSouris : MonoBehaviour
         // On désactive le rendu de la souris avant de commencer.
         sourisVirtuelle.SetActive(false);
         affichageDirectionJoueur.enabled = false;
+
+        etatsJeu = EtatsJeu.GetInstanceEtatsJeu();
     }
 
     /// <summary>
@@ -146,10 +149,16 @@ public class ControleurSouris : MonoBehaviour
     {
 
         bool estEnfoncementSansGlissement = controlesSouris.EstEnfoncementSansGlissement();
-        if (!estEnfoncementSansGlissement)
+        if (!estEnfoncementSansGlissement && !etatsJeu.SontMouvementsBloquees)
         {
             sourisVirtuelle.SetActive(true);
             affichageDirectionJoueur.enabled = true;
+        }
+
+        else if (etatsJeu.SontMouvementsBloquees)
+        {
+            sourisVirtuelle.SetActive(false);
+            affichageDirectionJoueur.enabled = false;
         }
 
         SourisClicEnfonce?.Invoke(estEnfoncementSansGlissement);

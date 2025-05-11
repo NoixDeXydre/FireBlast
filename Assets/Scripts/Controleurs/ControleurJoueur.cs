@@ -24,11 +24,15 @@ public class ControleurJoueur : MonoBehaviour
     /// </summary>
     private PhysiqueJoueur physiqueJoueur;
 
+    private EtatsJeu etatsJeu;
+
     /// <summary>
     /// Assignement de la logique métier et des évènements.
     /// </summary>
     private void Start()
     {
+
+        etatsJeu = EtatsJeu.GetInstanceEtatsJeu();
 
         physiqueJoueur = GestionJeuUtils.GetScriptGestionJeu().physiqueJoueur;
 
@@ -40,18 +44,26 @@ public class ControleurJoueur : MonoBehaviour
     private void OnSourisClicEnfonce(bool estEnEnfoncementSansGlissement)
     {
 
-        if (estEnEnfoncementSansGlissement)
+        if (!etatsJeu.SontMouvementsBloquees)
         {
-            physiqueJoueur.Freiner();
-        }
-        else
-        {
-            physiqueJoueur.AnnulerFreinage();
+
+            if (estEnEnfoncementSansGlissement)
+            {
+                physiqueJoueur.Freiner();
+            }
+            else
+            {
+                physiqueJoueur.AnnulerFreinage();
+            }
         }
     }
 
     private void OnSourisClicRelache(Vector2 directionGlissement)
     {
-        physiqueJoueur.Propulser(directionGlissement);
+
+        if (!etatsJeu.SontMouvementsBloquees)
+        {
+            physiqueJoueur.Propulser(directionGlissement);
+        }
     }
 }

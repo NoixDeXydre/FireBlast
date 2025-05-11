@@ -9,6 +9,11 @@ public class ComportementJoueur : MonoBehaviour
 {
 
     /// <summary>
+    /// Temps où le joueur ne peut pas bouger après un dommage.
+    /// </summary>
+    private const float TempsMouvementsInactif = .8f;
+
+    /// <summary>
     /// Nombre de points perdus lorsque le joueur est touché.
     /// </summary>
     public int nombrePointsPerdusDommage;
@@ -38,6 +43,8 @@ public class ComportementJoueur : MonoBehaviour
     /// Permet de modifier la vie du personnage.
     /// </summary>
     private ControleurVie controleurVie;
+
+    private EtatsJeu etatsJeu;
 
     /// <summary>
     /// Script principal du jeu
@@ -69,6 +76,8 @@ public class ComportementJoueur : MonoBehaviour
         physiqueJoueur = scriptGestionJeu.physiqueJoueur;
 
         spriteRenderer = GetComponent<SpriteRenderer>();
+
+        etatsJeu = EtatsJeu.GetInstanceEtatsJeu();
     }
 
     /// <summary>
@@ -86,6 +95,7 @@ public class ComportementJoueur : MonoBehaviour
             controleurScore.Ajouter(nombrePointsPerdusDommage);
 
             estInvincible = true;
+            etatsJeu.SontMouvementsBloqueesParDommage = true;
 
             // Propulse le joueur dans la direction du projectile.
             Vector2 vitesseProjectile = collision.rigidbody.linearVelocity;
@@ -115,7 +125,14 @@ public class ComportementJoueur : MonoBehaviour
     {
         if (estInvincible)
         {
+
             timerInvincibilite += Time.deltaTime;
+            if (timerInvincibilite > TempsMouvementsInactif)
+            {
+                etatsJeu.SontMouvementsBloqueesParDommage = false;
+            }
+
+
             if (timerInvincibilite >= tempsInvincibilite)
             {
                 timerInvincibilite = .0f;
