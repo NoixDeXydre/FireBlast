@@ -2806,9 +2806,9 @@ Camera:
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
-    y: 0
+    y: 0.00046296295
     width: 1
-    height: 1
+    height: 0.9995119
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
@@ -2925,9 +2925,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Padding:
     m_Left: 0
-    m_Right: 0
+    m_Right: -225
     m_Top: 0
-    m_Bottom: 0
+    m_Bottom: -125
   m_ChildAlignment: 8
   m_Spacing: 0
   m_ChildForceExpandWidth: 1
@@ -8870,12 +8870,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Padding:
-    m_Left: 0
+    m_Left: -225
     m_Right: 0
-    m_Top: 0
+    m_Top: -125
     m_Bottom: 0
   m_ChildAlignment: 0
-  m_Spacing: -425
+  m_Spacing: -550
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 1
   m_ChildControlWidth: 0
@@ -43921,7 +43921,7 @@ Camera:
     height: 100000
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 61.290257
+  field of view: 85.0708
   orthographic: 0
   orthographic size: 1
   m_Depth: 0
