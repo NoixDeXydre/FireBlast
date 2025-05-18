@@ -121,7 +121,7 @@ public class ComportementJoueur : MonoBehaviour
     /// <summary>
     /// Gère le temps d'invincibilité du joueur.
     /// </summary>
-    private void Update()
+    private void FixedUpdate()
     {
         if (estInvincible)
         {

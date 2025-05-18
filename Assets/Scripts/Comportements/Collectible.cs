@@ -84,7 +84,7 @@ public class Collectible : MonoBehaviour
     /// <summary>
     /// Met à jour le timer pour la disparition de l'entité.
     /// </summary>
-    private void Update()
+    private void FixedUpdate()
     {
 
         controleurDisparitionEntite.Update();
