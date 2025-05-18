@@ -1,5 +1,3 @@
-using System;
-
 /// <summary>
 /// Singleton rassemblant les états du jeu et leurs évènements.
 /// </summary>
@@ -53,6 +51,9 @@ public class EtatsJeu
     private bool _sontMouvementsBloqueesParDommage = false;
     private bool _sontMouvementsBloqueesParJeu = false;
 
+    /// <summary>
+    /// Instance globale des états.
+    /// </summary>
     private static EtatsJeu instanceEtatsJeu;
 
     // Méthodes
@@ -60,12 +61,13 @@ public class EtatsJeu
     /// <returns>Une instance du singleton</returns>
     public static EtatsJeu GetInstanceEtatsJeu()
     {
+
         if (instanceEtatsJeu != null)
         {
             return instanceEtatsJeu;
         }
 
-        instanceEtatsJeu = new EtatsJeu();
+        instanceEtatsJeu = new();
         return instanceEtatsJeu;
     }
 

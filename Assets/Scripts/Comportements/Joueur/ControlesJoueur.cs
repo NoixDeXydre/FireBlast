@@ -15,16 +15,12 @@ public class ControlesJoueur : MonoBehaviour
 {
 
     /// <summary>
-    /// Pilote permettant de capturer les clics de la souris.
-    /// </summary>
-    public ControleurSouris scriptPiloteSouris;
-
-    /// <summary>
     /// Logique pour mouvoir le joueur.
     /// </summary>
     public PhysiqueJoueur physiqueJoueur;
 
     private EtatsJeu etatsJeu;
+    private Evenements evenements;
 
     /// <summary>
     /// Initialise des composants nécessaires dans d'autres scripts.
@@ -41,10 +37,11 @@ public class ControlesJoueur : MonoBehaviour
     {
 
         etatsJeu = EtatsJeu.GetInstanceEtatsJeu();
+        evenements = Evenements.GetInstanceEvenements();
 
         // Evènements déclenchés par le pilote.
-        scriptPiloteSouris.SourisClicEnfonce += OnSourisClicEnfonce;
-        scriptPiloteSouris.SourisClicRelache += OnSourisClicRelache;
+        evenements.OnSourisClicEnfonce += OnSourisClicEnfonce;
+        evenements.OnSourisClicRelache += OnSourisClicRelache;
     }
 
     private void OnSourisClicEnfonce(bool estEnEnfoncementSansGlissement)
