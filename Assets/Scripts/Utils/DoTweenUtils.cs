@@ -16,6 +16,6 @@ public static class DoTweenUtils
     public static int CalculerCyclesLoopYoyo(float dureeTotaleAnimation,
         float dureeAnimationParCycle)
     {
-        return (int)(dureeTotaleAnimation / dureeAnimationParCycle);
+        return (int)Mathf.Round(dureeTotaleAnimation / dureeAnimationParCycle);
     }
 }

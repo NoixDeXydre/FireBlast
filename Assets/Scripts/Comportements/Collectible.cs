@@ -63,7 +63,8 @@ public class Collectible : MonoBehaviour
         spriteCollectible = GetComponent<SpriteRenderer>();
 
         animationDisparition = spriteCollectible.DOFade(0f, 0.2f)
-        .SetLoops(DoTweenUtils.CalculerCyclesLoopYoyo(TempsSurLePointDeDisparaitre, 0.2f), LoopType.Yoyo).Pause();
+        .SetLoops(DoTweenUtils.CalculerCyclesLoopYoyo(TempsSurLePointDeDisparaitre, 0.2f), LoopType.Yoyo)
+        .OnComplete(() => Destroy(gameObject)).Pause();
     }
 
     /// <summary>

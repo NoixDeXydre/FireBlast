@@ -34,6 +34,11 @@ public class DisparitionEntite
     {
         return periodeVie;
     }
+    
+    /// <returns>True si la période de vie est de 0, sinon false</returns>
+    public bool IsPeriodeVieTerminee() {
+        return periodeVie <= .0f;
+    }
 
     /// <summary>
     /// Met à jour le timer pour effectuer la destruction de l'objet
@@ -45,7 +50,7 @@ public class DisparitionEntite
         periodeVie -= Time.deltaTime;
         if (periodeVie <= .0f)
         {
-            Object.Destroy(entiteADisparaitre);
+            periodeVie = .0f;
         }
     }
 }
