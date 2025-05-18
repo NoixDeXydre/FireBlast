@@ -73,7 +73,7 @@ public class ComportementJoueur : MonoBehaviour
         scriptGestionJeu = GestionJeuUtils.GetScriptGestionJeu();
         controleurVie = scriptGestionJeu.controleurVie;
         controleurScore = scriptGestionJeu.controleurScore;
-        physiqueJoueur = scriptGestionJeu.physiqueJoueur;
+        physiqueJoueur = GetComponent<ControlesJoueur>().physiqueJoueur;
 
         spriteRenderer = GetComponent<SpriteRenderer>();
 

@@ -18,11 +18,6 @@ public class GestionJeu : MonoBehaviour
     public Image panelVies;
 
     /// <summary>
-    /// Entité contrôlée par le joueur.
-    /// </summary>
-    public Rigidbody2D joueur;
-
-    /// <summary>
     /// Map du jeu
     /// </summary>
     public Tilemap map;
@@ -61,7 +56,6 @@ public class GestionJeu : MonoBehaviour
     private void Awake()
     {
 
-        physiqueJoueur = new PhysiqueJoueur(joueur);
         mapVirtuelle = new Map(map);
         createurEntites = new CreateurEntites(mapVirtuelle);
         timer = new Timer();

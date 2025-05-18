@@ -11,7 +11,7 @@ using UnityEngine;
 /// - Glisser souris en enfonçant : le joueur se propulse.
 /// 
 /// </summary>
-public class ControleurJoueur : MonoBehaviour
+public class ControlesJoueur : MonoBehaviour
 {
 
     /// <summary>
@@ -22,9 +22,17 @@ public class ControleurJoueur : MonoBehaviour
     /// <summary>
     /// Logique pour mouvoir le joueur.
     /// </summary>
-    private PhysiqueJoueur physiqueJoueur;
+    public PhysiqueJoueur physiqueJoueur;
 
     private EtatsJeu etatsJeu;
+
+    /// <summary>
+    /// Initialise des composants nécessaires dans d'autres scripts.
+    /// </summary>
+    private void Awake()
+    {
+        physiqueJoueur = new(GetComponent<Rigidbody2D>());
+    }
 
     /// <summary>
     /// Assignement de la logique métier et des évènements.
@@ -33,8 +41,6 @@ public class ControleurJoueur : MonoBehaviour
     {
 
         etatsJeu = EtatsJeu.GetInstanceEtatsJeu();
-
-        physiqueJoueur = GestionJeuUtils.GetScriptGestionJeu().physiqueJoueur;
 
         // Evènements déclenchés par le pilote.
         scriptPiloteSouris.SourisClicEnfonce += OnSourisClicEnfonce;
