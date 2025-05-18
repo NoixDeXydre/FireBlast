@@ -35,11 +35,9 @@ public class GestionJeu : MonoBehaviour
     // ============= Logique métier ==============
 
     // Composants accessibles
-    public CreateurEntites createurEntites;
-    public PhysiqueJoueur physiqueJoueur;
+    // RIEN
 
     // Composants inaccessibles
-    private MapVirtuelle mapVirtuelle;
     private Score score;
     private Timer timer;
     private Vie vie;
@@ -56,22 +54,12 @@ public class GestionJeu : MonoBehaviour
     private void Awake()
     {
 
-        mapVirtuelle = new MapVirtuelle(map);
-        createurEntites = new CreateurEntites(mapVirtuelle);
         timer = new Timer();
         score = new Score();
         vie = new Vie();
 
         controleurScore = new ControleurScore(score, scoreTexte, timer);
         controleurVie = new ControleurVie(vie, panelVies);
-
-        PrefabsBD db = Resources.Load<PrefabsBD>("PrefabsBD");
-        createurEntites.CreerEntite(db.collectiblePiece, new Vector2(20, 10));
-        createurEntites.CreerEntite(db.collectiblePiece, new Vector2(10, -10));
-        createurEntites.CreerEntite(db.collectiblePiece, new Vector2(10, 0));
-        createurEntites.CreerEntite(db.collectiblePiece, new Vector2(-10, 0));
-
-        createurEntites.CreerEntite(db.joueur, mapVirtuelle.GetCentreMap());
     }
 
     /// <summary>

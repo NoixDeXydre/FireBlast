@@ -130,6 +130,7 @@ GameObject:
   - component: {fileID: 119538969}
   - component: {fileID: 119538968}
   - component: {fileID: 119538972}
+  - component: {fileID: 119538973}
   m_Layer: 3
   m_Name: MapGrid
   m_TagString: Untagged
@@ -194,6 +195,19 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!114 &119538973
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 119538967}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f41ac452c68c4e544b5064f96e68b18a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  map: {fileID: 1364175672}
 --- !u!1 &131868812
 GameObject:
   m_ObjectHideFlags: 0
