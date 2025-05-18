@@ -3456,6 +3456,7 @@ GameObject:
   - component: {fileID: 1112263514}
   - component: {fileID: 1112263513}
   - component: {fileID: 1112263511}
+  - component: {fileID: 1112263515}
   m_Layer: 5
   m_Name: UICanvas
   m_TagString: Untagged
@@ -3524,6 +3525,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 900, y: 500}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!225 &1112263515
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1112263510}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &1128198986
 GameObject:
   m_ObjectHideFlags: 0
@@ -4053,7 +4066,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   panelVies: {fileID: 903820168}
-  joueur: {fileID: 1564545269}
   map: {fileID: 131868816}
   scoreTexte: {fileID: 1712388593}
   timerTexte: {fileID: 1239875637}
@@ -33340,11 +33352,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1559566022}
   m_CullTransparentMesh: 1
---- !u!50 &1564545269 stripped
-Rigidbody2D:
-  m_CorrespondingSourceObject: {fileID: 8588803068935926200, guid: 3185832af3c7fd34cb5f7bba75cf185e, type: 3}
-  m_PrefabInstance: {fileID: 8498125295923766806}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1564545272 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5294398152728942782, guid: 3185832af3c7fd34cb5f7bba75cf185e, type: 3}
