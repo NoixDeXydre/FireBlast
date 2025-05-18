@@ -12,6 +12,9 @@ public class GestionJeu : MonoBehaviour
 
     // =========== Objets à référencer ===========
 
+    /// <summary>
+    /// Affiche les vies dans l'UI
+    /// </summary>
     public Image panelVies;
 
     /// <summary>
@@ -34,17 +37,14 @@ public class GestionJeu : MonoBehaviour
     /// </summary>
     public TextMeshProUGUI timerTexte;
 
-    // ===== Variables destinées aux calculs =====
-
-    private Vector3 coordonneesCoinSuperieurDroitMap;
-    private Vector3 coordonneesCoinInferieurGaucheMap;
-
     // ============= Logique métier ==============
 
     // Composants accessibles
+    public CreateurEntites createurEntites;
     public PhysiqueJoueur physiqueJoueur;
 
     // Composants inaccessibles
+    private Map mapVirtuelle;
     private Score score;
     private Timer timer;
     private Vie vie;
@@ -62,6 +62,8 @@ public class GestionJeu : MonoBehaviour
     {
 
         physiqueJoueur = new PhysiqueJoueur(joueur);
+        mapVirtuelle = new Map(map);
+        createurEntites = new CreateurEntites(mapVirtuelle);
         timer = new Timer();
         score = new Score();
         vie = new Vie();
@@ -69,14 +71,11 @@ public class GestionJeu : MonoBehaviour
         controleurScore = new ControleurScore(score, scoreTexte, timer);
         controleurVie = new ControleurVie(vie, panelVies);
 
-        BoundsInt coinsMap = map.cellBounds;
-        coordonneesCoinSuperieurDroitMap = map.CellToWorld(coinsMap.max);
-        coordonneesCoinInferieurGaucheMap = map.CellToWorld(coinsMap.min);
-
-        coordonneesCoinSuperieurDroitMap.y--; // Est exclusif
-
-        Debug.Log("Map : " + coordonneesCoinSuperieurDroitMap.ToString()
-            + " - " + coordonneesCoinInferieurGaucheMap.ToString());
+        PrefabsBD db = Resources.Load<PrefabsBD>("PrefabsBD");
+        createurEntites.CreerEntite(db.collectiblePiece, new Vector2(20, 10));
+        createurEntites.CreerEntite(db.collectiblePiece, new Vector2(10, -10));
+        createurEntites.CreerEntite(db.collectiblePiece, new Vector2(10, 0));
+        createurEntites.CreerEntite(db.collectiblePiece, new Vector2(-10, 0));
     }
 
     /// <summary>
