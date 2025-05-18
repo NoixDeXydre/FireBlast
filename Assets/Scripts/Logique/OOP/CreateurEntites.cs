@@ -10,13 +10,13 @@ public class CreateurEntites
     /// <summary>
     /// Map sur laquelle les entités vont apparaitre.
     /// </summary>
-    private readonly Map map;
+    private readonly MapVirtuelle map;
 
     /// <summary>
     /// Crée un nouveau créateur d'entités
     /// </summary>
     /// <param name="map">Map sur laquelle les entités vont apparaitre</param>
-    public CreateurEntites(Map map)
+    public CreateurEntites(MapVirtuelle map)
     {
         this.map = map;
     }

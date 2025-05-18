@@ -39,7 +39,7 @@ public class GestionJeu : MonoBehaviour
     public PhysiqueJoueur physiqueJoueur;
 
     // Composants inaccessibles
-    private Map mapVirtuelle;
+    private MapVirtuelle mapVirtuelle;
     private Score score;
     private Timer timer;
     private Vie vie;
@@ -56,7 +56,7 @@ public class GestionJeu : MonoBehaviour
     private void Awake()
     {
 
-        mapVirtuelle = new Map(map);
+        mapVirtuelle = new MapVirtuelle(map);
         createurEntites = new CreateurEntites(mapVirtuelle);
         timer = new Timer();
         score = new Score();
@@ -70,6 +70,8 @@ public class GestionJeu : MonoBehaviour
         createurEntites.CreerEntite(db.collectiblePiece, new Vector2(10, -10));
         createurEntites.CreerEntite(db.collectiblePiece, new Vector2(10, 0));
         createurEntites.CreerEntite(db.collectiblePiece, new Vector2(-10, 0));
+
+        createurEntites.CreerEntite(db.joueur, mapVirtuelle.GetCentreMap());
     }
 
     /// <summary>

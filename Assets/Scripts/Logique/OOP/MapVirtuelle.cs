@@ -4,7 +4,7 @@ using UnityEngine.Tilemaps;
 /// <summary>
 /// Représente la map du jeu (fixe)
 /// </summary>
-public class Map
+public class MapVirtuelle
 {
 
     /// <summary>
@@ -41,7 +41,7 @@ public class Map
     /// Référence une nouvelle map.
     /// </summary>
     /// <param name="map">La map à référencer</param>
-    public Map(Tilemap map)
+    public MapVirtuelle(Tilemap map)
     {
 
         this.map = map;
@@ -54,7 +54,7 @@ public class Map
         coordonneesCoinSuperieurDroitMap.y--; // Est exclusif
 
         // Calculer directement pour gagner en performance.
-        centreCoordonnees = coordonneesCoinSuperieurDroitMap / 2.0f;
+        centreCoordonnees = (coordonneesCoinSuperieurDroitMap + coordonneesCoinInferieurGaucheMap) * .5f;
         limitesCoordonneesX = new(coordonneesCoinInferieurGaucheMap.x, coordonneesCoinSuperieurDroitMap.x);
         limitesCoordonneesY = new(coordonneesCoinInferieurGaucheMap.y, coordonneesCoinSuperieurDroitMap.y);
     }
