@@ -16,11 +16,6 @@ public class ControleurSouris : MonoBehaviour
     private const float DistanceElementsVisuels = 100.0f;
 
     /// <summary>
-    /// La caméra qui suit le joueur.
-    /// </summary>
-    public Camera cameraJoueur;
-
-    /// <summary>
     /// La caméra qui représente précisément les coordonnées du monde.
     /// </summary>
     public Camera cameraReference;
@@ -71,7 +66,7 @@ public class ControleurSouris : MonoBehaviour
     private void Update()
     {
 
-        Vector3 positionCameraJoueur = cameraJoueur.transform.position;
+        Vector3 positionCameraJoueur = Camera.main.transform.position;
         Vector3 positionSouris = Input.mousePosition;
         ecranHitbox.offset = positionCameraJoueur;
 
@@ -79,7 +74,7 @@ public class ControleurSouris : MonoBehaviour
         positionCameraJoueur.z = DistanceElementsVisuels;
         positionSouris.z = DistanceElementsVisuels;
 
-        sourisVirtuelle.transform.position = cameraJoueur.ScreenToWorldPoint(positionSouris);
+        sourisVirtuelle.transform.position = Camera.main.ScreenToWorldPoint(positionSouris);
 
         affichageDirectionJoueur.SetPosition(0, sourisVirtuelle.transform.position);
         affichageDirectionJoueur.SetPosition(1, (positionCameraJoueur - sourisVirtuelle.transform.position).normalized 
