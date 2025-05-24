@@ -46,7 +46,7 @@ public class Collectible : MonoBehaviour
     /// <summary>
     /// Initialise le collectible
     /// </summary>
-    private void Start()
+    private void Awake()
     {
 
         controleurScore = GestionJeuUtils.GetScriptGestionJeu().controleurScore;
