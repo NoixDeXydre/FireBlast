@@ -11,7 +11,7 @@ public class ControleurApparitionEntites : MonoBehaviour
     /// <summary>
     /// Délais avant que le jeu regarde les entités à faire apparaître.
     /// </summary>
-    private const float TempsAttenteUsine = .5f;
+    private const float TempsAttenteUsine = 1.0f;
 
     /// <summary>
     /// La map où les entités vont apparaître.
@@ -20,6 +20,8 @@ public class ControleurApparitionEntites : MonoBehaviour
 
     private CreateurEntites usineEntites;
     private MapVirtuelle mapVirtuelle;
+
+    private EntitesPoolGroupe collectibles;
 
     private PrefabsBD prefabsBD;
 
@@ -33,6 +35,9 @@ public class ControleurApparitionEntites : MonoBehaviour
         usineEntites = new(mapVirtuelle);
 
         prefabsBD = Resources.Load<PrefabsBD>(nameof(PrefabsBD));
+
+        collectibles = new(3);
+        collectibles.InstancierTypeEntites(3, "piece", prefabsBD.collectiblePiece);
 
         // On crée le joueur
         usineEntites.CreerEntite(prefabsBD.joueur, mapVirtuelle.GetCentreMap());
@@ -50,7 +55,12 @@ public class ControleurApparitionEntites : MonoBehaviour
 
     private void SousIterationCollectibles()
     {
-        usineEntites.CreerEntite(prefabsBD.collectiblePiece, 
-            Aleatoire.ChoisirPointParmisDeuxAxes(mapVirtuelle.GetCoordonneesIntervallesX(), mapVirtuelle.GetCoordonneesIntervallesY()));
+
+        GameObject piece = collectibles.GetInstanceTypeEntiteNonActif("piece");
+        if (piece != null)
+        {
+            piece.transform.position = Aleatoire.ChoisirPointParmisDeuxAxes(mapVirtuelle.GetCoordonneesIntervallesX(), mapVirtuelle.GetCoordonneesIntervallesY());
+            piece.SetActive(true);
+        }
     }
 }

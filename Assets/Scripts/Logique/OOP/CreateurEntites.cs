@@ -3,6 +3,9 @@ using UnityEngine;
 
 /// <summary>
 /// Permet de créer des entités sur la map.
+///
+/// Utilisez plutôt EntitesPoolGroupe 
+/// si les objets doivent se détruire souvent !
 /// </summary>
 public class CreateurEntites
 {
@@ -50,33 +53,6 @@ public class CreateurEntites
     /// <returns>L'entité créee</returns>
     public GameObject CreerEntite(GameObject entite, Vector2 position)
     {
-
-        if (!map.IsPointSurLaMap(position))
-        {
-            
-            // Normalisation de la position si elle n'est pas dans le plan.
-
-            Vector2 limitesMapX = map.GetCoordonneesIntervallesX();
-            if (position.x < limitesMapX.x)
-            {
-                position.x = limitesMapX.x;
-            }
-            else if (position.x > limitesMapX.y)
-            {
-                position.x = limitesMapX.y;
-            }
-
-            Vector2 limitesMapY = map.GetCoordonneesIntervallesY();
-            if (position.y < limitesMapY.x)
-            {
-                position.y = limitesMapY.x;
-            }
-            else if (position.y > limitesMapY.y)
-            {
-                position.y = limitesMapY.y;
-            }
-        }
-
-        return Object.Instantiate(entite, position, Quaternion.identity);
+        return Object.Instantiate(entite, map.NormaliserPoint(position), Quaternion.identity);
     }
 }

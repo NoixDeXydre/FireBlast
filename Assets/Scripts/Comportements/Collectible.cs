@@ -1,5 +1,4 @@
 using DG.Tweening;
-using DG.Tweening.Core;
 using UnityEngine;
 
 /// <summary>
@@ -25,11 +24,6 @@ public class Collectible : MonoBehaviour
     public long nombrePointsCollection;
 
     /// <summary>
-    /// S'active si le collectible est sur le point de disparaître.
-    /// </summary>
-    private bool estEnDisparition;
-
-    /// <summary>
     /// Permet de manipuler le score.
     /// </summary>
     private ControleurScore controleurScore;
@@ -50,21 +44,17 @@ public class Collectible : MonoBehaviour
     private Tween animationDisparition;
 
     /// <summary>
-    /// Récupère le gestionnaire du score.
+    /// Initialise le collectible
     /// </summary>
     private void Start()
     {
 
-        estEnDisparition = false;
-
         controleurScore = GestionJeuUtils.GetScriptGestionJeu().controleurScore;
-        controleurDisparitionEntite = new DisparitionEntite(gameObject, dureeApparition);
+        controleurDisparitionEntite = new DisparitionEntite(dureeApparition);
 
         spriteCollectible = GetComponent<SpriteRenderer>();
 
-        animationDisparition = spriteCollectible.DOFade(0f, 0.2f)
-        .SetLoops(DoTweenUtils.CalculerCyclesLoopYoyo(TempsSurLePointDeDisparaitre, 0.2f), LoopType.Yoyo)
-        .OnComplete(() => Destroy(gameObject)).Pause();
+        InitialiserAnimationDisparition();
     }
 
     /// <summary>
@@ -77,8 +67,7 @@ public class Collectible : MonoBehaviour
         if (collision.collider.tag.Equals(TagLayers.TagJoueur)) 
         {
             controleurScore.Ajouter(nombrePointsCollection);
-            animationDisparition.Kill(); // On annule la possible animation avant de détruire l'objet.
-            Object.Destroy(gameObject);
+            gameObject.SetActive(false);
         }
     }
 
@@ -89,11 +78,36 @@ public class Collectible : MonoBehaviour
     {
 
         controleurDisparitionEntite.Update();
-        if (!estEnDisparition && controleurDisparitionEntite.GetPeriodeVie() 
+        if (!animationDisparition.IsPlaying() && controleurDisparitionEntite.GetPeriodeVie() 
             < TempsSurLePointDeDisparaitre)
         {
-            estEnDisparition = true;
             animationDisparition.Play();
         }
+    }
+
+    /// <summary>
+    /// Se remet à zéro lors de la désactivation.
+    /// </summary>
+    private void OnDisable()
+    {
+
+        controleurDisparitionEntite.SetPeriodeVie(dureeApparition);
+
+        DoTweenUtils.ReinitialiserApparenceSpriteRenderer(spriteCollectible);
+        InitialiserAnimationDisparition();
+    }
+
+    /// <summary>
+    /// (Ré)initalise l'animation de disparition
+    /// </summary>
+    private void InitialiserAnimationDisparition()
+    {
+
+        // Animation tuée si null
+        animationDisparition?.Kill();
+
+        animationDisparition = spriteCollectible.DOFade(0f, 0.2f)
+            .SetLoops(DoTweenUtils.CalculerCyclesLoopYoyo(TempsSurLePointDeDisparaitre, 0.2f), LoopType.Yoyo)
+            .OnComplete(() => gameObject.SetActive(false)).Pause();
     }
 }

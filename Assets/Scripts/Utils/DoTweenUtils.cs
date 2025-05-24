@@ -18,4 +18,17 @@ public static class DoTweenUtils
     {
         return (int)Mathf.Round(dureeTotaleAnimation / dureeAnimationParCycle);
     }
+
+    /// <summary>
+    /// Réinitialise les couleurs d'un sprite
+    /// </summary>
+    /// <param name="sprite">Le sprite renderer</param>
+    public static void ReinitialiserApparenceSpriteRenderer(SpriteRenderer sprite)
+    {
+
+        Color couleur = sprite.color;
+        couleur.a = 1f;
+
+        sprite.color = couleur;
+    }
 }

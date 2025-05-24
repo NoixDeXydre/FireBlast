@@ -13,22 +13,21 @@ public class DisparitionEntite
     private float periodeVie;
 
     /// <summary>
-    /// Entité qui va disparaître dans le temps imparti.
-    /// </summary>
-    private readonly GameObject entiteADisparaitre;
-
-    /// <summary>
     /// Initialise le composant avec
     /// l'entité concernée et sa période de vie.
     /// </summary>
-    /// <param name="entiteADisparaitre">Objet devant disparaître</param>
     /// <param name="periodeVie">Durée de vie en secondes</param>
-    public DisparitionEntite(GameObject entiteADisparaitre, float periodeVie)
+    public DisparitionEntite(float periodeVie)
     {
         this.periodeVie = periodeVie;
-        this.entiteADisparaitre = entiteADisparaitre;
     }
 
+    /// <param name="nouvellePeriodeVie">Nouvelle période de vie</param>
+    public void SetPeriodeVie(float nouvellePeriodeVie)
+    {
+        periodeVie = nouvellePeriodeVie;
+    }    
+    
     /// <returns>La période de vie restante</returns>
     public float GetPeriodeVie()
     {

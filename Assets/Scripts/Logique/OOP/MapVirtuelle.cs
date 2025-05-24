@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using UnityEngine.UIElements;
 
 /// <summary>
 /// Représente la map du jeu (fixe)
@@ -96,5 +97,33 @@ public class MapVirtuelle
     public bool IsPointSurLaMap(Vector2 point)
     {
         return IsAxeXSurLaMap(point.x) && IsAxeYSurLaMap(point.y);
+    }
+
+    /// <param name="point">le point à normaliser</param>
+    /// <returns>Un point normalisé, restant dans la map</returns>
+    public Vector2 NormaliserPoint(Vector2 point)
+    {
+
+        Vector2 pointNormalise = new(point.x, point.y);
+
+        if (pointNormalise.x < limitesCoordonneesX.x)
+        {
+            pointNormalise.x = limitesCoordonneesX.x;
+        }
+        else if (pointNormalise.x > limitesCoordonneesX.y)
+        {
+            pointNormalise.x = limitesCoordonneesX.y;
+        }
+
+        if (pointNormalise.y < limitesCoordonneesY.x)
+        {
+            pointNormalise.y = limitesCoordonneesX.x;
+        }
+        else if (pointNormalise.y > limitesCoordonneesY.y)
+        {
+            pointNormalise.y = limitesCoordonneesY.y;
+        }
+
+        return pointNormalise;
     }
 }
