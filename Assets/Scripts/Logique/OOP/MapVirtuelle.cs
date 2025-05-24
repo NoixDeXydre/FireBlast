@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.Tilemaps;
-using UnityEngine.UIElements;
 
 /// <summary>
 /// Représente la map du jeu (fixe)
@@ -42,15 +41,18 @@ public class MapVirtuelle
     /// Référence une nouvelle map.
     /// </summary>
     /// <param name="map">La map à référencer</param>
-    public MapVirtuelle(Tilemap map)
+    /// <param name="margeInterne">Marge restreignant les entités</param>
+    public MapVirtuelle(Tilemap map, float margeInterne)
     {
 
         this.map = map;
 
+        Vector2 margeVectoriel = new(margeInterne, margeInterne);
+
         // Calcul des bordures de la map
         BoundsInt coinsMap = map.cellBounds;
-        coordonneesCoinSuperieurDroitMap = map.CellToWorld(coinsMap.max);
-        coordonneesCoinInferieurGaucheMap = map.CellToWorld(coinsMap.min);
+        coordonneesCoinSuperieurDroitMap = (Vector2) map.CellToWorld(coinsMap.max) - margeVectoriel;
+        coordonneesCoinInferieurGaucheMap = (Vector2) map.CellToWorld(coinsMap.min) + margeVectoriel;
 
         coordonneesCoinSuperieurDroitMap.y--; // Est exclusif
 

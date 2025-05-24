@@ -31,7 +31,7 @@ public class ControleurApparitionEntites : MonoBehaviour
     private void Start()
     {
 
-        mapVirtuelle = new(map);
+        mapVirtuelle = new(map, 3.0f);
         usineEntites = new(mapVirtuelle);
 
         prefabsBD = Resources.Load<PrefabsBD>(nameof(PrefabsBD));
