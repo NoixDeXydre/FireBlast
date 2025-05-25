@@ -49,8 +49,7 @@ public class ControleurApparitionEntites : MonoBehaviour
     /// </summary>
     private void IterationTournageUsine()
     {
-        SousIterationCollectibles();
-        Invoke(nameof(IterationTournageUsine), TempsAttenteUsine);
+        Invoke(nameof(SousIterationCollectibles), Aleatoire.ChoisirNombreParmisPlage(15f, 35f, 1.1f));
     }
 
     private void SousIterationCollectibles()
@@ -62,5 +61,7 @@ public class ControleurApparitionEntites : MonoBehaviour
             piece.transform.position = Aleatoire.ChoisirPointParmisDeuxAxes(mapVirtuelle.GetCoordonneesIntervallesX(), mapVirtuelle.GetCoordonneesIntervallesY());
             piece.SetActive(true);
         }
+
+        Invoke(nameof(SousIterationCollectibles), Aleatoire.ChoisirNombreParmisPlage(15f, 35f, 1.1f));
     }
 }
