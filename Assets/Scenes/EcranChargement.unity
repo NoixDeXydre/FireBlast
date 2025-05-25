@@ -575,7 +575,7 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7210793808755009009, guid: e795f19f5ec07634eb5127ae4c4ed3b0, type: 3}
-      propertyPath: 'm_Cameras.Array.data[0]'
+      propertyPath: m_Cameras.Array.data[0]
       value: 
       objectReference: {fileID: 1512514888}
     - target: {fileID: 8638367476161573560, guid: e795f19f5ec07634eb5127ae4c4ed3b0, type: 3}
@@ -701,15 +701,15 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
-  m_fontSizeBase: 24
+  m_fontSize: 12
+  m_fontSizeBase: 12
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
   m_HorizontalAlignment: 4
-  m_VerticalAlignment: 256
+  m_VerticalAlignment: 1024
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
