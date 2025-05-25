@@ -9,6 +9,11 @@ public class ComportementJoueur : MonoBehaviour
 {
 
     /// <summary>
+    /// Temps où le joueur ne peut pas bouger après un dommage.
+    /// </summary>
+    private const float TempsMouvementsInactif = .8f;
+
+    /// <summary>
     /// Nombre de points perdus lorsque le joueur est touché.
     /// </summary>
     public int nombrePointsPerdusDommage;
@@ -39,6 +44,8 @@ public class ComportementJoueur : MonoBehaviour
     /// </summary>
     private ControleurVie controleurVie;
 
+    private EtatsJeu etatsJeu;
+
     /// <summary>
     /// Script principal du jeu
     /// </summary>
@@ -66,9 +73,11 @@ public class ComportementJoueur : MonoBehaviour
         scriptGestionJeu = GestionJeuUtils.GetScriptGestionJeu();
         controleurVie = scriptGestionJeu.controleurVie;
         controleurScore = scriptGestionJeu.controleurScore;
-        physiqueJoueur = scriptGestionJeu.physiqueJoueur;
+        physiqueJoueur = GetComponent<ControlesJoueur>().physiqueJoueur;
 
         spriteRenderer = GetComponent<SpriteRenderer>();
+
+        etatsJeu = EtatsJeu.GetInstanceEtatsJeu();
     }
 
     /// <summary>
@@ -86,6 +95,7 @@ public class ComportementJoueur : MonoBehaviour
             controleurScore.Ajouter(nombrePointsPerdusDommage);
 
             estInvincible = true;
+            etatsJeu.SontMouvementsBloqueesParDommage = true;
 
             // Propulse le joueur dans la direction du projectile.
             Vector2 vitesseProjectile = collision.rigidbody.linearVelocity;
@@ -94,7 +104,7 @@ public class ComportementJoueur : MonoBehaviour
 
             // Animation lorsque touché
             spriteRenderer.DOFade(0f, .2f).OnComplete(() => spriteRenderer.DOFade(1f, .5f))
-                .SetLoops((int)(tempsInvincibilite / .2f)); // Nombre de loop calculé avec les secondes.
+                .SetLoops(DoTweenUtils.CalculerCyclesLoopYoyo(tempsInvincibilite, .2f));
         }
 
         // Lorsque le joueur rebondit dans un mur.
@@ -115,7 +125,14 @@ public class ComportementJoueur : MonoBehaviour
     {
         if (estInvincible)
         {
+
             timerInvincibilite += Time.deltaTime;
+            if (timerInvincibilite > TempsMouvementsInactif)
+            {
+                etatsJeu.SontMouvementsBloqueesParDommage = false;
+            }
+
+
             if (timerInvincibilite >= tempsInvincibilite)
             {
                 timerInvincibilite = .0f;

@@ -12,12 +12,10 @@ public class GestionJeu : MonoBehaviour
 
     // =========== Objets à référencer ===========
 
-    public Image panelVies;
-
     /// <summary>
-    /// Entité contrôlée par le joueur.
+    /// Affiche les vies dans l'UI
     /// </summary>
-    public Rigidbody2D joueur;
+    public Image panelVies;
 
     /// <summary>
     /// Map du jeu
@@ -34,15 +32,10 @@ public class GestionJeu : MonoBehaviour
     /// </summary>
     public TextMeshProUGUI timerTexte;
 
-    // ===== Variables destinées aux calculs =====
-
-    private Vector3 coordonneesCoinSuperieurDroitMap;
-    private Vector3 coordonneesCoinInferieurGaucheMap;
-
     // ============= Logique métier ==============
 
     // Composants accessibles
-    public PhysiqueJoueur physiqueJoueur;
+    // RIEN
 
     // Composants inaccessibles
     private Score score;
@@ -61,22 +54,12 @@ public class GestionJeu : MonoBehaviour
     private void Awake()
     {
 
-        physiqueJoueur = new PhysiqueJoueur(joueur);
         timer = new Timer();
         score = new Score();
         vie = new Vie();
 
         controleurScore = new ControleurScore(score, scoreTexte, timer);
         controleurVie = new ControleurVie(vie, panelVies);
-
-        BoundsInt coinsMap = map.cellBounds;
-        coordonneesCoinSuperieurDroitMap = map.CellToWorld(coinsMap.max);
-        coordonneesCoinInferieurGaucheMap = map.CellToWorld(coinsMap.min);
-
-        coordonneesCoinSuperieurDroitMap.y--; // Est exclusif
-
-        Debug.Log("Map : " + coordonneesCoinSuperieurDroitMap.ToString()
-            + " - " + coordonneesCoinInferieurGaucheMap.ToString());
     }
 
     /// <summary>
