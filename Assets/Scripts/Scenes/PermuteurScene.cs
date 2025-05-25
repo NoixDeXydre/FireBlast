@@ -9,6 +9,11 @@ public class PermuteurScene : MonoBehaviour
 {
 
     /// <summary>
+    /// Nom de la scène de l'écran de chargement.
+    /// </summary>
+    private const string NOM_SCENE_ECRAN_CHARGEMENT = "EcranChargement";
+
+    /// <summary>
     /// Informe si une scène est en train de charger.
     /// </summary>
     private bool estEnChargement;
@@ -64,17 +69,17 @@ public class PermuteurScene : MonoBehaviour
     {
 
         // Restera en cache si fait une deuxième fois.
-        Scene ecranChargement = SceneManager.GetSceneByName("EcranChargement");
+        Scene ecranChargement = SceneManager.GetSceneByName(NOM_SCENE_ECRAN_CHARGEMENT);
         if (!ecranChargement.isLoaded)
         {
 
-            AsyncOperation chargementEcran = SceneManager.LoadSceneAsync("EcranChargement", LoadSceneMode.Additive);
+            AsyncOperation chargementEcran = SceneManager.LoadSceneAsync(NOM_SCENE_ECRAN_CHARGEMENT, LoadSceneMode.Additive);
             while (!chargementEcran.isDone)
             {
                 yield return null;
             }
 
-            ecranChargement = SceneManager.GetSceneByName("EcranChargement");
+            ecranChargement = SceneManager.GetSceneByName(NOM_SCENE_ECRAN_CHARGEMENT);
 
             // On doit récupérer le script sans faire confiance à la hiérarchie d'Unity.
             int indexGo = 0;
