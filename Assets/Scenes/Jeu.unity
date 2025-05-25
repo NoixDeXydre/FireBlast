@@ -34044,7 +34044,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7724160381207858931, guid: 6fad487ffe29bfc459c00b1203f40147, type: 3}
       propertyPath: m_Name
-      value: UICamera
+      value: UICamera3D
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
