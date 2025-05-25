@@ -1912,6 +1912,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 50799685}
     - target: {fileID: 8638367476161573560, guid: e795f19f5ec07634eb5127ae4c4ed3b0, type: 3}
+      propertyPath: m_Depth
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 8638367476161573560, guid: e795f19f5ec07634eb5127ae4c4ed3b0, type: 3}
       propertyPath: m_CullingMask.m_Bits
       value: 32
       objectReference: {fileID: 0}
