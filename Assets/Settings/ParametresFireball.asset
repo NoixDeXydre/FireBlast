@@ -14,5 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   numeroBuild: 1
   nomBuild: Aster
-  dateDebutCopyright: 2025
-  dateFinCopyright: 2025
+  dateCopyright: 2025
