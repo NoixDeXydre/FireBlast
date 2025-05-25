@@ -33982,6 +33982,10 @@ PrefabInstance:
       value: JeuCamera
       objectReference: {fileID: 0}
     - target: {fileID: 7210793808755009009, guid: e795f19f5ec07634eb5127ae4c4ed3b0, type: 3}
+      propertyPath: m_Cameras.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7210793808755009009, guid: e795f19f5ec07634eb5127ae4c4ed3b0, type: 3}
       propertyPath: 'm_Cameras.Array.data[0]'
       value: 
       objectReference: {fileID: 1967765979}
@@ -33989,6 +33993,18 @@ PrefabInstance:
       propertyPath: 'm_Cameras.Array.data[1]'
       value: 
       objectReference: {fileID: 1934295231}
+    - target: {fileID: 8638367476161573560, guid: e795f19f5ec07634eb5127ae4c4ed3b0, type: 3}
+      propertyPath: m_NormalizedViewPortRect.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8638367476161573560, guid: e795f19f5ec07634eb5127ae4c4ed3b0, type: 3}
+      propertyPath: m_NormalizedViewPortRect.width
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8638367476161573560, guid: e795f19f5ec07634eb5127ae4c4ed3b0, type: 3}
+      propertyPath: m_NormalizedViewPortRect.height
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -34002,6 +34018,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1461076952}
     m_Modifications:
+    - target: {fileID: 658511925188111130, guid: 6fad487ffe29bfc459c00b1203f40147, type: 3}
+      propertyPath: m_NormalizedViewPortRect.height
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7477509094654564396, guid: 6fad487ffe29bfc459c00b1203f40147, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -34059,6 +34079,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1461076952}
     m_Modifications:
+    - target: {fileID: 486202020602135574, guid: 0d493e7994207354a8755c1a915b4507, type: 3}
+      propertyPath: m_NormalizedViewPortRect.height
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1374095702893946277, guid: 0d493e7994207354a8755c1a915b4507, type: 3}
       propertyPath: m_Name
       value: PersonnageCamera
