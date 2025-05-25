@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8891454501905033676}
   - component: {fileID: 9003523852189342438}
   m_Layer: 6
-  m_Name: PicDynamicSprite
+  m_Name: Pic
   m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
