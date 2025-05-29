@@ -46,7 +46,7 @@ public class Collectible : MonoBehaviour
     /// <summary>
     /// Initialise le collectible
     /// </summary>
-    private void Awake()
+    private void Start()
     {
 
         controleurScore = GestionJeuUtils.GetScriptGestionJeu().controleurScore;
@@ -64,7 +64,7 @@ public class Collectible : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
 
-        if (collision.collider.tag.Equals(TagLayers.TagJoueur)) 
+        if (collision.collider.CompareTag(TagLayers.TagJoueur)) 
         {
             controleurScore.Ajouter(nombrePointsCollection);
             gameObject.SetActive(false);
@@ -91,9 +91,13 @@ public class Collectible : MonoBehaviour
     private void OnDisable()
     {
 
-        controleurDisparitionEntite.SetPeriodeVie(dureeApparition);
+        controleurDisparitionEntite?.SetPeriodeVie(dureeApparition);
 
-        DoTweenUtils.ReinitialiserApparenceSpriteRenderer(spriteCollectible);
+        if (spriteCollectible != null)
+        {
+            DoTweenUtils.ReinitialiserApparenceSpriteRenderer(spriteCollectible);
+        }
+
         InitialiserAnimationDisparition();
     }
 
