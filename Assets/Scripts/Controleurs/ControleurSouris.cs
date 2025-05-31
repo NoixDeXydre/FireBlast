@@ -68,17 +68,24 @@ public class ControleurSouris : MonoBehaviour
 
         Vector3 positionCameraJoueur = Camera.main.transform.position;
         Vector3 positionSouris = Input.mousePosition;
+
+        // Suit la grande collision de l'écran
         ecranHitbox.offset = positionCameraJoueur;
 
-        // Normalisation de la position de la souris et de la caméra.
-        positionCameraJoueur.z = DistanceElementsVisuels;
-        positionSouris.z = DistanceElementsVisuels;
+        // N'est pas rendu si la souris est hors de l'écran.
+        if (Screen.safeArea.Contains(positionSouris))
+        {
 
-        sourisVirtuelle.transform.position = Camera.main.ScreenToWorldPoint(positionSouris);
+            // Normalisation de la position de la souris et de la caméra.
+            positionCameraJoueur.z = DistanceElementsVisuels;
+            positionSouris.z = DistanceElementsVisuels;
 
-        affichageDirectionJoueur.SetPosition(0, sourisVirtuelle.transform.position);
-        affichageDirectionJoueur.SetPosition(1, (positionCameraJoueur - sourisVirtuelle.transform.position).normalized 
-            + positionCameraJoueur);
+            sourisVirtuelle.transform.position = Camera.main.ScreenToWorldPoint(positionSouris);
+
+            affichageDirectionJoueur.SetPosition(0, sourisVirtuelle.transform.position);
+            affichageDirectionJoueur.SetPosition(1, (positionCameraJoueur - sourisVirtuelle.transform.position).normalized
+                + positionCameraJoueur);
+        }
     }
 
     /// <summary>
