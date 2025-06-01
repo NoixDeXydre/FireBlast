@@ -1,12 +1,10 @@
-using JetBrains.Annotations;
 using System.Collections.Generic;
-using UnityEngine;
 
 /// <summary>
 /// Représente un groupe d'entités avec leur nature
 /// et leurs fréquences d'apparition.
 /// </summary>
-public class StructureGroupeEntites
+public class EntitesGroupeStructure
 {
     
     /// <summary>
@@ -27,7 +25,7 @@ public class StructureGroupeEntites
     /// <summary>
     /// Initialise un nouveau groupe d'entité
     /// </summary>
-    public StructureGroupeEntites()
+    public EntitesGroupeStructure()
     {
         entitesBibliotheque = new();
         entitesGroupe = new();

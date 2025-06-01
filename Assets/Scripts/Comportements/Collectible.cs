@@ -31,7 +31,7 @@ public class Collectible : MonoBehaviour
     /// <summary>
     /// Contrôle la disparition de l'objet.
     /// </summary>
-    private DisparitionEntite controleurDisparitionEntite;
+    private EntiteDispariteur controleurDisparitionEntite;
 
     /// <summary>
     /// Sprite du collectible.
@@ -50,7 +50,7 @@ public class Collectible : MonoBehaviour
     {
 
         controleurScore = GestionJeuUtils.GetScriptGestionJeu().controleurScore;
-        controleurDisparitionEntite = new DisparitionEntite(dureeApparition);
+        controleurDisparitionEntite = new EntiteDispariteur(dureeApparition);
 
         spriteCollectible = GetComponent<SpriteRenderer>();
 

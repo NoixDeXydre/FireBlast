@@ -21,7 +21,7 @@ public class PropulsionPic : MonoBehaviour
     /// <summary>
     /// Contrôle la disparition de l'objet.
     /// </summary>
-    private DisparitionEntite controleurDisparitionEntite;
+    private EntiteDispariteur controleurDisparitionEntite;
 
     /// <summary>
     /// Le projectile à lancer.
@@ -34,7 +34,7 @@ public class PropulsionPic : MonoBehaviour
     private void Start()
     {
 
-        controleurDisparitionEntite = new DisparitionEntite(dureeApparition);
+        controleurDisparitionEntite = new EntiteDispariteur(dureeApparition);
         projectile = gameObject.GetComponent<Rigidbody2D>();
 
         // Propulse le pic selon ça direction.

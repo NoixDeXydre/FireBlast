@@ -4,10 +4,10 @@ using UnityEngine;
 /// <summary>
 /// Permet de créer des entités sur la map.
 ///
-/// Utilisez plutôt EntitesPoolGroupe 
+/// Utilisez plutôt EntitesGroupePool 
 /// si les objets doivent se détruire souvent !
 /// </summary>
-public class CreateurEntites
+public class EntitesCreateur
 {
 
     /// <summary>
@@ -19,7 +19,7 @@ public class CreateurEntites
     /// Crée un nouveau créateur d'entités
     /// </summary>
     /// <param name="map">Map sur laquelle les entités vont apparaitre</param>
-    public CreateurEntites(MapVirtuelle map)
+    public EntitesCreateur(MapVirtuelle map)
     {
         this.map = map;
     }

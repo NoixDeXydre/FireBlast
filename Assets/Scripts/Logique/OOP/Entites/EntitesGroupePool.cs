@@ -5,7 +5,7 @@ using UnityEngine;
 /// Défini les limites d'instanciation d'un groupe d'entités
 /// et permet de faire du pooling efficace.
 /// </summary>
-public class EntitesPoolGroupe
+public class EntitesGroupePool
 {
 
     /// <summary>
@@ -27,7 +27,7 @@ public class EntitesPoolGroupe
     /// Initialise un pool
     /// </summary>
     /// <param name="nombreMaxInstances">Le nombre maximum d'instances supportées</param>
-    public EntitesPoolGroupe(int nombreMaxInstances)
+    public EntitesGroupePool(int nombreMaxInstances)
     {
         this.nombreMaxInstances = nombreMaxInstances;
         instancesEntites = new(nombreMaxInstances);

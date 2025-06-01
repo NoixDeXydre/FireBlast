@@ -4,7 +4,7 @@ using UnityEngine;
 /// Permet de faire disparaître une entité 
 /// au bout d'une certaine période.
 /// </summary>
-public class DisparitionEntite
+public class EntiteDispariteur
 {
 
     /// <summary>
@@ -17,7 +17,7 @@ public class DisparitionEntite
     /// l'entité concernée et sa période de vie.
     /// </summary>
     /// <param name="periodeVie">Durée de vie en secondes</param>
-    public DisparitionEntite(float periodeVie)
+    public EntiteDispariteur(float periodeVie)
     {
         this.periodeVie = periodeVie;
     }

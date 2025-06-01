@@ -18,12 +18,12 @@ public class ControleurApparitionEntites : MonoBehaviour
     /// </summary>
     public Tilemap map;
 
-    private CreateurEntites usineEntites;
+    private EntitesCreateur usineEntites;
     private MapVirtuelle mapVirtuelle;
 
-    private EntitesPoolGroupe collectiblesPool;
+    private EntitesGroupePool collectiblesPool;
 
-    private StructureGroupeEntites groupeCollectible;
+    private EntitesGroupeStructure groupeCollectible;
 
     private PrefabsBD prefabsBD;
 
