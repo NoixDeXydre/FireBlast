@@ -4,7 +4,7 @@ using System.Collections.Generic;
 /// Représente un groupe d'entités avec leur nature
 /// et leurs fréquences d'apparition.
 /// </summary>
-public class EntitesGroupeStructure
+public class EntitesGroupe
 {
     
     /// <summary>
@@ -25,7 +25,7 @@ public class EntitesGroupeStructure
     /// <summary>
     /// Initialise un nouveau groupe d'entité
     /// </summary>
-    public EntitesGroupeStructure()
+    public EntitesGroupe()
     {
         entitesBibliotheque = new();
         entitesGroupe = new();

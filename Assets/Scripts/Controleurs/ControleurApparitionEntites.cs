@@ -37,11 +37,16 @@ public class ControleurApparitionEntites : MonoBehaviour
         entitesSrc = Resources.Load<CollectionEntites>(nameof(CollectionEntites));
 
         collectiblesPool = new(200);
-        collectiblesPool.InstancierTypeEntites(3, entitesSrc.collectiblePiece.nom, entitesSrc.collectiblePiece.entite);
-        collectiblesPool.InstancierTypeEntites(5, entitesSrc.collectibleTriplePiece.nom, entitesSrc.collectibleTriplePiece.entite);
+
+        // Cache des entités
+
+        foreach(Entite entite in entitesSrc.datasets)
+        {
+            collectiblesPool.InstancierTypeEntites(entite.nombreMaxApparition, entite.nomEntite, entite.entite);
+        }
 
         // On crée le joueur
-        usineEntites.CreerEntite(entitesSrc.joueur.entite, mapVirtuelle.GetCentreMap());
+        usineEntites.CreerEntite(entitesSrc.datasetJoueur.entite, mapVirtuelle.GetCentreMap());
         IterationTournageUsine();
     }
 
@@ -56,7 +61,7 @@ public class ControleurApparitionEntites : MonoBehaviour
     private void SousIterationCollectibles()
     {
 
-        GameObject collectible = collectiblesPool.GetInstanceTypeEntiteNonActif(entitesSrc.collectibles.ChoisirEntiteAleatoirement());
+        GameObject collectible = collectiblesPool.GetInstanceTypeEntiteNonActif(entitesSrc.groupeCollectibles.ChoisirEntiteAleatoirement());
         if (collectible != null)
         {
             collectible.transform.position = Aleatoire.ChoisirPointParmisDeuxAxes(mapVirtuelle.GetCoordonneesIntervallesX(), mapVirtuelle.GetCoordonneesIntervallesY());
