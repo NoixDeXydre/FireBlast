@@ -21,7 +21,9 @@ public class ControleurApparitionEntites : MonoBehaviour
     private CreateurEntites usineEntites;
     private MapVirtuelle mapVirtuelle;
 
-    private EntitesPoolGroupe collectibles;
+    private EntitesPoolGroupe collectiblesPool;
+
+    private StructureGroupeEntites groupeCollectible;
 
     private PrefabsBD prefabsBD;
 
@@ -36,9 +38,13 @@ public class ControleurApparitionEntites : MonoBehaviour
 
         prefabsBD = Resources.Load<PrefabsBD>(nameof(PrefabsBD));
 
-        collectibles = new(200);
-        collectibles.InstancierTypeEntites(3, "piece", prefabsBD.collectiblePiece);
-        collectibles.InstancierTypeEntites(5, "triple_piece", prefabsBD.collectibleTriplePiece);
+        collectiblesPool = new(200);
+        collectiblesPool.InstancierTypeEntites(3, "piece", prefabsBD.collectiblePiece);
+        collectiblesPool.InstancierTypeEntites(5, "triple_piece", prefabsBD.collectibleTriplePiece);
+
+        groupeCollectible = new();
+        groupeCollectible.AjouterEntite("piece", .7f);
+        groupeCollectible.AjouterEntite("triple_piece", .3f);
 
         // On crée le joueur
         usineEntites.CreerEntite(prefabsBD.joueur, mapVirtuelle.GetCentreMap());
@@ -56,19 +62,7 @@ public class ControleurApparitionEntites : MonoBehaviour
     private void SousIterationCollectibles()
     {
 
-        GameObject collectible = null;
-        int collectibleIndex = Aleatoire.ChoisirIndexParmisFrequences(new float[] { .7f, .3f });
-
-        switch (collectibleIndex)
-        {
-            case 0:
-                collectible = collectibles.GetInstanceTypeEntiteNonActif("piece");
-                break;
-            case 1:
-                collectible = collectibles.GetInstanceTypeEntiteNonActif("triple_piece");
-                break;
-        }
-
+        GameObject collectible = collectiblesPool.GetInstanceTypeEntiteNonActif(groupeCollectible.ChoisirEntiteAleatoirement());
         if (collectible != null)
         {
             collectible.transform.position = Aleatoire.ChoisirPointParmisDeuxAxes(mapVirtuelle.GetCoordonneesIntervallesX(), mapVirtuelle.GetCoordonneesIntervallesY());

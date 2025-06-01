@@ -24,12 +24,12 @@ public static class Aleatoire
     /// </summary>
     /// <param name="frequences">Fréquences des items</param>
     /// <returns>L'index de la fréquence choisie</returns>
-    public static int ChoisirIndexParmisFrequences(float[] frequences)
+    public static int ChoisirIndexParmisFrequences(List<float> frequences)
     {
 
         // Génère des clés aléatoires pondérées.
         List<(double cle, int index)> cles = new();
-        for (int i = 0; i < frequences.Length; i++)
+        for (int i = 0; i < frequences.Count; i++)
         {
             cles.Add((Mathf.Pow(Random.value, 1.0f / frequences[i]), i));
         }
