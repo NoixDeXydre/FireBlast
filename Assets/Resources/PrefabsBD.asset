@@ -14,4 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   joueur: {fileID: 7772179672655701004, guid: 3185832af3c7fd34cb5f7bba75cf185e, type: 3}
   collectiblePiece: {fileID: 646656805070835319, guid: 0df21ec2985933745bb27fbd76f78d04, type: 3}
+  collectibleTriplePiece: {fileID: 646656805070835319, guid: 37cbf6959d3aaee4186a04640e0397a3, type: 3}
   projectilePicPropulsion: {fileID: 4241930860421260931, guid: 881c57ea3125b644ebe7191005da9a98, type: 3}

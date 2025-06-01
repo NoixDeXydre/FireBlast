@@ -9,6 +9,7 @@ public class PrefabsBD : ScriptableObject
 
     // Collectibles
     public GameObject collectiblePiece;
+    public GameObject collectibleTriplePiece;
 
     // Projectiles
     public GameObject projectilePicPropulsion;

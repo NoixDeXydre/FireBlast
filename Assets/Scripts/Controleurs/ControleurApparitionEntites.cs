@@ -36,8 +36,9 @@ public class ControleurApparitionEntites : MonoBehaviour
 
         prefabsBD = Resources.Load<PrefabsBD>(nameof(PrefabsBD));
 
-        collectibles = new(3);
+        collectibles = new(200);
         collectibles.InstancierTypeEntites(3, "piece", prefabsBD.collectiblePiece);
+        collectibles.InstancierTypeEntites(5, "triple_piece", prefabsBD.collectibleTriplePiece);
 
         // On crée le joueur
         usineEntites.CreerEntite(prefabsBD.joueur, mapVirtuelle.GetCentreMap());
@@ -49,19 +50,31 @@ public class ControleurApparitionEntites : MonoBehaviour
     /// </summary>
     private void IterationTournageUsine()
     {
-        Invoke(nameof(SousIterationCollectibles), Aleatoire.ChoisirNombreParmisPlage(15f, 35f, 1.1f));
+        Invoke(nameof(SousIterationCollectibles), Aleatoire.ChoisirNombreParmisPlage(5f, 25f, 1.1f));
     }
 
     private void SousIterationCollectibles()
     {
 
-        GameObject piece = collectibles.GetInstanceTypeEntiteNonActif("piece");
-        if (piece != null)
+        GameObject collectible = null;
+        int collectibleIndex = Aleatoire.ChoisirIndexParmisFrequences(new float[] { .7f, .3f });
+
+        switch (collectibleIndex)
         {
-            piece.transform.position = Aleatoire.ChoisirPointParmisDeuxAxes(mapVirtuelle.GetCoordonneesIntervallesX(), mapVirtuelle.GetCoordonneesIntervallesY());
-            piece.SetActive(true);
+            case 0:
+                collectible = collectibles.GetInstanceTypeEntiteNonActif("piece");
+                break;
+            case 1:
+                collectible = collectibles.GetInstanceTypeEntiteNonActif("triple_piece");
+                break;
         }
 
-        Invoke(nameof(SousIterationCollectibles), Aleatoire.ChoisirNombreParmisPlage(15f, 35f, 1.1f));
+        if (collectible != null)
+        {
+            collectible.transform.position = Aleatoire.ChoisirPointParmisDeuxAxes(mapVirtuelle.GetCoordonneesIntervallesX(), mapVirtuelle.GetCoordonneesIntervallesY());
+            collectible.SetActive(true);
+        }
+
+        Invoke(nameof(SousIterationCollectibles), Aleatoire.ChoisirNombreParmisPlage(5f, 10f));
     }
 }
