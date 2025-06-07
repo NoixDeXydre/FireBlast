@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UIElements;
 
 /// <summary>
 /// Défini le comportement d'un pic.
@@ -12,6 +13,11 @@ public class PropulsionPic : MonoBehaviour
     /// Durée du projectile avant de disparaître.
     /// </summary>
     public float dureeApparition;
+
+    /// <summary>
+    /// Direction où se dirigera le projectile.
+    /// </summary>
+    public float angleDirection;
 
     /// <summary>
     /// Vitesse du projectile.
@@ -34,11 +40,12 @@ public class PropulsionPic : MonoBehaviour
     private void Start()
     {
 
-        controleurDisparitionEntite = new EntiteDispariteur(dureeApparition);
+        controleurDisparitionEntite = new EntiteDispariteur(dureeApparition); 
         projectile = gameObject.GetComponent<Rigidbody2D>();
 
         // Propulse le pic selon ça direction.
-        projectile.linearVelocity = transform.up * vitesse;
+        Vector3 directionProjectile = Quaternion.Euler(0.0f, angleDirection, 0.0f) * transform.forward;
+        projectile.linearVelocity = new Vector2(directionProjectile.x, directionProjectile.z).normalized * vitesse;
     }
 
     /// <summary>
