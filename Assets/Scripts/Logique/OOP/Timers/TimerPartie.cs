@@ -3,14 +3,14 @@ using UnityEngine;
 /// <summary>
 /// Compte le temps d'une partie.
 /// </summary>
-public class Timer
+public class TimerPartie
 {
 
     /// <summary>
     /// Temps total écoulé
     /// </summary>
     private float temps;
-    public Timer()
+    public TimerPartie()
     {
         temps = 0f;
     }

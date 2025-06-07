@@ -43,7 +43,7 @@ public class ControleurScore
     /// Influence le score 
     /// et permet de faire gagner des points chaque seconde.
     /// </summary>
-    private readonly Timer timer;
+    private readonly TimerPartie timer;
 
     /// <summary>
     /// Affiche le score
@@ -55,8 +55,8 @@ public class ControleurScore
     /// </summary>
     /// <param name="score">Le service score</param>
     /// <param name="compteurScore">Le compteur UI affichant le score</param>
-    /// <param name="timer">Timer influançant le score</param>
-    public ControleurScore(Score score, TextMeshProUGUI compteurScore, Timer timer)
+    /// <param name="timer">TimerPartie influançant le score</param>
+    public ControleurScore(Score score, TextMeshProUGUI compteurScore, TimerPartie timer)
     {
 
         this.score = score;

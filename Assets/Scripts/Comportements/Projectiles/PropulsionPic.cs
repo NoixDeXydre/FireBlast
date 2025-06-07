@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.UIElements;
 
 /// <summary>
 /// Défini le comportement d'un pic.
@@ -27,7 +26,7 @@ public class PropulsionPic : MonoBehaviour
     /// <summary>
     /// Contrôle la disparition de l'objet.
     /// </summary>
-    private EntiteDispariteur controleurDisparitionEntite;
+    private TimerEcoulement timerEcoulement;
 
     /// <summary>
     /// Le projectile à lancer.
@@ -37,10 +36,10 @@ public class PropulsionPic : MonoBehaviour
     /// <summary>
     /// Projette l'entité
     /// </summary>
-    private void Start()
+    private void Awake()
     {
 
-        controleurDisparitionEntite = new EntiteDispariteur(dureeApparition); 
+        timerEcoulement = new TimerEcoulement(dureeApparition, 0.0f, true); 
         projectile = gameObject.GetComponent<Rigidbody2D>();
 
         // Propulse le pic selon ça direction.
@@ -48,11 +47,26 @@ public class PropulsionPic : MonoBehaviour
         projectile.linearVelocity = new Vector2(directionProjectile.x, directionProjectile.z).normalized * vitesse;
     }
 
+    private void OnDisable()
+    {
+        timerEcoulement.ResetTimer();
+        timerEcoulement.SetPauseTimer(true);
+    }
+
+    private void OnEnable()
+    {
+        timerEcoulement.SetPauseTimer(false);
+    }
+
     /// <summary>
     /// Met à jour le timer pour la disparition de l'entité.
     /// </summary>
     private void FixedUpdate()
     {
-        controleurDisparitionEntite.Update();
+
+        if (timerEcoulement.Update())
+        {
+            gameObject.SetActive(false);
+        }            
     }
 }
