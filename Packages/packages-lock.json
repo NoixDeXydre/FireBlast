@@ -1,5 +1,12 @@
 {
   "dependencies": {
+    "com.nkstudio.scenereference": {
+      "version": "https://github.com/NK-Studio/SceneReference.git#UPM",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "520ac1e86783a0b7de29a0d7678ee09c1c09615a"
+    },
     "com.unity.2d.animation": {
       "version": "10.2.0",
       "depth": 1,
@@ -220,6 +227,13 @@
         "com.unity.mathematics": "1.2.4",
         "com.unity.modules.terrain": "1.0.0"
       }
+    },
+    "com.unity.scene-system": {
+      "version": "https://github.com/NK-Studio/SceneSystem.git#UPM",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "ec8444a53eb3029975487cb3a0ed7d3cc6bcc5e3"
     },
     "com.unity.searcher": {
       "version": "4.9.3",
