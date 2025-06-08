@@ -14,13 +14,14 @@ public class CollectionEntites : ScriptableObject
 
     public Entite datasetJoueur;
     public List<Entite> datasetsCollectibles;
+    public List<Entite> datasetsEnnemis;
     public List<Entite> datasetsProjectiles;
 
     // ======= Définition des propriétés =======
 
     public List<Entite> datasets;
-
     public EntitesGroupe groupeCollectibles;
+    public EntitesGroupe groupeEnnemis;
     public EntitesGroupe groupeProjectiles;
 
     /// <summary>
@@ -32,6 +33,7 @@ public class CollectionEntites : ScriptableObject
         // Ajout de tout les datasets.
         datasets = new();
         datasets.AddRange(datasetsCollectibles);
+        datasets.AddRange(datasetsEnnemis);
         datasets.AddRange(datasetsProjectiles);
 
         // Création des groupes ici
@@ -40,6 +42,12 @@ public class CollectionEntites : ScriptableObject
         foreach (Entite entite in datasetsCollectibles)
         {
             groupeCollectibles.AjouterEntite(entite.nomEntite, entite.chanceApparition);
+        }
+
+        groupeEnnemis = new();
+        foreach (Entite entite in datasetsEnnemis)
+        {
+            groupeEnnemis.AjouterEntite(entite.nomEntite, entite.chanceApparition);
         }
 
         groupeProjectiles = new();

@@ -10,9 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: da2165f36b656b04f8472b777ec22ea7, type: 3}
-  m_Name: Pic
+  m_Name: Ballon
   m_EditorClassIdentifier: 
-  entite: {fileID: 4241930860421260931, guid: 881c57ea3125b644ebe7191005da9a98, type: 3}
-  nomEntite: pic
+  entite: {fileID: 4241930860421260931, guid: 777bb4c76a59aeb428bc5b7f0c4b924f, type: 3}
+  nomEntite: ballon
   chanceApparition: 1
-  nombreMaxApparition: 100
+  nombreMaxApparition: 3
+  niveauxParution: 0100000009000000

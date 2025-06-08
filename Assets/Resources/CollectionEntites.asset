@@ -16,5 +16,10 @@ MonoBehaviour:
   datasetsCollectibles:
   - {fileID: 11400000, guid: 7ee4796e249aee843834ec5aa6a2955a, type: 2}
   - {fileID: 11400000, guid: 7cfb68d42382eb247bab61e023ac38f7, type: 2}
-  datasetsProjectiles:
-  - {fileID: 11400000, guid: a5b644a9180c4ab438613861e03abbb5, type: 2}
+  datasetsEnnemis:
+  - {fileID: 11400000, guid: b9c65809cdd356b4292323f58b73ff7a, type: 2}
+  datasetsProjectiles: []
+  datasets:
+  - {fileID: 11400000, guid: 7ee4796e249aee843834ec5aa6a2955a, type: 2}
+  - {fileID: 11400000, guid: 7cfb68d42382eb247bab61e023ac38f7, type: 2}
+  - {fileID: 11400000, guid: b9c65809cdd356b4292323f58b73ff7a, type: 2}

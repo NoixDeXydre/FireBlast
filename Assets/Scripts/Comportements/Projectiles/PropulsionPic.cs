@@ -41,21 +41,6 @@ public class PropulsionPic : MonoBehaviour
 
         timerEcoulement = new TimerEcoulement(dureeApparition, 0.0f, true); 
         projectile = gameObject.GetComponent<Rigidbody2D>();
-
-        // Propulse le pic selon ça direction.
-        Vector3 directionProjectile = Quaternion.Euler(0.0f, angleDirection, 0.0f) * transform.forward;
-        projectile.linearVelocity = new Vector2(directionProjectile.x, directionProjectile.z).normalized * vitesse;
-    }
-
-    private void OnDisable()
-    {
-        timerEcoulement.ResetTimer();
-        timerEcoulement.SetPauseTimer(true);
-    }
-
-    private void OnEnable()
-    {
-        timerEcoulement.SetPauseTimer(false);
     }
 
     /// <summary>
@@ -68,5 +53,37 @@ public class PropulsionPic : MonoBehaviour
         {
             gameObject.SetActive(false);
         }            
+    }
+
+    private void LancerProjectile()
+    {
+        Vector3 directionProjectile = Quaternion.Euler(0.0f, angleDirection, 0.0f) * transform.forward;
+        projectile.linearVelocity = new Vector2(directionProjectile.x, directionProjectile.z).normalized * vitesse;
+    }
+
+    private void OnDisable()
+    {
+
+        timerEcoulement.SetPauseTimer(true);
+        timerEcoulement.ResetTimer();
+
+        projectile.linearVelocity = Vector2.zero;
+    }
+
+    private void OnEnable()
+    {
+        timerEcoulement.SetPauseTimer(false);
+        LancerProjectile();
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+
+        // Se désactive à la rencontre d'un mur ou un joueur.
+        if (collision.collider.CompareTag(TagLayers.TagMur) 
+            || collision.collider.CompareTag(TagLayers.TagJoueur))
+        {
+            gameObject.SetActive(false);
+        }
     }
 }

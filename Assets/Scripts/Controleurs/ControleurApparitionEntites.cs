@@ -9,11 +9,6 @@ public class ControleurApparitionEntites : MonoBehaviour
 {
 
     /// <summary>
-    /// Délais avant que le jeu regarde les entités à faire apparaître.
-    /// </summary>
-    private const float TempsAttenteUsine = 1.0f;
-
-    /// <summary>
     /// La map où les entités vont apparaître.
     /// </summary>
     public Tilemap map;
@@ -21,7 +16,7 @@ public class ControleurApparitionEntites : MonoBehaviour
     private EntitesCreateur usineEntites;
     private MapVirtuelle mapVirtuelle;
 
-    private EntitesGroupePool collectiblesPool;
+    private EntitesGroupePool pool;
 
     private CollectionEntites entitesSrc;
 
@@ -36,13 +31,13 @@ public class ControleurApparitionEntites : MonoBehaviour
 
         entitesSrc = Resources.Load<CollectionEntites>(nameof(CollectionEntites));
 
-        collectiblesPool = new(200);
+        pool = new(200);
 
         // Cache des entités
 
         foreach(Entite entite in entitesSrc.datasets)
         {
-            collectiblesPool.InstancierTypeEntites(entite.nombreMaxApparition, entite.nomEntite, entite.entite);
+            pool.InstancierTypeEntites(entite.nombreMaxApparition, entite.nomEntite, entite.entite);
         }
 
         // On crée le joueur
@@ -56,12 +51,13 @@ public class ControleurApparitionEntites : MonoBehaviour
     private void IterationTournageUsine()
     {
         Invoke(nameof(SousIterationCollectibles), Aleatoire.ChoisirNombreParmisPlage(5f, 25f, 1.1f));
+        Invoke(nameof(SousIterationEnnemis), Aleatoire.ChoisirNombreParmisPlage(10f, 30f, 0.9f));
     }
 
     private void SousIterationCollectibles()
     {
 
-        GameObject collectible = collectiblesPool.GetInstanceTypeEntiteNonActif(entitesSrc.groupeCollectibles.ChoisirEntiteAleatoirement());
+        GameObject collectible = pool.GetInstanceTypeEntiteNonActif(entitesSrc.groupeCollectibles.ChoisirEntiteAleatoirement());
         if (collectible != null)
         {
             collectible.transform.position = Aleatoire.ChoisirPointParmisDeuxAxes(mapVirtuelle.GetCoordonneesIntervallesX(), mapVirtuelle.GetCoordonneesIntervallesY());
@@ -69,5 +65,18 @@ public class ControleurApparitionEntites : MonoBehaviour
         }
 
         Invoke(nameof(SousIterationCollectibles), Aleatoire.ChoisirNombreParmisPlage(5f, 10f));
+    }
+
+    private void SousIterationEnnemis()
+    {
+
+        GameObject collectible = pool.GetInstanceTypeEntiteNonActif(entitesSrc.groupeEnnemis.ChoisirEntiteAleatoirement());
+        if (collectible != null)
+        {
+            collectible.transform.position = Aleatoire.ChoisirPointParmisDeuxAxes(mapVirtuelle.GetCoordonneesIntervallesX(), mapVirtuelle.GetCoordonneesIntervallesY());
+            collectible.SetActive(true);
+        }
+
+        Invoke(nameof(SousIterationEnnemis), Aleatoire.ChoisirNombreParmisPlage(2f, 7f));
     }
 }
