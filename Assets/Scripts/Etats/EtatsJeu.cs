@@ -13,9 +13,22 @@ public class EtatsJeu
 
     // Evènements pouvant être abonnés 
 
-    // TODO placer des évènements
+    public event OnBooleenModifie OnChangementEstPartieTerminee;
 
     // Etats disponibles du jeu
+
+    /// <summary>
+    /// S'active lorsque le joueur n'a plus de vie.
+    /// </summary>
+    public bool EstPartieTerminee
+    {
+        get { return _estPartieTerminee; }
+        set
+        {
+            AppelerEvenementSurNouvelleValeur(OnChangementEstPartieTerminee, _estPartieTerminee, value);
+            _estPartieTerminee = value;
+        }
+    }
 
     /// <summary>
     /// S'active si les mouvements du joueur 
@@ -48,6 +61,7 @@ public class EtatsJeu
 
     // Référence des états
 
+    private bool _estPartieTerminee = false;
     private bool _sontMouvementsBloqueesParDommage = false;
     private bool _sontMouvementsBloqueesParJeu = false;
 
