@@ -97,7 +97,7 @@ public class TimerEcoulement
         // Le temps ne s'écoulera pas en pause.
         if (EstTimerEnPause)
         {
-            return IsTimerEcoule();
+            return false;
         }
 
         tempsVieRestante -= Time.deltaTime;
