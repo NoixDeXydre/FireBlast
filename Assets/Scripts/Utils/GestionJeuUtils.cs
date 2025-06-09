@@ -14,14 +14,18 @@ public static class GestionJeuUtils
     /// <summary>
     /// L'objet contenant le script principal de la partie.
     /// </summary>
-    private static readonly GameObject comportementJeu = GameObject.Find(NomObjetComportementJeu);
+    private static GameObject comportementJeu;
 
-    /// <summary>
-    /// Retourne le script GestionJeu initialisé.
-    /// </summary>
     /// <returns>Le script GestionJeu</returns>
     public static GestionJeu GetScriptGestionJeu()
     {
+
+        if (comportementJeu != null)
+        {
+            return comportementJeu.GetComponent<GestionJeu>();
+        }
+
+        comportementJeu = GameObject.Find(NomObjetComportementJeu);
         return comportementJeu.GetComponent<GestionJeu>();
     }
 }
