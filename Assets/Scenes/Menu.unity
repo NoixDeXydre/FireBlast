@@ -1637,9 +1637,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 916774848}
-        m_TargetAssemblyTypeName: PermuteurScene, Assembly-CSharp
-        m_MethodName: ChargerEtLancerScene
-        m_Mode: 5
+        m_TargetAssemblyTypeName: SimplePermutateurScene, Assembly-CSharp
+        m_MethodName: PermuterScene
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1695,9 +1695,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 916774843}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e7543886578177140ba78a398f6461ed, type: 3}
+  m_Script: {fileID: 11500000, guid: 7cea73c160c003647aeb95eed8e79275, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ecranChargement: {fileID: 3430502296719526298, guid: 54f06cb37149e4c4dbf7abeb7d541f06, type: 3}
+  scenePermutation:
+    sceneAsset: {fileID: 102900000, guid: 9d419b69ecadca3428d58ad3b480cec3, type: 3}
+    path: Assets/Scenes/Jeu.unity
 --- !u!1 &1029526178
 GameObject:
   m_ObjectHideFlags: 0
@@ -1922,7 +1926,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8638367476161573560, guid: e795f19f5ec07634eb5127ae4c4ed3b0, type: 3}
       propertyPath: m_NormalizedViewPortRect.x
-      value: 0.08974359
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8638367476161573560, guid: e795f19f5ec07634eb5127ae4c4ed3b0, type: 3}
       propertyPath: m_NormalizedViewPortRect.y
@@ -1930,7 +1934,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8638367476161573560, guid: e795f19f5ec07634eb5127ae4c4ed3b0, type: 3}
       propertyPath: m_NormalizedViewPortRect.width
-      value: 0.8209135
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8638367476161573560, guid: e795f19f5ec07634eb5127ae4c4ed3b0, type: 3}
       propertyPath: m_NormalizedViewPortRect.height
