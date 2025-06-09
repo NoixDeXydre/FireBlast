@@ -54,6 +54,9 @@ public class GestionJeu : MonoBehaviour
     private void Awake()
     {
 
+        // Remet les variables de la partie à zéro.
+        EtatsJeu.NullifierInstance(); 
+
         timer = new TimerPartie();
         score = new Score();
         vie = new Vie();

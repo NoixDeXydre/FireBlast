@@ -85,6 +85,14 @@ public class EtatsJeu
         return instanceEtatsJeu;
     }
 
+    /// <summary>
+    /// Libère l'instance du singleton
+    /// </summary>
+    public static void NullifierInstance()
+    {
+        instanceEtatsJeu = null;
+    }
+
     private static void AppelerEvenementSurNouvelleValeur(OnBooleenModifie evenement,
         bool ancienneValeur, bool nouvelleValeur)
     {

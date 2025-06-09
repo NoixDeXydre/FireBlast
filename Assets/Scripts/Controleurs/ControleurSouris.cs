@@ -58,6 +58,15 @@ public class ControleurSouris : MonoBehaviour
 
         etatsJeu = EtatsJeu.GetInstanceEtatsJeu();
         evenements = Evenements.GetInstanceEvenements();
+
+        // Désactive les contrôles en cas de fin de partie.
+        etatsJeu.OnChangementEstPartieTerminee += (bool estPartieTerminee) => 
+        {
+            if (estPartieTerminee)
+            {
+                etatsJeu.SontMouvementsBloqueesParJeu = true;
+            }  
+        };
     }
 
     /// <summary>
