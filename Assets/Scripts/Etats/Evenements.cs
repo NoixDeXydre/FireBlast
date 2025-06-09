@@ -1,7 +1,8 @@
 using UnityEngine;
 
 /// <summary>
-/// Singleton rassemblant des évènements pouvant être déclenchées.
+/// Singleton rassemblant des évènements avancés
+/// pouvant être déclenchées.
 /// </summary>
 public class Evenements
 {

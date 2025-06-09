@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da2165f36b656b04f8472b777ec22ea7, type: 3}
+  m_Name: Ballon
+  m_EditorClassIdentifier: 
+  entite: {fileID: 4241930860421260931, guid: 777bb4c76a59aeb428bc5b7f0c4b924f, type: 3}
+  nomEntite: ballon
+  chanceApparition: 1
+  nombreMaxApparition: 3
+  niveauxParution: 0100000009000000

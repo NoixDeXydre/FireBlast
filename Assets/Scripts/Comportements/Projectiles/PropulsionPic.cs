@@ -14,6 +14,11 @@ public class PropulsionPic : MonoBehaviour
     public float dureeApparition;
 
     /// <summary>
+    /// Direction où se dirigera le projectile.
+    /// </summary>
+    public float angleDirection;
+
+    /// <summary>
     /// Vitesse du projectile.
     /// </summary>
     public float vitesse;
@@ -21,7 +26,7 @@ public class PropulsionPic : MonoBehaviour
     /// <summary>
     /// Contrôle la disparition de l'objet.
     /// </summary>
-    private DisparitionEntite controleurDisparitionEntite;
+    private TimerEcoulement timerEcoulement;
 
     /// <summary>
     /// Le projectile à lancer.
@@ -31,14 +36,11 @@ public class PropulsionPic : MonoBehaviour
     /// <summary>
     /// Projette l'entité
     /// </summary>
-    private void Start()
+    private void Awake()
     {
 
-        controleurDisparitionEntite = new DisparitionEntite(dureeApparition);
+        timerEcoulement = new TimerEcoulement(dureeApparition, 0.0f, true); 
         projectile = gameObject.GetComponent<Rigidbody2D>();
-
-        // Propulse le pic selon ça direction.
-        projectile.linearVelocity = transform.up * vitesse;
     }
 
     /// <summary>
@@ -46,6 +48,42 @@ public class PropulsionPic : MonoBehaviour
     /// </summary>
     private void FixedUpdate()
     {
-        controleurDisparitionEntite.Update();
+
+        if (timerEcoulement.Update())
+        {
+            gameObject.SetActive(false);
+        }            
+    }
+
+    private void LancerProjectile()
+    {
+        Vector3 directionProjectile = Quaternion.Euler(0.0f, angleDirection, 0.0f) * transform.forward;
+        projectile.linearVelocity = new Vector2(directionProjectile.x, directionProjectile.z).normalized * vitesse;
+    }
+
+    private void OnDisable()
+    {
+
+        timerEcoulement.SetPauseTimer(true);
+        timerEcoulement.ResetTimer();
+
+        projectile.linearVelocity = Vector2.zero;
+    }
+
+    private void OnEnable()
+    {
+        timerEcoulement.SetPauseTimer(false);
+        LancerProjectile();
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+
+        // Se désactive à la rencontre d'un mur ou un joueur.
+        if (collision.collider.CompareTag(TagLayers.TagMur) 
+            || collision.collider.CompareTag(TagLayers.TagJoueur))
+        {
+            gameObject.SetActive(false);
+        }
     }
 }

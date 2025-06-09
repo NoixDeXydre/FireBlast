@@ -31,7 +31,7 @@ public class Collectible : MonoBehaviour
     /// <summary>
     /// Contrôle la disparition de l'objet.
     /// </summary>
-    private DisparitionEntite controleurDisparitionEntite;
+    private TimerEcoulement timerEcoulement;
 
     /// <summary>
     /// Sprite du collectible.
@@ -46,11 +46,11 @@ public class Collectible : MonoBehaviour
     /// <summary>
     /// Initialise le collectible
     /// </summary>
-    private void Start()
+    private void Awake()
     {
 
         controleurScore = GestionJeuUtils.GetScriptGestionJeu().controleurScore;
-        controleurDisparitionEntite = new DisparitionEntite(dureeApparition);
+        timerEcoulement = new TimerEcoulement(dureeApparition, TempsSurLePointDeDisparaitre, true);
 
         spriteCollectible = GetComponent<SpriteRenderer>();
 
@@ -77,9 +77,8 @@ public class Collectible : MonoBehaviour
     private void FixedUpdate()
     {
 
-        controleurDisparitionEntite.Update();
-        if (!animationDisparition.IsPlaying() && controleurDisparitionEntite.GetPeriodeVie() 
-            < TempsSurLePointDeDisparaitre)
+        timerEcoulement.Update();
+        if (!animationDisparition.IsPlaying() && timerEcoulement.IsTimerEnAvertissement())
         {
             animationDisparition.Play();
         }
@@ -91,14 +90,17 @@ public class Collectible : MonoBehaviour
     private void OnDisable()
     {
 
-        controleurDisparitionEntite?.SetPeriodeVie(dureeApparition);
+        timerEcoulement.ResetTimer();
+        timerEcoulement.SetPauseTimer(true);
 
-        if (spriteCollectible != null)
-        {
-            DoTweenUtils.ReinitialiserApparenceSpriteRenderer(spriteCollectible);
-        }
+        DoTweenUtils.ReinitialiserApparenceSpriteRenderer(spriteCollectible);
 
         InitialiserAnimationDisparition();
+    }
+
+    private void OnEnable()
+    {
+        timerEcoulement?.SetPauseTimer(false);
     }
 
     /// <summary>

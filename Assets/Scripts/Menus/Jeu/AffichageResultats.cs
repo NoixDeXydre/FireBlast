@@ -1,0 +1,47 @@
+using DG.Tweening;
+using UnityEngine;
+
+/// <summary>
+/// Affiche les résultats du jeu une fois la partie terminée.
+/// </summary>
+public class AffichageResultat : MonoBehaviour
+{
+
+    /// <summary>
+    /// Racine des résultats
+    /// </summary>
+    private GameObject racinePanel;
+
+    /// <summary>
+    /// Groupe de transparence
+    /// </summary>
+    private CanvasGroup groupeCanvas;
+
+    private void Start()
+    {
+
+        groupeCanvas = GetComponent<CanvasGroup>();
+        racinePanel = transform.GetChild(0).gameObject;
+
+        // On fait bien en sorte que tout soit désactivé.
+        groupeCanvas.alpha = 0f;
+        racinePanel.SetActive(false);
+
+        EtatsJeu.GetInstanceEtatsJeu().OnChangementEstPartieTerminee += AfficherResultats;
+    }
+
+    /// <summary>
+    /// Affiche les résultats en fin de partie.
+    /// </summary>
+    /// <param name="estPartieTerminee">Dit si la partie est bien terminée</param>
+    private void AfficherResultats(bool estPartieTerminee)
+    {
+
+        // Vérifie que la partie est bien terminée.
+        if (estPartieTerminee)
+        {
+            racinePanel.SetActive(true);
+            groupeCanvas.DOFade(1f, 1f);
+        }
+    }
+}

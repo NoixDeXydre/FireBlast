@@ -39,7 +39,7 @@ public class GestionJeu : MonoBehaviour
 
     // Composants inaccessibles
     private Score score;
-    private Timer timer;
+    private TimerPartie timer;
     private Vie vie;
 
     // ============== Controleurs ================
@@ -54,7 +54,10 @@ public class GestionJeu : MonoBehaviour
     private void Awake()
     {
 
-        timer = new Timer();
+        // Remet les variables de la partie à zéro.
+        EtatsJeu.NullifierInstance(); 
+
+        timer = new TimerPartie();
         score = new Score();
         vie = new Vie();
 

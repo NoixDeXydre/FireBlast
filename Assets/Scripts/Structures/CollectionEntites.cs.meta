@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: e3f42c90c3c906a4094e70876980bb8b
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - joueur: {instanceID: 0}
+  - collectiblePiece: {instanceID: 0}
+  - collectibleTriplePiece: {instanceID: 0}
+  - projectilePicPropulsion: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

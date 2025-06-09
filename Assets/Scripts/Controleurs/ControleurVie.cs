@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using UnityEngine.UI;
-using UnityEngine;
 
 /// <summary>
 /// Pilote entre les données et les vies affichées.
@@ -65,6 +64,12 @@ public class ControleurVie
     private void UpdateUIVies()
     {
 
+        // Notifie la fin de partie avec 0 vie.
+        if (compteurVie.GetVies() == 0)
+        {
+            EtatsJeu.GetInstanceEtatsJeu().EstPartieTerminee = true;
+        }
+
         Image vie;
         int nombreVies = compteurVie.GetVies();
         for (int i = vies.Count - 1; i > -1; i--)
@@ -81,6 +86,5 @@ public class ControleurVie
                 vie.enabled = true;
             }
         }
-
     }
 }
