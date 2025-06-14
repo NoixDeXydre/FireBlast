@@ -1,19 +1,28 @@
+using DG.Tweening;
 using UnityEngine;
 
 public class ChargementEcran : MonoBehaviour
 {
-    public  void OnCompleted()
+
+    public CanvasGroup racineCanvas;
+    private GameObject racinePanel;
+
+    private void Start()
     {
-        Debug.Log("completed");
+
+        racineCanvas = gameObject.GetComponentInChildren<CanvasGroup>();
+        racinePanel = racineCanvas.transform.GetChild(0).gameObject;
+
+        // On fait bien en sorte que tout soit désactivé.
+        racineCanvas.alpha = 0f;
+        racinePanel.SetActive(false);
+
+        racinePanel.SetActive(true);
+        racineCanvas.DOFade(1f, 1f);
     }
 
-    public  void OnLoadCompleted()
+    public void OnCompleted()
     {
-        Debug.Log("load completed");
-    }
-
-    public  void OnLoading(float progress)
-    {
-        Debug.Log("loading...");
+        racineCanvas.DOFade(0f, 1f).OnComplete(() => gameObject.SetActive(false));
     }
 }
