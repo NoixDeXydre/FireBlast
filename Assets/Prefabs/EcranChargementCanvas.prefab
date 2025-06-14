@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2814844404072249011}
   - component: {fileID: 55084840958069887}
   - component: {fileID: 6653494029675498950}
-  - component: {fileID: 7258000379931480952}
+  - component: {fileID: 6662748820132613825}
   m_Layer: 5
   m_Name: EcranChargementCanvas
   m_TagString: Untagged
@@ -92,7 +92,7 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
---- !u!114 &7258000379931480952
+--- !u!114 &6662748820132613825
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -101,21 +101,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 3430502296719526298}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 89fc4b73d3bdf43aeac288614f778a97, type: 3}
+  m_Script: {fileID: 11500000, guid: 34d38039191d87e41881881c4e41848f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LoadStyle: 0
-  UseAsync: 0
-  editorAutoLoad: 0
-  loadScene:
-    sceneAsset: {fileID: 0}
-    path: 
-  additiveScenes: []
-  SkipMode: 0
-  SkipKey: 32
-  MinimumLoadingTime: 1.5
-  DontUseAsync: 0
-  DestroyOnCompleted: 1
+  skipMode: 0
+  minimumLoadingTime: 1.5
+  destroyOnCompleted: 1
   onLoading:
     m_PersistentCalls:
       m_Calls: []
