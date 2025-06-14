@@ -114,15 +114,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 658511925188111130, guid: 6fad487ffe29bfc459c00b1203f40147, type: 3}
       propertyPath: m_NormalizedViewPortRect.y
-      value: 0.21851851
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 658511925188111130, guid: 6fad487ffe29bfc459c00b1203f40147, type: 3}
       propertyPath: m_NormalizedViewPortRect.width
-      value: 0.18177085
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 658511925188111130, guid: 6fad487ffe29bfc459c00b1203f40147, type: 3}
       propertyPath: m_NormalizedViewPortRect.height
-      value: 0.18177083
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7477509094654564396, guid: 6fad487ffe29bfc459c00b1203f40147, type: 3}
       propertyPath: m_LocalPosition.x
@@ -284,8 +284,12 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 5745687232202529070}
     - target: {fileID: 8638367476161573560, guid: e795f19f5ec07634eb5127ae4c4ed3b0, type: 3}
+      propertyPath: m_NormalizedViewPortRect.width
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8638367476161573560, guid: e795f19f5ec07634eb5127ae4c4ed3b0, type: 3}
       propertyPath: m_NormalizedViewPortRect.height
-      value: 0.18177083
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
