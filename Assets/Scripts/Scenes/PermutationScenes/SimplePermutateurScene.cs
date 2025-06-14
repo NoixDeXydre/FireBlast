@@ -1,4 +1,3 @@
-using AnnulusGames.SceneSystem;
 using UnityEngine;
 
 /// <summary>

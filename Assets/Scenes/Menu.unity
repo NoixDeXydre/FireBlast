@@ -1677,10 +1677,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cea73c160c003647aeb95eed8e79275, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ecranChargement: {fileID: 3430502296719526298, guid: 54f06cb37149e4c4dbf7abeb7d541f06, type: 3}
+  ecranChargement: {fileID: 5124565448364237840, guid: 823d1a886dfb450438262ed7cf6f9766, type: 3}
   scenePermutation:
     sceneAsset: {fileID: 102900000, guid: 9d419b69ecadca3428d58ad3b480cec3, type: 3}
-    path: Assets/Scenes/Jeu.unity
+    _assetPath: 
 --- !u!1 &1029526178
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,5 +1,5 @@
 using UnityEngine;
-using AnnulusGames.SceneSystem;
+using UnityEngine.SceneSystem;
 
 /// <summary>
 /// Singleton gérant le chargement des scènes,
@@ -47,10 +47,10 @@ public class GestionnaireScenes : MonoBehaviour
         {
 
             estSceneEnChargement = true;
-            LoadingScreen ecranChargementCharge = Instantiate(ecranChargement).GetComponent<LoadingScreen>();
+            var ecranChargementCharge = Instantiate(ecranChargement).GetComponent<SceneLoader>();
             DontDestroyOnLoad(ecranChargementCharge);
 
-            var levier = Scenes.LoadSceneAsync(scene.assetPath).WithLoadingScreen(ecranChargementCharge);
+            var levier = Scenes.LoadSceneAsync(scene).WithLoadingScreen(ecranChargementCharge);
             levier.onCompleted += () => { estSceneEnChargement = false; };
         }
     }

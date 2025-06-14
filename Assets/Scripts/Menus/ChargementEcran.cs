@@ -1,19 +1,18 @@
 using UnityEngine;
-using AnnulusGames.SceneSystem;
 
-public class ChargementEcran : LoadingScreen
+public class ChargementEcran : MonoBehaviour
 {
-    public override void OnCompleted()
+    public  void OnCompleted()
     {
         Debug.Log("completed");
     }
 
-    public override void OnLoadCompleted()
+    public  void OnLoadCompleted()
     {
         Debug.Log("load completed");
     }
 
-    public override void OnLoading(float progress)
+    public  void OnLoading(float progress)
     {
         Debug.Log("loading...");
     }
