@@ -34628,8 +34628,12 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1934295231}
     - target: {fileID: 2131072691566750229, guid: 9d272e46f5607684b95f367b88ab668b, type: 3}
+      propertyPath: orthographic size
+      value: 67.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2131072691566750229, guid: 9d272e46f5607684b95f367b88ab668b, type: 3}
       propertyPath: m_NormalizedViewPortRect.y
-      value: 0.12529977
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2131072691566750229, guid: 9d272e46f5607684b95f367b88ab668b, type: 3}
       propertyPath: m_NormalizedViewPortRect.width
@@ -34637,7 +34641,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2131072691566750229, guid: 9d272e46f5607684b95f367b88ab668b, type: 3}
       propertyPath: m_NormalizedViewPortRect.height
-      value: 0.74963397
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4683429752487885283, guid: 9d272e46f5607684b95f367b88ab668b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -34826,7 +34830,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7724160381207858931, guid: 6fad487ffe29bfc459c00b1203f40147, type: 3}
       propertyPath: m_Name
-      value: UICamera3D
+      value: UICamera
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
