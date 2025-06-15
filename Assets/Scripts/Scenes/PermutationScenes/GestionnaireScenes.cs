@@ -11,12 +11,23 @@ public class GestionnaireScenes : MonoBehaviour
     /// <summary>
     /// True si une scène est en chargement, sinon false.
     /// </summary>
-    private bool estSceneEnChargement = false;
+    private bool estSceneEnChargement;
+
+    /// <summary>
+    /// Rassemble les écrans de chargement
+    /// </summary>
+    private CollectionEcransChargement ecransChargementSrc;
 
     /// <summary>
     /// Seule instance de la classe.
     /// </summary>
     private static GestionnaireScenes instanceGestionnaireScenes;
+
+    private void Awake()
+    {
+        estSceneEnChargement = false;
+        ecransChargementSrc = Resources.Load<CollectionEcransChargement>(nameof(CollectionEcransChargement));
+    }
 
     /// <returns>Une instance du gestionnaire de scènes</returns>
     public static GestionnaireScenes GetInstance()
@@ -36,17 +47,21 @@ public class GestionnaireScenes : MonoBehaviour
     /// Charge et permute la scène en ne gardant que la nouvelle.
     /// </summary>
     /// <param name="scene">Scène à permuter</param>
-    /// <param name="ecranChargement">
     /// L'écran de chargement à montrer 
     /// pendant le chargement
     /// </param>
-    public void PermuterScene(SceneReference scene, GameObject ecranChargement)
+    public void PermuterScene(SceneReference scene)
     {
 
         if (!estSceneEnChargement)
         {
 
-            estSceneEnChargement = true;
+            estSceneEnChargement = true; // On informe à ce point qu'une scène est en chargement.
+
+            // On choisi ensuite aléatoire notre écran de chargement.
+            GameObject ecranChargement 
+            = ecransChargementSrc.ecransChargement[Aleatoire.ChoisirNombreEntierNaturel(ecransChargementSrc.ecransChargement.Count - 1)];
+
             var ecranChargementCharge = Instantiate(ecranChargement).GetComponent<SceneLoader>();
             DontDestroyOnLoad(ecranChargementCharge);
 

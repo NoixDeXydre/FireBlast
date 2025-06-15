@@ -7,11 +7,6 @@ public class SimplePermutateurScene : MonoBehaviour
 {
 
     /// <summary>
-    /// Ecran de chargement affiché.
-    /// </summary>
-    public GameObject ecranChargement;
-
-    /// <summary>
     /// Scène prête à être permutée.
     /// </summary>
     public SceneReference scenePermutation;
@@ -21,6 +16,6 @@ public class SimplePermutateurScene : MonoBehaviour
     /// </summary>
     public void PermuterScene()
     {
-        GestionnaireScenes.GetInstance().PermuterScene(scenePermutation, ecranChargement);
+        GestionnaireScenes.GetInstance().PermuterScene(scenePermutation);
     }
 }

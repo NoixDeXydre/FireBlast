@@ -23,6 +23,6 @@ public class ChargementEcran : MonoBehaviour
 
     public void OnCompleted()
     {
-        racineCanvas.DOFade(0f, 1f).OnComplete(() => gameObject.SetActive(false));
+        racineCanvas.DOFade(0f, 1f).OnComplete(() => Destroy(gameObject));
     }
 }

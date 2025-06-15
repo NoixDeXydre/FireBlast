@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 674294595119368869}
   - component: {fileID: 4593035153125450464}
   m_Layer: 0
-  m_Name: EcranChargement
+  m_Name: MenuNoirSimple
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
