@@ -103,7 +103,7 @@ public class ComportementJoueur : MonoBehaviour
                 * collision.otherRigidbody.mass);
 
             // Animation lorsque touché
-            spriteRenderer.DOFade(0f, .2f).OnComplete(() => spriteRenderer.DOFade(1f, .5f))
+            spriteRenderer.DOFade(0f, .2f).OnComplete(() => spriteRenderer.DOFade(AffichageUtils.ALPHA_COMPLET, .5f))
                 .SetLoops(DoTweenUtils.CalculerCyclesLoopYoyo(tempsInvincibilite, .2f));
         }
 

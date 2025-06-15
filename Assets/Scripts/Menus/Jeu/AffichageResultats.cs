@@ -24,7 +24,7 @@ public class AffichageResultat : MonoBehaviour
         racinePanel = transform.GetChild(0).gameObject;
 
         // On fait bien en sorte que tout soit désactivé.
-        groupeCanvas.alpha = 0f;
+        groupeCanvas.alpha = AffichageUtils.ALPHA_NUL;
         racinePanel.SetActive(false);
 
         EtatsJeu.GetInstanceEtatsJeu().OnChangementEstPartieTerminee += AfficherResultats;
@@ -41,7 +41,7 @@ public class AffichageResultat : MonoBehaviour
         if (estPartieTerminee)
         {
             racinePanel.SetActive(true);
-            groupeCanvas.DOFade(1f, 1f);
+            groupeCanvas.DOFade(AffichageUtils.ALPHA_COMPLET, 1f);
         }
     }
 }

@@ -112,7 +112,7 @@ public class Collectible : MonoBehaviour
         // Animation tuée si null
         animationDisparition?.Kill();
 
-        animationDisparition = spriteCollectible.DOFade(0f, 0.2f)
+        animationDisparition = spriteCollectible.DOFade(AffichageUtils.ALPHA_NUL, 0.2f)
             .SetLoops(DoTweenUtils.CalculerCyclesLoopYoyo(TempsSurLePointDeDisparaitre, 0.2f), LoopType.Yoyo)
             .OnComplete(() => gameObject.SetActive(false)).Pause();
     }

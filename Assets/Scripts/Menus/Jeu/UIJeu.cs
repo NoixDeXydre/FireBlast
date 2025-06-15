@@ -36,7 +36,7 @@ public class UIJeu : MonoBehaviour
         // Vérifie que la partie est bien terminée.
         if (estPartieTerminee)
         {
-            groupeCanvas.DOFade(0f, 1f).OnComplete(() => racinePanel.SetActive(false));
+            groupeCanvas.DOFade(AffichageUtils.ALPHA_NUL, 1f).OnComplete(() => racinePanel.SetActive(false));
         }
     }
 }

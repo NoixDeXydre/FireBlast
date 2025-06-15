@@ -34,7 +34,7 @@ public class BaseEcranChargement : MonoBehaviour
     {
 
         // Remet à zéro au préalable.
-        racineCanvas.alpha = 0f;
+        racineCanvas.alpha = AffichageUtils.ALPHA_NUL;
         racinePanel.SetActive(false);
 
         DeclencherDebutTransition();
@@ -46,7 +46,7 @@ public class BaseEcranChargement : MonoBehaviour
     public virtual void DeclencherDebutTransition()
     {
         racinePanel.SetActive(true);
-        racineCanvas.DOFade(1f, 1f).SetEase(Ease.InFlash);
+        racineCanvas.DOFade(AffichageUtils.ALPHA_COMPLET, 1f).SetEase(Ease.InFlash);
     }
 
     /// <summary>
@@ -55,6 +55,6 @@ public class BaseEcranChargement : MonoBehaviour
     /// </summary>
     public virtual void OnCompletion()
     {
-        racineCanvas.DOFade(0f, .5f).OnComplete(() => Destroy(gameObject)).SetEase(Ease.OutFlash);
+        racineCanvas.DOFade(AffichageUtils.ALPHA_NUL, .5f).OnComplete(() => Destroy(gameObject)).SetEase(Ease.OutFlash);
     }
 }
