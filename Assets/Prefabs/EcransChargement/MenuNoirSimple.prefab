@@ -55,7 +55,7 @@ MonoBehaviour:
   additiveScenes: []
   SkipMode: 0
   SkipKey: 32
-  MinimumLoadingTime: 1
+  MinimumLoadingTime: 1.5
   DontUseAsync: 0
   DestroyOnCompleted: 0
   onLoading:
