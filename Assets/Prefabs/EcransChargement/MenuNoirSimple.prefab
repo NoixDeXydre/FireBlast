@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5120886395503130677}
   - component: {fileID: 674294595119368869}
-  - component: {fileID: 4593035153125450464}
+  - component: {fileID: 6548426661602618403}
   m_Layer: 0
   m_Name: MenuNoirSimple
   m_TagString: Untagged
@@ -67,8 +67,8 @@ MonoBehaviour:
   onCompleted:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4593035153125450464}
-        m_TargetAssemblyTypeName: ChargementEcran, Assembly-CSharp
+      - m_Target: {fileID: 6548426661602618403}
+        m_TargetAssemblyTypeName: BaseEcranChargement, Assembly-CSharp
         m_MethodName: OnCompletion
         m_Mode: 1
         m_Arguments:
@@ -79,7 +79,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &4593035153125450464
+--- !u!114 &6548426661602618403
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

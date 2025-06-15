@@ -3,25 +3,35 @@ using UnityEngine;
 
 /// <summary>
 /// Implémente une simple transition dans l'écran de chargement.
+/// Comportement de base d'un écran de chargement.
 /// </summary>
-public class ChargementEcran : MonoBehaviour
+public class BaseEcranChargement : MonoBehaviour
 {
 
     /// <summary>
     /// Racine du canvas
     /// </summary>
-    private CanvasGroup racineCanvas;
+    protected CanvasGroup racineCanvas;
 
     /// <summary>
     /// Panel contenant les ressources de l'écran.
     /// </summary>
-    private GameObject racinePanel;
+    protected GameObject racinePanel;
 
     private void Start()
     {
 
         racineCanvas = gameObject.GetComponentInChildren<CanvasGroup>();
         racinePanel = racineCanvas.transform.GetChild(0).gameObject;
+
+        MiseEnPlaceMenu();
+    }
+
+    /// <summary>
+    /// Met en place le menu et lance la transition de début.
+    /// </summary>
+    public virtual void MiseEnPlaceMenu()
+    {
 
         // Remet à zéro au préalable.
         racineCanvas.alpha = 0f;
@@ -33,7 +43,7 @@ public class ChargementEcran : MonoBehaviour
     /// <summary>
     /// Affiche le menu de chargement.
     /// </summary>
-    private void DeclencherDebutTransition()
+    public virtual void DeclencherDebutTransition()
     {
         racinePanel.SetActive(true);
         racineCanvas.DOFade(1f, 1f).SetEase(Ease.InFlash);
@@ -43,7 +53,7 @@ public class ChargementEcran : MonoBehaviour
     /// Enlève le menu de chargement.
     /// À exécuter lorsque le chargement est terminé.
     /// </summary>
-    public void OnCompletion()
+    public virtual void OnCompletion()
     {
         racineCanvas.DOFade(0f, .5f).OnComplete(() => Destroy(gameObject)).SetEase(Ease.OutFlash);
     }
