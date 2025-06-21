@@ -1,3 +1,4 @@
+using UnityEngine;
 using Zenject;
 
 /// <summary>
@@ -16,5 +17,10 @@ public class InstallerJeu : MonoInstaller
         Container.Bind<MapVirtuelle>().FromComponentInHierarchy().AsSingle();
 
         Container.Bind<EntitesCreateur>().AsSingle();
+
+        // Contrôleurs 
+        Container.Bind<ControleurScore>().FromComponentInHierarchy().AsSingle();
+        Container.Bind<ControleurTemps>().FromComponentInHierarchy().AsSingle();
+        Container.Bind<ControleurVie>().FromComponentInHierarchy().AsSingle();
     }
 }

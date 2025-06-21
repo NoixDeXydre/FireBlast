@@ -1,10 +1,12 @@
 using TMPro;
 using DG.Tweening;
+using UnityEngine;
+using Zenject;
 
 /// <summary>
-/// Pilote entre les données et le score affiché.
+/// Gère le score du joueur graphiquement et numériquement.
 /// </summary>
-public class ControleurScore
+public class ControleurScore : MonoBehaviour
 {
 
     /// <summary>
@@ -24,6 +26,11 @@ public class ControleurScore
     private const int PointsParSeconde = 50;
 
     /// <summary>
+    /// Contrôleur du temps
+    /// </summary>
+    [Inject] private readonly ControleurTemps _controleurTemps;
+
+    /// <summary>
     /// Temps écoulé du timer à un instant donné.
     /// </summary>
     private int secondesTimer;
@@ -31,44 +38,18 @@ public class ControleurScore
     /// <summary>
     /// Stocke le score
     /// </summary>
-    private readonly Score score;
+    private Score score;
 
     /// <summary>
     /// Stocke le score avant un gain ou une perte afin
     /// d'effectuer des animations.
     /// </summary>
-    private readonly Score scoreInstantPrecedent;
-
-    /// <summary>
-    /// Influence le score 
-    /// et permet de faire gagner des points chaque seconde.
-    /// </summary>
-    private readonly TimerPartie timer;
+    private Score scoreInstantPrecedent;
 
     /// <summary>
     /// Affiche le score
     /// </summary>
-    private readonly TextMeshProUGUI compteurScore;
-
-    /// <summary>
-    /// Initialise le contrôleur du score.
-    /// </summary>
-    /// <param name="score">Le service score</param>
-    /// <param name="compteurScore">Le compteur UI affichant le score</param>
-    /// <param name="timer">TimerPartie influançant le score</param>
-    public ControleurScore(Score score, TextMeshProUGUI compteurScore, TimerPartie timer)
-    {
-
-        this.score = score;
-        this.compteurScore = compteurScore;
-        this.timer = timer;
-
-        scoreInstantPrecedent = new Score();
-
-        secondesTimer = 0;
-
-        compteurScore.SetText(score.ToString());
-    }
+    private TextMeshProUGUI compteurScore;
 
     /// <summary>
     /// Augmente ou baisse le score.
@@ -98,12 +79,28 @@ public class ControleurScore
     }
 
     /// <summary>
-    /// Augmente le score selon le nombre de secondes écoulés.
+    /// Initialise le contrôleur.
     /// </summary>
-    public void Update()
+    private void Start()
     {
 
-        int secondesActuellesTimer = timer.GetTempsEcoule();
+        compteurScore = GetComponent<TextMeshProUGUI>();
+
+        score = new();
+        scoreInstantPrecedent = new();
+
+        secondesTimer = 0;
+
+        compteurScore.SetText(score.ToString());
+    }
+
+    /// <summary>
+    /// Augmente le score selon le nombre de secondes écoulés.
+    /// </summary>
+    private void Update()
+    {
+
+        int secondesActuellesTimer = _controleurTemps.GetTimerPartie().GetTempsEcoule();
         float multiplicateurScore = score.GetMultiplieur();
         if (secondesTimer != secondesActuellesTimer)
         {

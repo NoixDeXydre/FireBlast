@@ -1,5 +1,6 @@
 using DG.Tweening;
 using UnityEngine;
+using Zenject;
 
 /// <summary>
 /// À part les contrôles de base,
@@ -25,6 +26,16 @@ public class ComportementJoueur : MonoBehaviour
     public float tempsInvincibilite;
 
     /// <summary>
+    /// Permet de modifier le score.
+    /// </summary>
+    [Inject] private readonly ControleurScore _controleurScore;
+
+    /// <summary>
+    /// Permet de modifier la vie du personnage.
+    /// </summary>
+    [Inject] private readonly ControleurVie _controleurVie;
+
+    /// <summary>
     /// Le temps écoulé en étant invincible.
     /// </summary>
     private float timerInvincibilite;
@@ -34,22 +45,7 @@ public class ComportementJoueur : MonoBehaviour
     /// </summary>
     private bool estInvincible;
 
-    /// <summary>
-    /// Permet de modifier le score.
-    /// </summary>
-    private ControleurScore controleurScore;
-
-    /// <summary>
-    /// Permet de modifier la vie du personnage.
-    /// </summary>
-    private ControleurVie controleurVie;
-
     private EtatsJeu etatsJeu;
-
-    /// <summary>
-    /// Script principal du jeu
-    /// </summary>
-    private GestionJeu scriptGestionJeu;
 
     /// <summary>
     /// Module permetant de bouger le joueur.
@@ -70,11 +66,7 @@ public class ComportementJoueur : MonoBehaviour
         timerInvincibilite = .0f;
         estInvincible = false;
 
-        scriptGestionJeu = GestionJeuUtils.GetScriptGestionJeu();
-        controleurVie = scriptGestionJeu.controleurVie;
-        controleurScore = scriptGestionJeu.controleurScore;
         physiqueJoueur = GetComponent<ControlesJoueur>().physiqueJoueur;
-
         spriteRenderer = GetComponent<SpriteRenderer>();
 
         etatsJeu = EtatsJeu.GetInstanceEtatsJeu();
@@ -91,8 +83,8 @@ public class ComportementJoueur : MonoBehaviour
         if (!estInvincible && collision.collider.CompareTag(TagLayers.TagProjectile))
         {
 
-            controleurVie.Diminuer();
-            controleurScore.Ajouter(nombrePointsPerdusDommage);
+            _controleurVie.Diminuer();
+            _controleurScore.Ajouter(nombrePointsPerdusDommage);
 
             estInvincible = true;
             etatsJeu.SontMouvementsBloqueesParDommage = true;

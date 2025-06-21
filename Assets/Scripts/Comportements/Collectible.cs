@@ -1,5 +1,6 @@
 using DG.Tweening;
 using UnityEngine;
+using Zenject;
 
 /// <summary>
 /// Comportement d'un collectible
@@ -26,7 +27,7 @@ public class Collectible : MonoBehaviour
     /// <summary>
     /// Permet de manipuler le score.
     /// </summary>
-    private ControleurScore controleurScore;
+    [Inject] private readonly ControleurScore _controleurScore;
 
     /// <summary>
     /// Contrôle la disparition de l'objet.
@@ -49,7 +50,6 @@ public class Collectible : MonoBehaviour
     private void Awake()
     {
 
-        controleurScore = GestionJeuUtils.GetScriptGestionJeu().controleurScore;
         timerEcoulement = new TimerEcoulement(dureeApparition, TempsSurLePointDeDisparaitre, true);
 
         spriteCollectible = GetComponent<SpriteRenderer>();
@@ -66,7 +66,7 @@ public class Collectible : MonoBehaviour
 
         if (collision.collider.CompareTag(TagLayers.TagJoueur)) 
         {
-            controleurScore.Ajouter(nombrePointsCollection);
+            _controleurScore.Ajouter(nombrePointsCollection);
             gameObject.SetActive(false);
         }
     }
