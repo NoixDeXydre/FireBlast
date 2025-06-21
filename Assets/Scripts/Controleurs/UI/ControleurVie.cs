@@ -1,12 +1,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 /// <summary>
 /// Gère la vie du joueur graphiquement et numériquement.
 /// </summary>
 public class ControleurVie : MonoBehaviour
 {
+
+    [Inject] readonly private EtatsJeu _etatsJeu;
 
     /// <summary>
     /// UI affichant la vie.
@@ -71,7 +74,7 @@ public class ControleurVie : MonoBehaviour
         // Notifie la fin de partie avec 0 vie.
         if (compteurVie.GetVies() == 0)
         {
-            EtatsJeu.GetInstanceEtatsJeu().EstPartieTerminee = true;
+            _etatsJeu.EstPartieTerminee = true;
         }
 
         Image vie;

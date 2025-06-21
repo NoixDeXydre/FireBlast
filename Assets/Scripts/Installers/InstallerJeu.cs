@@ -13,7 +13,8 @@ public class InstallerJeu : MonoInstaller
     public override void InstallBindings()
     {
 
-        // Instancie une map virtuelle afin de connaître les bordures.
+        Container.Bind<EtatsJeu>().AsSingle();
+
         Container.Bind<MapVirtuelle>().FromComponentInHierarchy().AsSingle();
 
         Container.Bind<EntitesCreateur>().AsSingle();

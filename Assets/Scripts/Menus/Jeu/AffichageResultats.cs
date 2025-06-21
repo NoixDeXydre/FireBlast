@@ -1,11 +1,14 @@
 using DG.Tweening;
 using UnityEngine;
+using Zenject;
 
 /// <summary>
 /// Affiche les résultats du jeu une fois la partie terminée.
 /// </summary>
 public class AffichageResultat : MonoBehaviour
 {
+
+    [Inject] readonly private EtatsJeu _etatsJeu;
 
     /// <summary>
     /// Racine des résultats
@@ -27,7 +30,7 @@ public class AffichageResultat : MonoBehaviour
         groupeCanvas.alpha = AffichageUtils.ALPHA_NUL;
         racinePanel.SetActive(false);
 
-        EtatsJeu.GetInstanceEtatsJeu().OnChangementEstPartieTerminee += AfficherResultats;
+        _etatsJeu.OnChangementEstPartieTerminee += AfficherResultats;
     }
 
     /// <summary>

@@ -1,11 +1,14 @@
 using DG.Tweening;
 using UnityEngine;
+using Zenject;
 
 /// <summary>
 /// Affiche l'UI du jeu
 /// </summary>
 public class UIJeu : MonoBehaviour
 {
+
+    [Inject] readonly private EtatsJeu _etatsJeu;
 
     /// <summary>
     /// Racine de l'UI
@@ -23,7 +26,7 @@ public class UIJeu : MonoBehaviour
         groupeCanvas = GetComponent<CanvasGroup>();
         racinePanel = transform.GetChild(0).gameObject;
 
-        EtatsJeu.GetInstanceEtatsJeu().OnChangementEstPartieTerminee += DesactiverUI;
+        _etatsJeu.OnChangementEstPartieTerminee += DesactiverUI;
     }
 
     /// <summary>

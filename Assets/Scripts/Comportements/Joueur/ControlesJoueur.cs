@@ -1,4 +1,5 @@
 using UnityEngine;
+using Zenject;
 
 /// <summary>
 /// 
@@ -19,7 +20,8 @@ public class ControlesJoueur : MonoBehaviour
     /// </summary>
     public PhysiqueJoueur physiqueJoueur;
 
-    private EtatsJeu etatsJeu;
+    [Inject] private readonly EtatsJeu _etatsJeu;
+
     private Evenements evenements;
 
     /// <summary>
@@ -36,7 +38,6 @@ public class ControlesJoueur : MonoBehaviour
     private void Start()
     {
 
-        etatsJeu = EtatsJeu.GetInstanceEtatsJeu();
         evenements = Evenements.GetInstanceEvenements();
 
         // Evènements déclenchés par le pilote.
@@ -47,7 +48,7 @@ public class ControlesJoueur : MonoBehaviour
     private void OnSourisClicEnfonce(bool estEnEnfoncementSansGlissement)
     {
 
-        if (!etatsJeu.SontMouvementsBloquees)
+        if (!_etatsJeu.SontMouvementsBloquees)
         {
 
             if (estEnEnfoncementSansGlissement)
@@ -64,7 +65,7 @@ public class ControlesJoueur : MonoBehaviour
     private void OnSourisClicRelache(Vector2 directionGlissement)
     {
 
-        if (!etatsJeu.SontMouvementsBloquees)
+        if (!_etatsJeu.SontMouvementsBloquees)
         {
             physiqueJoueur.Propulser(directionGlissement);
         }

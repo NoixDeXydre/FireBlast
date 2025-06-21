@@ -1,4 +1,5 @@
 using UnityEngine;
+using Zenject;
 
 /// <summary>
 /// Gère la notification des évènements
@@ -30,6 +31,8 @@ public class ControleurSouris : MonoBehaviour
     /// </summary>
     public LineRenderer affichageDirectionJoueur;
 
+    [Inject] readonly private EtatsJeu _etatsJeu;
+
     /// <summary>
     /// Surface pouvant être cliquée.
     /// </summary>
@@ -40,7 +43,6 @@ public class ControleurSouris : MonoBehaviour
     /// </summary>
     private ControlesSouris controlesSouris;
 
-    private EtatsJeu etatsJeu;
     private Evenements evenements;
 
     /// <summary>
@@ -56,15 +58,14 @@ public class ControleurSouris : MonoBehaviour
         sourisVirtuelle.SetActive(false);
         affichageDirectionJoueur.enabled = false;
 
-        etatsJeu = EtatsJeu.GetInstanceEtatsJeu();
         evenements = Evenements.GetInstanceEvenements();
 
         // Désactive les contrôles en cas de fin de partie.
-        etatsJeu.OnChangementEstPartieTerminee += (bool estPartieTerminee) => 
+        _etatsJeu.OnChangementEstPartieTerminee += (bool estPartieTerminee) => 
         {
             if (estPartieTerminee)
             {
-                etatsJeu.SontMouvementsBloqueesParJeu = true;
+                _etatsJeu.SontMouvementsBloqueesParJeu = true;
             }  
         };
     }
@@ -116,13 +117,13 @@ public class ControleurSouris : MonoBehaviour
         controlesSouris.UpdateOnEnfoncement();
 
         bool estEnfoncementSansGlissement = controlesSouris.EstEnfoncementSansGlissement();
-        if (!estEnfoncementSansGlissement && !etatsJeu.SontMouvementsBloquees)
+        if (!estEnfoncementSansGlissement && !_etatsJeu.SontMouvementsBloquees)
         {
             sourisVirtuelle.SetActive(true);
             affichageDirectionJoueur.enabled = true;
         }
 
-        else if (etatsJeu.SontMouvementsBloquees)
+        else if (_etatsJeu.SontMouvementsBloquees)
         {
             sourisVirtuelle.SetActive(false);
             affichageDirectionJoueur.enabled = false;

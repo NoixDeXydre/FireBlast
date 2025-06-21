@@ -35,6 +35,8 @@ public class ComportementJoueur : MonoBehaviour
     /// </summary>
     [Inject] private readonly ControleurVie _controleurVie;
 
+    [Inject] private readonly EtatsJeu _etatsJeu;
+
     /// <summary>
     /// Le temps écoulé en étant invincible.
     /// </summary>
@@ -44,8 +46,6 @@ public class ComportementJoueur : MonoBehaviour
     /// Défini le moment où le joueur est invincible.
     /// </summary>
     private bool estInvincible;
-
-    private EtatsJeu etatsJeu;
 
     /// <summary>
     /// Module permetant de bouger le joueur.
@@ -68,8 +68,6 @@ public class ComportementJoueur : MonoBehaviour
 
         physiqueJoueur = GetComponent<ControlesJoueur>().physiqueJoueur;
         spriteRenderer = GetComponent<SpriteRenderer>();
-
-        etatsJeu = EtatsJeu.GetInstanceEtatsJeu();
     }
 
     /// <summary>
@@ -87,7 +85,7 @@ public class ComportementJoueur : MonoBehaviour
             _controleurScore.Ajouter(nombrePointsPerdusDommage);
 
             estInvincible = true;
-            etatsJeu.SontMouvementsBloqueesParDommage = true;
+            _etatsJeu.SontMouvementsBloqueesParDommage = true;
 
             // Propulse le joueur dans la direction du projectile.
             Vector2 vitesseProjectile = collision.rigidbody.linearVelocity;
@@ -121,7 +119,7 @@ public class ComportementJoueur : MonoBehaviour
             timerInvincibilite += Time.deltaTime;
             if (timerInvincibilite > TempsMouvementsInactif)
             {
-                etatsJeu.SontMouvementsBloqueesParDommage = false;
+                _etatsJeu.SontMouvementsBloqueesParDommage = false;
             }
 
 

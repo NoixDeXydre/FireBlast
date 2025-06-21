@@ -65,33 +65,7 @@ public class EtatsJeu
     private bool _sontMouvementsBloqueesParDommage = false;
     private bool _sontMouvementsBloqueesParJeu = false;
 
-    /// <summary>
-    /// Instance globale des états.
-    /// </summary>
-    private static EtatsJeu instanceEtatsJeu;
-
     // Méthodes
-
-    /// <returns>Une instance du singleton</returns>
-    public static EtatsJeu GetInstanceEtatsJeu()
-    {
-
-        if (instanceEtatsJeu != null)
-        {
-            return instanceEtatsJeu;
-        }
-
-        instanceEtatsJeu = new();
-        return instanceEtatsJeu;
-    }
-
-    /// <summary>
-    /// Libère l'instance du singleton
-    /// </summary>
-    public static void NullifierInstance()
-    {
-        instanceEtatsJeu = null;
-    }
 
     private static void AppelerEvenementSurNouvelleValeur(OnBooleenModifie evenement,
         bool ancienneValeur, bool nouvelleValeur)
