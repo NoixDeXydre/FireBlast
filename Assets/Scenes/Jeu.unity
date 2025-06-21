@@ -207,7 +207,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f41ac452c68c4e544b5064f96e68b18a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  map: {fileID: 1364175672}
 --- !u!1 &131868812
 GameObject:
   m_ObjectHideFlags: 0
@@ -220,6 +219,7 @@ GameObject:
   - component: {fileID: 131868816}
   - component: {fileID: 131868815}
   - component: {fileID: 131868817}
+  - component: {fileID: 131868818}
   m_Layer: 0
   m_Name: LimitesTilemap
   m_TagString: Mur
@@ -2652,6 +2652,19 @@ TilemapCollider2D:
   m_MaximumTileChangeCount: 1000
   m_ExtrusionFactor: 0
   m_UseDelaunayMesh: 0
+--- !u!114 &131868818
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 131868812}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9945903063726cf4b868a171ab76aadb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  margeInterne: 3
 --- !u!1 &177787254
 GameObject:
   m_ObjectHideFlags: 0
@@ -4039,6 +4052,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1298134834}
   - component: {fileID: 1298134835}
+  - component: {fileID: 1298134837}
+  - component: {fileID: 1298134836}
   m_Layer: 0
   m_Name: ComportementJeu
   m_TagString: Untagged
@@ -4078,9 +4093,52 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   panelVies: {fileID: 903820168}
-  map: {fileID: 131868816}
   scoreTexte: {fileID: 1712388593}
   timerTexte: {fileID: 1239875637}
+--- !u!114 &1298134836
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1298134833}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 378b7efabd2ebe7418cb35d33307b4de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1298134837
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1298134833}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89715ad69b973a14899afa2c6730b30b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _scriptableObjectInstallers: []
+  _monoInstallers:
+  - {fileID: 1298134836}
+  _installerPrefabs: []
+  _autoRun: 1
+  OnPreInstall:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPostInstall:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPreResolve:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPostResolve:
+    m_PersistentCalls:
+      m_Calls: []
+  _parentNewObjectsUnderSceneContext: 0
+  _contractNames: []
+  _parentContractNames: []
 --- !u!1 &1364175669
 GameObject:
   m_ObjectHideFlags: 0
@@ -33509,10 +33567,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cea73c160c003647aeb95eed8e79275, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ecranChargement: {fileID: 5124565448364237840, guid: 823d1a886dfb450438262ed7cf6f9766, type: 3}
   scenePermutation:
     sceneAsset: {fileID: 102900000, guid: 5d6098f395a1e1942886eecac57aaeac, type: 3}
-    _assetPath: 
+    path: Assets/Scenes/Menu.unity
 --- !u!1 &1604149921
 GameObject:
   m_ObjectHideFlags: 0

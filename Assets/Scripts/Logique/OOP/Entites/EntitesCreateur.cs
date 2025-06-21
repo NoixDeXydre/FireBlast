@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 /// <summary>
 /// Permet de créer des entités sur la map.
@@ -13,16 +14,7 @@ public class EntitesCreateur
     /// <summary>
     /// Map sur laquelle les entités vont apparaitre.
     /// </summary>
-    private readonly MapVirtuelle map;
-
-    /// <summary>
-    /// Crée un nouveau créateur d'entités
-    /// </summary>
-    /// <param name="map">Map sur laquelle les entités vont apparaitre</param>
-    public EntitesCreateur(MapVirtuelle map)
-    {
-        this.map = map;
-    }
+    [Inject] private readonly MapVirtuelle _map;
 
     /// <summary>
     /// Crée les entités à la chaîne.
@@ -53,6 +45,6 @@ public class EntitesCreateur
     /// <returns>L'entité créee</returns>
     public GameObject CreerEntite(GameObject entite, Vector2 position)
     {
-        return Object.Instantiate(entite, map.NormaliserPoint(position), Quaternion.identity);
+        return Object.Instantiate(entite, _map.NormaliserPoint(position), Quaternion.identity);
     }
 }

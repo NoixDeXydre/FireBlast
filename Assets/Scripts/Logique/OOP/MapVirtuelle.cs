@@ -4,55 +4,58 @@ using UnityEngine.Tilemaps;
 /// <summary>
 /// Représente la map du jeu (fixe)
 /// </summary>
-public class MapVirtuelle
+public class MapVirtuelle : MonoBehaviour
 {
+
+    /// <summary>
+    /// Marge interne de la map pour ne pas faire débordé les entités.
+    /// </summary>
+    public float margeInterne;
 
     /// <summary>
     /// Map actuelle du jeu
     /// </summary>
-    private readonly Tilemap map;
+    private Tilemap map;
 
     /// <summary>
     /// Centre de la map
     /// </summary>
-    private readonly Vector2 centreCoordonnees;
+    private Vector2 centreCoordonnees;
 
     /// <summary>
     /// Coordonnées du point en haut à droite de la map.
     /// </summary>
-    private readonly Vector2 coordonneesCoinSuperieurDroitMap;
+    private Vector2 coordonneesCoinSuperieurDroitMap;
 
     /// <summary>
     /// Coordonnées du point en bas à gauche de la map.
     /// </summary>
-    private readonly Vector2 coordonneesCoinInferieurGaucheMap;
+    private Vector2 coordonneesCoinInferieurGaucheMap;
 
     /// <summary>
     /// Limites gauche et droite en X.
     /// </summary>
-    private readonly Vector2 limitesCoordonneesX;
+    private Vector2 limitesCoordonneesX;
 
     /// <summary>
     /// Limites gauche et droite en Y.
     /// </summary>
-    private readonly Vector2 limitesCoordonneesY;
+    private Vector2 limitesCoordonneesY;
 
     /// <summary>
-    /// Référence une nouvelle map.
+    /// Initialise la map
     /// </summary>
-    /// <param name="map">La map à référencer</param>
-    /// <param name="margeInterne">Marge restreignant les entités</param>
-    public MapVirtuelle(Tilemap map, float margeInterne)
+    private void Start()
     {
 
-        this.map = map;
+        map = GetComponent<Tilemap>();
 
         Vector2 margeVectoriel = new(margeInterne, margeInterne);
 
         // Calcul des bordures de la map
         BoundsInt coinsMap = map.cellBounds;
-        coordonneesCoinSuperieurDroitMap = (Vector2) map.CellToWorld(coinsMap.max) - margeVectoriel;
-        coordonneesCoinInferieurGaucheMap = (Vector2) map.CellToWorld(coinsMap.min) + margeVectoriel;
+        coordonneesCoinSuperieurDroitMap = (Vector2)map.CellToWorld(coinsMap.max) - margeVectoriel;
+        coordonneesCoinInferieurGaucheMap = (Vector2)map.CellToWorld(coinsMap.min) + margeVectoriel;
 
         coordonneesCoinSuperieurDroitMap.y--; // Est exclusif
 

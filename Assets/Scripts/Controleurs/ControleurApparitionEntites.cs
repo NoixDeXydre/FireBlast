@@ -1,5 +1,5 @@
 using UnityEngine;
-using UnityEngine.Tilemaps;
+using Zenject;
 
 /// <summary>
 /// Fait apparaître les entités dans la carte au bon moment,
@@ -8,16 +8,10 @@ using UnityEngine.Tilemaps;
 public class ControleurApparitionEntites : MonoBehaviour
 {
 
-    /// <summary>
-    /// La map où les entités vont apparaître.
-    /// </summary>
-    public Tilemap map;
-
-    private EntitesCreateur usineEntites;
-    private MapVirtuelle mapVirtuelle;
+    [Inject] private MapVirtuelle _map;
+    [Inject] private EntitesCreateur usineEntites;
 
     private EntitesGroupePool pool;
-
     private CollectionEntites entitesSrc;
 
     /// <summary>
@@ -25,9 +19,6 @@ public class ControleurApparitionEntites : MonoBehaviour
     /// </summary>
     private void Start()
     {
-
-        mapVirtuelle = new(map, 3.0f);
-        usineEntites = new(mapVirtuelle);
 
         entitesSrc = Resources.Load<CollectionEntites>(nameof(CollectionEntites));
 
@@ -41,7 +32,7 @@ public class ControleurApparitionEntites : MonoBehaviour
         }
 
         // On crée le joueur
-        usineEntites.CreerEntite(entitesSrc.datasetJoueur.entite, mapVirtuelle.GetCentreMap());
+        usineEntites.CreerEntite(entitesSrc.datasetJoueur.entite, _map.GetCentreMap());
         IterationTournageUsine();
     }
 
@@ -60,7 +51,7 @@ public class ControleurApparitionEntites : MonoBehaviour
         GameObject collectible = pool.GetInstanceTypeEntiteNonActif(entitesSrc.groupeCollectibles.ChoisirEntiteAleatoirement());
         if (collectible != null)
         {
-            collectible.transform.position = Aleatoire.ChoisirPointParmisDeuxAxes(mapVirtuelle.GetCoordonneesIntervallesX(), mapVirtuelle.GetCoordonneesIntervallesY());
+            collectible.transform.position = Aleatoire.ChoisirPointParmisDeuxAxes(_map.GetCoordonneesIntervallesX(), _map.GetCoordonneesIntervallesY());
             collectible.SetActive(true);
         }
 
@@ -73,7 +64,7 @@ public class ControleurApparitionEntites : MonoBehaviour
         GameObject collectible = pool.GetInstanceTypeEntiteNonActif(entitesSrc.groupeEnnemis.ChoisirEntiteAleatoirement());
         if (collectible != null)
         {
-            collectible.transform.position = Aleatoire.ChoisirPointParmisDeuxAxes(mapVirtuelle.GetCoordonneesIntervallesX(), mapVirtuelle.GetCoordonneesIntervallesY());
+            collectible.transform.position = Aleatoire.ChoisirPointParmisDeuxAxes(_map.GetCoordonneesIntervallesX(), _map.GetCoordonneesIntervallesY());
             collectible.SetActive(true);
         }
 

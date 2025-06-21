@@ -18,11 +18,6 @@ public class GestionJeu : MonoBehaviour
     public Image panelVies;
 
     /// <summary>
-    /// Map du jeu
-    /// </summary>
-    public Tilemap map;
-
-    /// <summary>
     /// Score total de la partie affiché dans l'UI.
     /// </summary>
     public TextMeshProUGUI scoreTexte;
