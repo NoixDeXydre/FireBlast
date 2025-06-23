@@ -15,12 +15,9 @@ using Zenject;
 public class ControlesJoueur : MonoBehaviour
 {
 
-    /// <summary>
-    /// Logique pour mouvoir le joueur.
-    /// </summary>
-    public PhysiqueJoueur physiqueJoueur;
-
     [Inject] private readonly EtatsJeu _etatsJeu;
+
+    private Joueur joueur;
 
     private Evenements evenements;
 
@@ -29,7 +26,7 @@ public class ControlesJoueur : MonoBehaviour
     /// </summary>
     private void Awake()
     {
-        physiqueJoueur = new(GetComponent<Rigidbody2D>());
+        joueur = GetComponent<Joueur>();
     }
 
     /// <summary>
@@ -53,11 +50,11 @@ public class ControlesJoueur : MonoBehaviour
 
             if (estEnEnfoncementSansGlissement)
             {
-                physiqueJoueur.Freiner();
+                joueur.PhysiqueJoueur.Freiner();
             }
             else
             {
-                physiqueJoueur.AnnulerFreinage();
+                joueur.PhysiqueJoueur.AnnulerFreinage();
             }
         }
     }
@@ -67,7 +64,7 @@ public class ControlesJoueur : MonoBehaviour
 
         if (!_etatsJeu.SontMouvementsBloquees)
         {
-            physiqueJoueur.Propulser(directionGlissement);
+            joueur.PhysiqueJoueur.Propulser(directionGlissement);
         }
     }
 }

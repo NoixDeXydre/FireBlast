@@ -8,11 +8,13 @@ using Zenject;
 public class ControleurApparitionEntites : MonoBehaviour
 {
 
-    [Inject] private MapVirtuelle _map;
-    [Inject] private EntitesCreateur usineEntites;
+    [Inject] readonly private MapVirtuelle _map;
 
-    private EntitesGroupePool pool;
-    private CollectionEntites entitesSrc;
+    [Inject] readonly private IFactory<Vector3, Joueur> _usineJoueur;
+
+    [Inject] readonly private EntitesGroupePool _pool;
+
+    [Inject] readonly private CollectionEntites _db;
 
     /// <summary>
     /// Initialise les composants pour repérer la map.
@@ -20,19 +22,14 @@ public class ControleurApparitionEntites : MonoBehaviour
     private void Start()
     {
 
-        entitesSrc = Resources.Load<CollectionEntites>(nameof(CollectionEntites));
-
-        pool = new(200);
-
-        // Cache des entités
-
-        foreach(Entite entite in entitesSrc.datasets)
+        foreach (var entite in _db.datasets)
         {
-            pool.InstancierTypeEntites(entite.nombreMaxApparition, entite.nomEntite, entite.entite);
+            _pool.CreateBatch(entite.nombreMaxApparition, entite.nomEntite, entite.entite);
         }
 
         // On crée le joueur
-        usineEntites.CreerEntite(entitesSrc.datasetJoueur.entite, _map.GetCentreMap());
+        _usineJoueur.Create(_map.GetCentreMap());
+
         IterationTournageUsine();
     }
 
@@ -48,11 +45,11 @@ public class ControleurApparitionEntites : MonoBehaviour
     private void SousIterationCollectibles()
     {
 
-        GameObject collectible = pool.GetInstanceTypeEntiteNonActif(entitesSrc.groupeCollectibles.ChoisirEntiteAleatoirement());
+        GameObject collectible = _pool.GetInstanceTypeEntiteNonActif(_db.groupeCollectibles.ChoisirEntiteAleatoirement());
         if (collectible != null)
         {
             collectible.transform.position = Aleatoire.ChoisirPointParmisDeuxAxes(_map.GetCoordonneesIntervallesX(), _map.GetCoordonneesIntervallesY());
-            collectible.SetActive(true);
+            collectible.gameObject.SetActive(true);
         }
 
         Invoke(nameof(SousIterationCollectibles), Aleatoire.ChoisirNombreParmisPlage(5f, 10f));
@@ -61,11 +58,11 @@ public class ControleurApparitionEntites : MonoBehaviour
     private void SousIterationEnnemis()
     {
 
-        GameObject collectible = pool.GetInstanceTypeEntiteNonActif(entitesSrc.groupeEnnemis.ChoisirEntiteAleatoirement());
+        GameObject collectible = _pool.GetInstanceTypeEntiteNonActif(_db.groupeEnnemis.ChoisirEntiteAleatoirement());
         if (collectible != null)
         {
             collectible.transform.position = Aleatoire.ChoisirPointParmisDeuxAxes(_map.GetCoordonneesIntervallesX(), _map.GetCoordonneesIntervallesY());
-            collectible.SetActive(true);
+            collectible.gameObject.SetActive(true);
         }
 
         Invoke(nameof(SousIterationEnnemis), Aleatoire.ChoisirNombreParmisPlage(2f, 7f));

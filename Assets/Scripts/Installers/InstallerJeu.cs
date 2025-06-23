@@ -13,6 +13,13 @@ public class InstallerJeu : MonoInstaller
     public override void InstallBindings()
     {
 
+        // Base de données
+
+        Container.Bind<CollectionEcransChargement>().FromResource(nameof(CollectionEcransChargement));
+        Container.Bind<CollectionEntites>().FromResource(nameof(CollectionEntites));
+
+        // Composants principaux
+
         Container.Bind<EtatsJeu>().AsSingle();
 
         Container.Bind<MapVirtuelle>().FromComponentInHierarchy().AsSingle();
@@ -23,5 +30,9 @@ public class InstallerJeu : MonoInstaller
         Container.Bind<ControleurScore>().FromComponentInHierarchy().AsSingle();
         Container.Bind<ControleurTemps>().FromComponentInHierarchy().AsSingle();
         Container.Bind<ControleurVie>().FromComponentInHierarchy().AsSingle();
+
+        // Usines
+        Container.BindInterfacesAndSelfTo<UsineJoueur>().AsSingle();
+        Container.BindInterfacesAndSelfTo<EntitesGroupePool>().AsSingle().WithArguments(200);
     }
 }

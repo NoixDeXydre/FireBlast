@@ -25,17 +25,12 @@ public class ComportementJoueur : MonoBehaviour
     /// </summary>
     public float tempsInvincibilite;
 
-    /// <summary>
-    /// Permet de modifier le score.
-    /// </summary>
     [Inject] private readonly ControleurScore _controleurScore;
-
-    /// <summary>
-    /// Permet de modifier la vie du personnage.
-    /// </summary>
     [Inject] private readonly ControleurVie _controleurVie;
 
     [Inject] private readonly EtatsJeu _etatsJeu;
+
+    private Joueur joueur;
 
     /// <summary>
     /// Le temps écoulé en étant invincible.
@@ -48,16 +43,6 @@ public class ComportementJoueur : MonoBehaviour
     private bool estInvincible;
 
     /// <summary>
-    /// Module permetant de bouger le joueur.
-    /// </summary>
-    private PhysiqueJoueur physiqueJoueur;
-
-    /// <summary>
-    /// Rendu du sprite.
-    /// </summary>
-    private SpriteRenderer spriteRenderer;
-
-    /// <summary>
     /// Prépare le joueur et sa physique.
     /// </summary>
     private void Start()
@@ -66,8 +51,7 @@ public class ComportementJoueur : MonoBehaviour
         timerInvincibilite = .0f;
         estInvincible = false;
 
-        physiqueJoueur = GetComponent<ControlesJoueur>().physiqueJoueur;
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        joueur = GetComponent<Joueur>();
     }
 
     /// <summary>
@@ -89,11 +73,11 @@ public class ComportementJoueur : MonoBehaviour
 
             // Propulse le joueur dans la direction du projectile.
             Vector2 vitesseProjectile = collision.rigidbody.linearVelocity;
-            physiqueJoueur.Propulser(-vitesseProjectile * vitesseProjectile.magnitude 
+            joueur.PhysiqueJoueur.Propulser(-vitesseProjectile * vitesseProjectile.magnitude 
                 * collision.otherRigidbody.mass);
 
             // Animation lorsque touché
-            spriteRenderer.DOFade(0f, .2f).OnComplete(() => spriteRenderer.DOFade(AffichageUtils.ALPHA_COMPLET, .5f))
+            joueur.SpriteRenderer.DOFade(0f, .2f).OnComplete(() => joueur.SpriteRenderer.DOFade(AffichageUtils.ALPHA_COMPLET, .5f))
                 .SetLoops(DoTweenUtils.CalculerCyclesLoopYoyo(tempsInvincibilite, .2f));
         }
 

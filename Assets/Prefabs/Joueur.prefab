@@ -12,9 +12,10 @@ GameObject:
   - component: {fileID: 2382540636204940287}
   - component: {fileID: 6471376212288843919}
   - component: {fileID: 8588803068935926200}
+  - component: {fileID: 8010211429834150385}
   - component: {fileID: 8054202070341350563}
   - component: {fileID: 6653127416501942817}
-  - component: {fileID: 8010211429834150385}
+  - component: {fileID: 4922723838561759116}
   - component: {fileID: 8819591831375385301}
   m_Layer: 6
   m_Name: Joueur
@@ -157,33 +158,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &8054202070341350563
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7772179672655701004}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1e94086fa6f104d46a0762f77f714f1c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  nombrePointsPerdusDommage: -1000
-  tempsInvincibilite: 2
---- !u!114 &6653127416501942817
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7772179672655701004}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1401a94e77517c741868dd39ac84c0dc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  scriptPiloteSouris: {fileID: 0}
 --- !u!198 &8010211429834150385
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -4907,6 +4881,44 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
+--- !u!114 &8054202070341350563
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7772179672655701004}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e94086fa6f104d46a0762f77f714f1c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nombrePointsPerdusDommage: -1000
+  tempsInvincibilite: 2
+--- !u!114 &6653127416501942817
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7772179672655701004}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1401a94e77517c741868dd39ac84c0dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &4922723838561759116
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7772179672655701004}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c1c7b1a63ec1b94dbb5863f89c7ab07, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!199 &8819591831375385301
 ParticleSystemRenderer:
   serializedVersion: 6

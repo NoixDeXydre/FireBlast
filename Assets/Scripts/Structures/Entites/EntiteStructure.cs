@@ -3,8 +3,8 @@ using UnityEngine;
 /// <summary>
 /// Représente les données d'une entité.
 /// </summary>
-[CreateAssetMenu(fileName = "Entite", menuName = "FireBall - Entites/Entite")]
-public class Entite : ScriptableObject
+[CreateAssetMenu(fileName = "EntiteStructure", menuName = "FireBall - Entites/EntiteStructure")]
+public class EntiteStructure : ScriptableObject
 {
 
     /// <summary>

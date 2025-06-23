@@ -1,12 +1,16 @@
 ﻿using System.Collections.Generic;
+using System.IO.Compression;
 using UnityEngine;
+using Zenject;
 
 /// <summary>
 /// Défini les limites d'instanciation d'un groupe d'entités
 /// et permet de faire du pooling efficace.
 /// </summary>
-public class EntitesGroupePool
+public class EntitesGroupePool : IFactory<string, GameObject, GameObject>
 {
+
+    [Inject] private readonly DiContainer _container;
 
     /// <summary>
     /// Nombre maximum d'instances dans le jeu.
@@ -32,6 +36,55 @@ public class EntitesGroupePool
         this.nombreMaxInstances = nombreMaxInstances;
         instancesEntites = new(nombreMaxInstances);
         instancesEntitesSousGroupes = new(nombreMaxInstances);
+    }
+
+    /// <summary>
+    /// Instancie une entité d'un type particulier.
+    /// </summary>
+    /// <param name="nomSousGroupe">Nom du type d'entité</param>
+    /// <param name="entite">L'entité à instancier</param>
+    /// <returns>L'entité instancié</returns>
+    public GameObject Create(string nomSousGroupe, GameObject entite)
+    {
+
+        GameObject entiteInstancie = _container.InstantiatePrefab(entite);
+
+        // On met à jour les autres composants
+
+        // Si non existant, le groupe doit être crée.
+        if (!instancesEntitesSousGroupes.ContainsKey(nomSousGroupe))
+        {
+            instancesEntitesSousGroupes[nomSousGroupe] = new();
+        }
+
+        instancesEntites.Add(entiteInstancie);
+        instancesEntitesSousGroupes[nomSousGroupe].Add(entiteInstancie);
+
+        // L'entité est désactivée au préalable.
+        entiteInstancie.gameObject.SetActive(false);
+
+        return entiteInstancie;
+    }
+
+    /// <summary>
+    /// Instancie une quantité spécifique d'entités d'un type particulier
+    /// par défaut désactivées.
+    /// </summary>
+    /// <param name="nombreInstances">Nombre à instancier</param>
+    /// <param name="nomSousGroupe">Nom du type d'entité</param>
+    /// <param name="entite">L'entité à instancier</param>
+    /// <returns>Les entités instanciées</returns>
+    public List<GameObject> CreateBatch(int nombreInstances, string nomSousGroupe, GameObject entite)
+    {
+        int i = 0;
+        List<GameObject> entitesInstanciees = new();
+        while (i++ < nombreInstances && GetNombreInstancesPoolEntier() != nombreMaxInstances)
+        {
+            entitesInstanciees.Add(Create(nomSousGroupe, entite));
+            i++;
+        }
+
+        return entitesInstanciees;
     }
 
     /// <param name="nomSousGroupe">Nom du sous groupe</param>
@@ -78,45 +131,5 @@ public class EntitesGroupePool
     public int GetNombreInstancesPoolSousGroupe(string nomSousGroupe)
     {
         return instancesEntitesSousGroupes[nomSousGroupe].Count;
-    }
-
-    /// <summary>
-    /// Instancie une quantité spécifique d'entités d'un type particulier
-    /// par défaut désactivées.
-    /// </summary>
-    /// <param name="nombreInstances">Nombre à instancier</param>
-    /// <param name="nomSousGroupe">Nom du type d'entité</param>
-    /// <param name="entite">L'entité à instancier</param>
-    /// <returns>Les entités instanciées</returns>
-    public List<GameObject> InstancierTypeEntites(int nombreInstances, string nomSousGroupe, GameObject entite)
-    {
-
-        int i = 0;
-        List<GameObject> entitesInstanciees = new();
-        while (i < nombreInstances && GetNombreInstancesPoolEntier() != nombreMaxInstances)
-        {
-
-            GameObject entiteInstancie = Object.Instantiate(entite);
-            entitesInstanciees.Add(entiteInstancie);
-            
-            // On met à jour les autres composants
-
-            // Si non existant, le groupe doit être crée.
-            if (!instancesEntitesSousGroupes.ContainsKey(nomSousGroupe))
-            {
-                instancesEntitesSousGroupes[nomSousGroupe] = new();
-            }
-
-            List<GameObject> sousGroupeEntites = instancesEntitesSousGroupes[nomSousGroupe];
-            instancesEntites.Add(entiteInstancie);
-            sousGroupeEntites.Add(entiteInstancie);
-
-            // L'entité est désactivée au préalable.
-            entiteInstancie.SetActive(false);
-
-            i++;
-        }
-
-        return entitesInstanciees;
     }
 }
